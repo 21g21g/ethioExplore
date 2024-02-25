@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components{
+.top-header{
+    @apply bg-green-600 text-white h-16 flex items-center  pl-10 justify-between rounded-lg m-2
+}
+.nav-link{
+    @apply  flex items-center  pr-5
+}
+.nav-text{
+    @apply flex gap-2 text-gray-200 hover:bg-green-800  hover:text-white px-3 py-2 rounded-md text-sm font-medium
+}
+    
+}
