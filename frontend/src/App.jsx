@@ -8,6 +8,7 @@ import Booking from "./pages/bookings/Booking"
 import Destination from "./pages/destinations/Destination"
 import Layouts from "./pages/layout/Layouts"
 import Home from "./pages/home/Home"
+import UserDashboard from "./pages/userPage/UserDashboard"
 
 const App = () => {
   return (
@@ -19,6 +20,9 @@ const App = () => {
           <Route path="packages" element={<Package />} />
           <Route path="bookings" element={<Booking />} />
           <Route path="destinations" element={<Destination />} />
+        </Route>
+        <Route path="/user">
+          <Route path="dashboard" element={<UserDashboard />} />
         </Route>
         <Route path="auth/login" element={<Login />} />
         <Route path="auth/register" element={<Register />} />

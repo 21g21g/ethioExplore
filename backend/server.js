@@ -3,7 +3,8 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv").config();
 const cookieParser = require("cookie-parser");
-
+const userRoute = require("./routes/userRoute");
+const cors = require('cors');
 const app = express();
 //environmental variables
 const url=process.env.MONGO_URI
@@ -13,7 +14,11 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(cors());
+//route middleware
+app.use("/api/users", userRoute);
 
+//connect mongodb and listen to server
 mongoose
   .connect(url)
   .then(() => {
