@@ -1,8 +1,9 @@
 const asyncHandler = require("express-async-handler");
 const User = require("../models/userModel");
-const generateToken = require('../utils/generateToken');
+const generateAccessToken = require("../utils/generateAccessToken");
+const generateRefreshToken = require("../utils/generateRefreshToken");
+const bcrypt = require("bcryptjs")
 // register users
-
 exports.registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
 
@@ -16,15 +17,12 @@ exports.registerUser = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("Password must be at least 6 characters");
   }
-
-  // Check if user email already exists
+  // Check if user  already exists
   let user = await User.findOne({ email });
-
   if (user) {
     res.status(400);
-    throw new Error("Email has already been registered");
+    throw new Error("This email has already been exist");
   }
-
   // Create new user
   user = await User.create({
     name,
@@ -32,24 +30,30 @@ exports.registerUser = asyncHandler(async (req, res) => {
     password,
   });
 
-  // Generate Token
-  const token = generateToken(user._id);
+  // Generate tokens
+  const accessToken = generateAccessToken(user._id);
+  const refreshToken = generateRefreshToken(user._id);
 
-  // Send HTTP-only cookie
-  res.cookie("token", token, {
-    path: "/",
+  // Set tokens as cookies
+  res.cookie('accessToken', accessToken, {
     httpOnly: true,
-    expires: new Date(Date.now() + 1000 * 86400), // 1 day
-    sameSite: "none",
+    expires: new Date(Date.now() + 1 * 60 * 1000), // 1 minutes
     secure: true,
+    sameSite: 'none'
   });
 
+  res.cookie('refreshToken', refreshToken, {
+    httpOnly: true,
+    expires: new Date(Date.now() + 15 * 60 * 1000), // 15 minutes
+    secure: true,
+    sameSite: 'none'
+  });
+
+  // Send success response without including tokens
   if (user) {
+    const { _id, email, name, photo, phone } = user
     res.status(201).json({
-      data: {
-        user,
-        token // Include token in the response
-      },
+      _id, email, name, photo, phone
     });
   } else {
     res.status(400);
@@ -58,11 +62,11 @@ exports.registerUser = asyncHandler(async (req, res) => {
 });
 
 
-
-//login uuser
+// Login User
 exports.loginUser = asyncHandler(async (req, res) => {
-  //take inputs from the user
+  // Take inputs from the user
   const { email, password } = req.body;
+
   // Validate user input
   if (!email || !password) {
     res.status(400);
@@ -72,42 +76,83 @@ exports.loginUser = asyncHandler(async (req, res) => {
   const user = await User.findOne({ email });
   if (!user) {
     res.status(401);
-    throw new Error("Invalid credentials");
+    throw new Error("User not found ");
   }
   // Check if password is correct
-  const isPasswordMatched = await user.matchPassword(password);
-  if (!isPasswordMatched) {
+  const isPasswordCorrect = await bcrypt.compare(password, user.password);
+  if (!isPasswordCorrect) {
     res.status(401);
-    throw new Error("Invalid credentials");
+    throw new Error("Enter correct password");
   }
-  // Generate token
-  const token = generateToken(user._id);
-  // Send HTTP-only cookie
-  res.cookie("token", token, {
-    path: "/",
+  // Generate access token and refresh token
+  const accessToken = generateAccessToken(user._id);
+  const refreshToken = generateRefreshToken(user._id);
+
+  // Set tokens as cookies
+  res.cookie('accessToken', accessToken, {
     httpOnly: true,
-    expires: new Date(Date.now() + 1000 * 86400), // 1 day
-    sameSite: "none",
+    expires: new Date(Date.now() + 1 * 60 * 1000), // 1 minutes
     secure: true,
+    sameSite: 'none'
   });
 
-  if (user) {
-    res.status(201).json({
-      data: {
-        user,
-      },
-      token,
+  res.cookie('refreshToken', refreshToken, {
+    httpOnly: true,
+    expires: new Date(Date.now() + 15 * 60 * 1000), // 15 minutes
+    secure: true,
+    sameSite: 'none'
+  });
+
+  // Send success response without including the tokens
+  if (user && isPasswordCorrect) {
+    const { _id, email, name, photo, phone } = user
+    res.status(200).json({
+      _id, email, name, photo, phone
     });
   } else {
     res.status(400);
-    throw new Error("Invalid user data");
+    throw new Error("Invalid credentials");
   }
 });
+
+
+//logout user
 exports.logoutUser = asyncHandler(async (req, res) => {
-  res.send("successfully logedout");
+  res.cookie('accessToken', "", {
+    httpOnly: true,
+    expires: new Date(Date.now() + 1 * 60 * 1000), // 1 minutes
+    secure: true,
+    sameSite: 'none'
+  });
+  res.status(200).json({ message: "Logged out successfully" })
 });
+
+
 exports.getUsers = asyncHandler(async (req, res) => {
-  const user = await User.find();
+  // Check if user is authenticated
+  if (!req.userId) {
+    // If not authenticated, send "Please login" message
+    return res.status(401).json({ message: "Please log in" });
+  }
+
+  // User is authenticated, fetch users
+  const users = await User.find();
+  if (users) {
+    res.status(200).json({
+      data: {
+        users,
+      },
+    });
+  } else {
+    throw new Error("User not found");
+  }
+});
+
+
+
+//get single user
+exports.getUser = asyncHandler(async (req, res) => {
+  const user = await User.findOne();
   if (user) {
     res.status(200).json({
       data: {
@@ -118,11 +163,9 @@ exports.getUsers = asyncHandler(async (req, res) => {
     throw new Error("user not found");
   }
 });
-//get single user
-exports.getUser = asyncHandler(async (req, res) => {
-  res.status(200).json(req.user);
-});
-//assign the user to be admin
+
+
+//update the user
 exports.updateUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
 

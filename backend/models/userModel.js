@@ -30,7 +30,7 @@ userSchema = mongoose.Schema(
     },
     photo: {
       type: String,
-      required: [true, "please add the photo"],
+      // required: [true, "please add the photo"],
       default:
         "https://as2.ftcdn.net/v2/jpg/02/29/75/83/1000_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg",
     },
@@ -57,10 +57,6 @@ userSchema.pre("save", async function (next) {
     return next(error);
   }
 });
-userSchema.methods.matchPassword = async function (password) {
-  const isMatch = await bcrypt.compare(password, this.password);
-  return isMatch;
-};
 
 const User = mongoose.model("User", userSchema);
 

@@ -1,35 +1,33 @@
-const jwt = require("jsonwebtoken");
-const asyncHandler = require("express-async-handler");
-const User = require("../models/userModel");
+const jwt = require('jsonwebtoken');
 
-// Protect routes
-const protect = asyncHandler(async (req, res, next) => {
-  let token;
-
-  if (
-    req.headers.authorization &&
-    req.headers.authorization.startsWith("Bearer")
-  ) {
-    try {
-      //get token from header
-      token = req.headers.authorization.split(" ")[1];
-      //verify tocken
-      const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      //get user from token
-      req.user = await User.findById(decoded.id).select("-password");
-      next();
-    } catch (error) {
-      console.log(error);
+const protect = async (req, res, next) => {
+  try {
+    // Get access token from cookies
+    const accessToken = req.cookies.accessToken;
+    // If no access token found, deny access
+    if (!accessToken) {
       res.status(401);
-      throw new Error("Not authorized, token failed");
+      throw new Error('Access token not found');
     }
-  }
-
-  if (!token) {
+    // Verify access token using the access token secret key
+    const decoded = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
+    // If verification succeeds, attach the user ID to the request object
+    req.userId = decoded.userId;
+    // Proceed to the next middleware
+    next();
+  } catch (error) {
+    // If verification fails, deny access
     res.status(401);
-    throw new Error("Not authorized, no token");
+    throw new Error('Not authorized, token verification failed');
   }
-});
+};
+
+
+module.exports = protect;
+
+
+module.exports = protect;
+
 
 
 // Role-based middleware
@@ -68,4 +66,4 @@ const hotel = (req, res, next) => {
   }
 };
 
-module.exports = { protect, admin, tourGuide, user,hotel };
+module.exports = { protect, admin, tourGuide, user, hotel };
