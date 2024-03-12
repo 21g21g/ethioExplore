@@ -19,12 +19,6 @@ const protect = async (req, res, next) => {
         throw new Error("user not found")
       }
       req.user=user
-    // Attach user information to the request object
-    // req.user = {
-    //   userId: verified.userId,
-    //   role: verified.role 
-    // };
-    // Proceed to the next middleware
     next();
   } catch (error) {
     // If verification fails, deny access
