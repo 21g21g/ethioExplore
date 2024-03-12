@@ -16,6 +16,7 @@ import PrivateRoute from "./utils/privateRoute";
 import { selectIsLoggedIn } from "./redux/features/auth/authSlice";
 import UserBookings from "./pages/userPage/UserBookings";
 import AdminDashboard from "./pages/adminePage/AdminDashboard";
+import AdminHome from "./pages/adminePage/AdminHome";
 axios.defaults.withCredentials = true;
 
 const App = () => {
@@ -33,7 +34,7 @@ const App = () => {
           <Route path="destinations" element={<Destination />} />
         </Route>
         {/* admin route is private */}
-        <Route path="admin" element={<PrivateRoute><AdminDashboard /></PrivateRoute> } />
+        <Route path="admin" element={<PrivateRoute><AdminHome /></PrivateRoute> } />
         <Route path="user/dashboard" element={<PrivateRoute><UserDashboard /></PrivateRoute>} />
         <Route path="user/bookings" element={<PrivateRoute><UserBookings /></PrivateRoute>} />
         <Route path="auth/login" element={<Login />} />
