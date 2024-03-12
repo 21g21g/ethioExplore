@@ -15,10 +15,11 @@ import "react-toastify/dist/ReactToastify.css";
 import PrivateRoute from "./utils/privateRoute";
 import { selectIsLoggedIn } from "./redux/features/auth/authSlice";
 import UserBookings from "./pages/userPage/UserBookings";
+import AdminDashboard from "./pages/adminePage/AdminDashboard";
 axios.defaults.withCredentials = true;
 
 const App = () => {
-  const isLoggedIn = useSelector(selectIsLoggedIn); // Assuming you have a selector named selectIsLoggedIn
+  // const isLoggedIn = useSelector(selectIsLoggedIn); // Assuming you have a selector named selectIsLoggedIn
 
   return (
     <BrowserRouter>
@@ -31,8 +32,10 @@ const App = () => {
           <Route path="bookings" element={<Booking />} />
           <Route path="destinations" element={<Destination />} />
         </Route>
-        <Route path="user/dashboard" element={<PrivateRoute><UserDashboard /></PrivateRoute> } />
-        <Route path="user/bookings" element={<PrivateRoute><UserBookings /></PrivateRoute> } />
+        {/* admin route is private */}
+        <Route path="admin" element={<PrivateRoute><AdminDashboard /></PrivateRoute> } />
+        <Route path="user/dashboard" element={<PrivateRoute><UserDashboard /></PrivateRoute>} />
+        <Route path="user/bookings" element={<PrivateRoute><UserBookings /></PrivateRoute>} />
         <Route path="auth/login" element={<Login />} />
         <Route path="auth/register" element={<Register />} />
       </Routes>

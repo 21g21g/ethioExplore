@@ -21,7 +21,7 @@ exports.registerUser = asyncHandler(async (req, res) => {
   let user = await User.findOne({ email });
   if (user) {
     res.status(400);
-    throw new Error("This email has already been exist");
+    throw new Error("This email has already been used");
   }
   // Create new user
   user = await User.create({
@@ -32,35 +32,35 @@ exports.registerUser = asyncHandler(async (req, res) => {
 
   // Generate tokens
   const accessToken = generateAccessToken(user._id);
-  const refreshToken = generateRefreshToken(user._id);
+  // const refreshToken = generateRefreshToken(user._id);
 
   // Set tokens as cookies
   res.cookie('accessToken', accessToken, {
     httpOnly: true,
-    expires: new Date(Date.now() + 1 * 60 * 1000), // 1 minutes
+    expires: new Date(Date.now() + 15 * 60 * 1000), // 1 minutes
     secure: true,
     sameSite: 'none'
   });
 
-  res.cookie('refreshToken', refreshToken, {
-    httpOnly: true,
-    expires: new Date(Date.now() + 15 * 60 * 1000), // 15 minutes
-    secure: true,
-    sameSite: 'none'
-  });
+  // res.cookie('refreshToken', refreshToken, {
+  //   httpOnly: true,
+  //   expires: new Date(Date.now() + 15 * 60 * 1000), // 15 minutes
+  //   secure: true,
+  //   sameSite: 'none'
+  // });
 
   // Send success response without including tokens
   if (user) {
-    const { _id, email, name, photo, phone } = user
     res.status(201).json({
-      _id, email, name, photo, phone
+      data: {
+        user,
+      },
     });
   } else {
     res.status(400);
     throw new Error("Invalid credentials");
   }
 });
-
 
 // Login User
 exports.loginUser = asyncHandler(async (req, res) => {
@@ -85,30 +85,31 @@ exports.loginUser = asyncHandler(async (req, res) => {
     throw new Error("Enter correct password");
   }
   // Generate access token and refresh token
-  const accessToken = generateAccessToken(user._id);
-  const refreshToken = generateRefreshToken(user._id);
+  const accessToken = generateAccessToken(user._id,user.role);
+  // const refreshToken = generateRefreshToken(user._id);
 
   // Set tokens as cookies
   res.cookie('accessToken', accessToken, {
     httpOnly: true,
-    expires: new Date(Date.now() + 1 * 60 * 1000), // 1 minutes
+    expires: new Date(Date.now() + 15 * 60 * 1000), // 1 minutes
     secure: true,
     sameSite: 'none'
   });
 
-  res.cookie('refreshToken', refreshToken, {
-    httpOnly: true,
-    expires: new Date(Date.now() + 15 * 60 * 1000), // 15 minutes
-    secure: true,
-    sameSite: 'none'
-  });
+  // res.cookie('refreshToken', refreshToken, {
+  //   httpOnly: true,
+  //   expires: new Date(Date.now() + 15 * 60 * 1000), // 15 minutes
+  //   secure: true,
+  //   sameSite: 'none'
+  // });
 
   // Send success response without including the tokens
   if (user && isPasswordCorrect) {
-    const { _id, email, name, photo, phone } = user
     res.status(200).json({
-      _id, email, name, photo, phone
-    });
+      data: {
+        user,
+      },
+        });
   } else {
     res.status(400);
     throw new Error("Invalid credentials");
@@ -120,7 +121,7 @@ exports.loginUser = asyncHandler(async (req, res) => {
 exports.logoutUser = asyncHandler(async (req, res) => {
   res.cookie('accessToken', "", {
     httpOnly: true,
-    expires: new Date(Date.now() + 1 * 60 * 1000), // 1 minutes
+    expires: new Date(0) , // 0 minutes
     secure: true,
     sameSite: 'none'
   });
@@ -129,12 +130,6 @@ exports.logoutUser = asyncHandler(async (req, res) => {
 
 
 exports.getUsers = asyncHandler(async (req, res) => {
-  // Check if user is authenticated
-  if (!req.userId) {
-    // If not authenticated, send "Please login" message
-    return res.status(401).json({ message: "Please log in" });
-  }
-
   // User is authenticated, fetch users
   const users = await User.find();
   if (users) {
@@ -152,7 +147,7 @@ exports.getUsers = asyncHandler(async (req, res) => {
 
 //get single user
 exports.getUser = asyncHandler(async (req, res) => {
-  const user = await User.findOne();
+  const user = await User.findById(req.user._id);
   if (user) {
     res.status(200).json({
       data: {

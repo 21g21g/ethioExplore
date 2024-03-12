@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const User = require('../models/userModel');
 
 const protect = async (req, res, next) => {
   try {
@@ -7,31 +8,34 @@ const protect = async (req, res, next) => {
     // If no access token found, deny access
     if (!accessToken) {
       res.status(401);
-      throw new Error('Access token not found');
+      throw new Error('Not autherized please login');
     }
-    // Verify access token using the access token secret key
-    const decoded = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
-    // If verification succeeds, attach the user ID to the request object
-    req.userId = decoded.userId;
+    //verify the token
+    const verified = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
+    const user= await User.findById( verified.userId,
+      verified.role ).select("-password")
+      if (!user) {
+        res.status(401)
+        throw new Error("user not found")
+      }
+      req.user=user
+    // Attach user information to the request object
+    // req.user = {
+    //   userId: verified.userId,
+    //   role: verified.role 
+    // };
     // Proceed to the next middleware
     next();
   } catch (error) {
     // If verification fails, deny access
     res.status(401);
-    throw new Error('Not authorized, token verification failed');
+    next(error);
   }
 };
 
-
-module.exports = protect;
-
-
-module.exports = protect;
-
-
-
 // Role-based middleware
 const admin = (req, res, next) => {
+  console.log('User Role:', req.user.role); // Log user role
   if (req.user && req.user.role === "admin") {
     next();
   } else {
@@ -40,7 +44,9 @@ const admin = (req, res, next) => {
   }
 };
 
+
 const tourGuide = (req, res, next) => {
+  console.log('User Role:', req.user.role); // Log user role
   if (req.user && req.user.role === "tourGuide") {
     next();
   } else {
@@ -50,6 +56,7 @@ const tourGuide = (req, res, next) => {
 };
 
 const user = (req, res, next) => {
+  console.log('User Role:', req.user.role); // Log user role
   if (req.user && req.user.role === "user") {
     next();
   } else {
@@ -58,6 +65,7 @@ const user = (req, res, next) => {
   }
 };
 const hotel = (req, res, next) => {
+  console.log('User Role:', req.user.role); // Log user role
   if (req.user && req.user.role === "hotel") {
     next();
   } else {
@@ -66,4 +74,4 @@ const hotel = (req, res, next) => {
   }
 };
 
-module.exports = { protect, admin, tourGuide, user, hotel };
+module.exports = { protect, admin, tourGuide, user, hotel, };

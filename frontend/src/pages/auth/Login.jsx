@@ -39,26 +39,36 @@ const Login = () => {
         if (!email || !password) {
             return toast.error("Please fill all fields");
         }
-        if (password.length<6) {
-            return toast.error("password be at least 6 character");
+        if (password.length < 6) {
+            return toast.error("Password must be at least 6 characters");
         }
         if (!validateEmail(email)) {
             return toast.error("Please enter a valid email");
         }
+
         setIsLoading(true);
         try {
             const data = await loginService({ email, password });
 
             dispatch(setLogin(true));
-            if (data && data.name) {
-                dispatch(setName(data.name));
+
+            // Extract role from the user data returned in the response
+            const userRole = data.data.user.role;
+
+            if (userRole === 'admin') {
+                navigate("/admin");
+            } else if (userRole === 'tourGuide') {
+                navigate("/tourGuide");
+            } else if (userRole === 'user') {
+                navigate("/user/dashboard");
+            } else if (userRole === 'hotel') {
+                navigate("/hotel");
             } else {
-                // Handle the case where 'name' property is not present in the data object
+                navigate("/"); // Default route for unrecognized roles
             }
-            navigate("/user/dashboard");
         } catch (error) {
-            if (error.response && error.response.status === 401) {
-                toast.error("User not found");
+            if (error.response && error.response.status === 400) {
+                toast.error("Invalid credentials");
             } else {
                 toast.error(error.message); // Display the generic error message
             }
@@ -66,6 +76,7 @@ const Login = () => {
             setIsLoading(false);
         }
     };
+
 
 
 
