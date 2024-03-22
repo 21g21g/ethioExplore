@@ -1,22 +1,19 @@
 import React, { useState } from 'react';
-import AdminTopNav from '../../components/header/AdminTopNav';
 import Sidebar from '../../components/sidebar/Sidebar';
-import AdminDashboard from './AdminDashboard';
-import AdminBooking from './AdminBooking';
-import AdminHotel from './AdminHotel';
-import AdminDestination from './AdminDestination';
-import AdminTourist from './AdminTourist';
-import AdminGuides from './AdminGuides';
-import AdminCar from './AdminCar';
-import { AdminSidebarData } from '../../data/Data';
+
+import {  UserSidebarData } from '../../data/Data';
 import TopNav from '../../components/header/TopNav';
 import { selectName } from '../../redux/features/auth/authSlice';
 import { useSelector } from 'react-redux';
+import UserDashboard from './UserDashboard';
+import UserBookings from './UserBookings';
+import UserHotels from './UserHotels';
+import UserPackages from './UserPackages';
 
-const AdminHome = () => {
+const UserHome = () => {
 
   const [selectedMenuItem, setSelectedMenuItem] = useState(
-    AdminSidebarData[0].link
+    UserSidebarData[0].link
   );
   const name = useSelector(selectName); 
   const handleMenuItemClick = (link) => {
@@ -25,47 +22,31 @@ const AdminHome = () => {
 
   const renderPageContent = () => {
     switch (selectedMenuItem) {
-      case "/admin/dashboard":
+      case "/user/dashboard":
         return (
           <>
-            <AdminDashboard />
+            <UserDashboard />
           </>
         );
-      case "/admin/bookings":
+      case "/user/bookings":
         return (
           <>
-            <AdminBooking />
+            <UserBookings />
           </>
         );
-      case "/admin/cars":
+     
+      case "/user/hotels":
         return (
           <>
-            <AdminCar />
-          </>
-        );
-      case "/admin/hotels":
-        return (
-          <>
-            <AdminHotel />
+            <UserHotels />
           </>
         );
 
-      case "/admin/tourists":
+
+      case "/user/packages":
         return (
           <>
-            <AdminTourist />
-          </>
-        );
-      case "/admin/guides":
-        return (
-          <>
-            <AdminGuides />
-          </>
-        );
-      case "/admin/destinations":
-        return (
-          <>
-            <AdminDestination />
+            <UserPackages />
           </>
         );
 
@@ -73,22 +54,23 @@ const AdminHome = () => {
         return null;
     }
   };
+
   return (
     <div className="flex bg-green-100">
-      <Sidebar role="admin" onMenuItemClick={handleMenuItemClick} />
+      <Sidebar role="user" onMenuItemClick={handleMenuItemClick} />
       <div className="flex flex-col w-full">
         <TopNav
-          roleData={AdminSidebarData}
+          roleData={UserSidebarData}
           onMenuToggle={() => console.log("Menu toggled")} // Example function for menu toggle
           onMenuClick={handleMenuItemClick}
           searchPlaceholder="Search..."
           userName={name} // Example user name
         />
-        {/* <AdminTopNav /> */}
         <div className='bg-green-50 pl-3 m-4 border-white border-2 rounded-md'>
           <h1>{selectedMenuItem}</h1>
         </div>
         <div className="bg-green-50 pl-3 m-4 border-white border-2 rounded-md">
+          <h1>this is the contents</h1>
           {renderPageContent()}
         </div>
       </div>
@@ -96,4 +78,4 @@ const AdminHome = () => {
   );
 };
 
-export default AdminHome;
+export default UserHome;

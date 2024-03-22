@@ -9,6 +9,15 @@ import {
   FaThList,
   FaEject,
 } from "react-icons/fa";
+import {
+  RiDashboardLine,
+  RiHotelBedLine,
+  RiCarLine,
+  RiBook2Line,
+  RiUserLine,
+  RiTeamLine,
+  RiMapPin2Line
+} from 'react-icons/ri';
 
 import { TfiPackage } from "react-icons/tfi";
 import { BiTaxi } from "react-icons/bi";
@@ -16,38 +25,37 @@ import { BiTaxi } from "react-icons/bi";
 
 export const AdminSidebarData = [
   {
-    icon: RxDashboard,
+    icon: RiDashboardLine,
     heading: "Dashboard",
     link: "/admin/dashboard",
   },
   {
-    icon: FaEject,
+    icon: RiHotelBedLine,
     heading: "Hotels",
     link: "/admin/hotels",
   },
   {
-    icon: FaCarAlt,
+    icon: RiCarLine,
     heading: "Cars",
     link: "/admin/cars",
   },
   {
-    icon: FaThList,
-    heading: "Booking",
+    icon: RiBook2Line,
+    heading: "Bookings",
     link: "/admin/bookings",
   },
   {
-    icon: AiOutlineUsergroupAdd,
+    icon: RiUserLine,
     heading: "Tourists",
     link: "/admin/tourists",
   },
   {
-    icon: AiOutlineUsergroupAdd,
-    heading: "GuideCompanies",
+    icon: RiTeamLine,
+    heading: "Guide Companies",
     link: "/admin/guides",
   },
-
   {
-    icon: AiOutlineHome,
+    icon: RiMapPin2Line,
     heading: "Destinations",
     link: "/admin/destinations",
   },
@@ -90,31 +98,29 @@ export const TourGuideSidebarData = [
     link: "/tourGuide/cars",
   },
 ];
-export const UserNavData = [
+export const UserSidebarData = [
   {
+    icon: RiDashboardLine,
     heading: "Dashboard",
     link: "/user/dashboard",
   },
   {
+    icon: RiBook2Line,
     heading: "Bookings",
     link: "/user/bookings",
   },
+
   {
-    heading: "Destinations",
-    link: "/user/destinations",
-  },
-  {
+    icon: TfiPackage,
     heading: "Packages",
     link: "/user/packages",
   },
   {
+    icon: RiHotelBedLine,
     heading: "Hotels",
-    link: "/hotels",
+    link: "/user/hotels",
   },
-  {
-    heading: "Cars",
-    link: "/user/cars",
-  },
+
 ];
 
 export const HotelSidebarData = [

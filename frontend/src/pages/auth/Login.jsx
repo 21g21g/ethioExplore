@@ -60,7 +60,7 @@ const Login = () => {
             } else if (userRole === 'tourGuide') {
                 navigate("/tourGuide");
             } else if (userRole === 'user') {
-                navigate("/user/dashboard");
+                navigate("/user");
             } else if (userRole === 'hotel') {
                 navigate("/hotel");
             } else {

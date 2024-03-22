@@ -32,22 +32,22 @@ exports.registerUser = asyncHandler(async (req, res) => {
 
   // Generate tokens
   const accessToken = generateAccessToken(user._id);
-  // const refreshToken = generateRefreshToken(user._id);
+  const refreshToken = generateRefreshToken(user._id);
 
   // Set tokens as cookies
   res.cookie('accessToken', accessToken, {
     httpOnly: true,
-    expires: new Date(Date.now() + 15 * 60 * 1000), // 1 minutes
+    expires: new Date(Date.now() + 1 * 60 * 1000), // 1 minutes
     secure: true,
     sameSite: 'none'
   });
 
-  // res.cookie('refreshToken', refreshToken, {
-  //   httpOnly: true,
-  //   expires: new Date(Date.now() + 15 * 60 * 1000), // 15 minutes
-  //   secure: true,
-  //   sameSite: 'none'
-  // });
+  res.cookie('refreshToken', refreshToken, {
+    httpOnly: true,
+    expires: new Date(Date.now() + 15 * 60 * 1000), // 15 minutes
+    secure: true,
+    sameSite: 'none'
+  });
 
   // Send success response without including tokens
   if (user) {
@@ -86,22 +86,22 @@ exports.loginUser = asyncHandler(async (req, res) => {
   }
   // Generate access token and refresh token
   const accessToken = generateAccessToken(user._id,user.role);
-  // const refreshToken = generateRefreshToken(user._id);
+  const refreshToken = generateRefreshToken(user._id);
 
   // Set tokens as cookies
   res.cookie('accessToken', accessToken, {
     httpOnly: true,
-    expires: new Date(Date.now() + 15 * 60 * 1000), // 1 minutes
+    expires: new Date(Date.now() + 1 * 60 * 1000), // 1 minutes
     secure: true,
     sameSite: 'none'
   });
 
-  // res.cookie('refreshToken', refreshToken, {
-  //   httpOnly: true,
-  //   expires: new Date(Date.now() + 15 * 60 * 1000), // 15 minutes
-  //   secure: true,
-  //   sameSite: 'none'
-  // });
+  res.cookie('refreshToken', refreshToken, {
+    httpOnly: true,
+    expires: new Date(Date.now() + 15 * 60 * 1000), // 15 minutes
+    secure: true,
+    sameSite: 'none'
+  });
 
   // Send success response without including the tokens
   if (user && isPasswordCorrect) {
