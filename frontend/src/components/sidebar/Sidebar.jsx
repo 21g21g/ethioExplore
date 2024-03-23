@@ -14,7 +14,7 @@ const Sidebar = (props) => {
   let SidebarData = role === "admin" ? AdminSidebarData : role === "hotel" ? HotelSidebarData :role=="user"?UserSidebarData: TourGuideSidebarData;
 
   return (
-    <div className="bg-green-700 text-white w-64 h-screen  flex-col border-white border-2 lg:block hidden">
+    <div className="bg-green-700 text-white w-64 h-screen fixed z-60 flex-col border-white border-2 lg:block hidden">
       {/* Logo */}
       <div className=" h-16 flex items-center justify-center">
         <SiEthiopianairlines size={25} color="yellow" />

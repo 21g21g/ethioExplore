@@ -37,20 +37,16 @@ const AdminTourist = () => {
   ];
 
   return (
-    <div className="MainTourist">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-6 py-4">
-        <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-          <div className="p-6 bg-white border-b border-gray-200">
-            <MyTable
-              apiEndpoint="http://localhost:5000/api/users"
-              title="Tourists"
-              columns={Usercolumns}
-              dataKey="users"
-            />
-          </div>
-        </div>
-      </div>
+    <div className="p-6 bg-white border-b border-gray-200">
+      <MyTable
+        apiEndpoint="http://localhost:5000/api/users"
+        title="Tourists"
+        columns={Usercolumns}
+        dataKey="users"
+      />
     </div>
+
+
   );
 };
 

@@ -25,7 +25,7 @@ exports.createPackage = asyncHandler(async (req, res) => {
     category,
     priceDiscount,
   });
-  
+
   res.status(201).json({
     status: "success",
     data: {

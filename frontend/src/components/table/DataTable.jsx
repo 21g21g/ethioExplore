@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { HiTrash, HiEye } from "react-icons/hi"; // Importing HiTrash and HiEye icons
+import DataTable from "react-data-table-component";
+import { HiTrash, HiEye } from "react-icons/hi";
 
 const MyTable = ({ apiEndpoint, title, columns, dataKey, handleEdit, handleDelete }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
   const [searchText, setSearchText] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(5); // Change the number of items per page as needed
 
   useEffect(() => {
     setIsLoading(true);
@@ -24,10 +23,7 @@ const MyTable = ({ apiEndpoint, title, columns, dataKey, handleEdit, handleDelet
           });
           setData(updatedData);
         } else {
-          console.log(
-            "Response data is not an array:",
-            response.data.data[dataKey]
-          );
+          console.log("Response data is not an array:", response.data.data[dataKey]);
         }
         setIsLoading(false);
       })
@@ -39,109 +35,65 @@ const MyTable = ({ apiEndpoint, title, columns, dataKey, handleEdit, handleDelet
 
   const handleSearch = (event) => {
     setSearchText(event.target.value);
-    setCurrentPage(1); // Reset current page to 1 when searching
   };
 
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = data
-    .filter((item) =>
-      item.name.toLowerCase().includes(searchText.toLowerCase())
-    )
-    .slice(indexOfFirstItem, indexOfLastItem);
-
-  const totalPages = Math.ceil(
-    data.filter((item) =>
-      item.name.toLowerCase().includes(searchText.toLowerCase())
-    ).length / itemsPerPage
+  const filteredData = data.filter(item =>
+    item.name.toLowerCase().includes(searchText.toLowerCase())
   );
 
   return (
-    <div className=" px-3 ">
+    <div>
       {isLoading ? (
         <h1>Loading...</h1>
       ) : (
         <>
-          <input
-            type="text"
-            placeholder="Search by name"
-            value={searchText}
-            onChange={handleSearch}
-            className="border rounded-md py-2 px-4 mb-4"
-          />
-          {currentItems.length > 0 ? (
-            <div className="overflow-x-auto">
-              <h2 className="text-xl font-semibold mb-4">{title}</h2>
-              <table className="w-full table-fixed border-collapse">
-                <thead>
-                  <tr>
-                    {columns.map((column) => (
-                      <th
-                        key={column.selector}
-                        className="px-4 py-2 bg-gray-200 text-left text-sm font-medium text-gray-700 uppercase tracking-wider"
-                      >
-                        {column.name}
-                      </th>
-                    ))}
-                    
-                  </tr>
-                </thead>
-                <tbody>
-                  {currentItems.map((row) => (
-                    <tr key={row.id} className="border-t">
-                      {columns.map((column) => (
-                        <td
-                          key={column.selector}
-                          className="px-4 py-2 text-sm text-gray-600"
-                        >
-                          {row[column.selector]}
-                        </td>
-                      ))}
-                      <td className="px-4 py-2 text-sm text-gray-600">
-                        <div className="flex items-center space-x-4">
-                          <HiEye
-                            onClick={() => handleEdit(row)}
-                            className="cursor-pointer text-green-500 text-2xl"
-                          />
-                          <HiTrash
-                            onClick={() => handleDelete(row)}
-                            className="cursor-pointer text-red-500 text-2xl"
-                          />
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              {totalPages > 1 && (
-                <div className="mt-4 flex justify-center">
-                  <nav className="inline-block">
-                    <ul className="flex items-center">
-                      {[...Array(totalPages)].map((_, index) => (
-                        <li key={index}>
-                          <button
-                            className={`px-3 py-1 ${
-                              currentPage === index + 1
-                                ? "bg-blue-500 text-white"
-                                : "bg-white text-blue-500"
-                            } border border-blue-500 rounded-md mx-1 hover:bg-blue-200 hover:text-white focus:outline-none`}
-                            onClick={() => handlePageChange(index + 1)}
-                          >
-                            {index + 1}
-                          </button>
-                        </li>
-                      ))}
-                    </ul>
-                  </nav>
-                </div>
-              )}
-            </div>
+          <div className="flex items-center justify-between">
+            <input
+              type="text"
+              placeholder="Search by name"
+              value={searchText}
+              onChange={handleSearch}
+              className="border rounded-md py-2 px-4"
+            />
+            <h2 className="text-green-700 text-xl font-semibold mb-4">{title}</h2>
+            <button className="border rounded-md py-2 px-4 mr-2 text-white bg-green-400">Add User</button>
+          </div>
+          {filteredData.length > 0 ? (
+            <DataTable
+              className="data-table"
+              title={title}
+              columns={columns.map(column => ({
+                name: column.name,
+                selector: column.selector,
+                sortable: true,
+                cell: row => <div>{row[column.selector]}</div>,
+                sortFunction: (a, b) => {
+                  if (a[column.selector] < b[column.selector]) return -1;
+                  if (a[column.selector] > b[column.selector]) return 1;
+                  return 0;
+                }
+              }))}
+              data={filteredData}
+              pagination
+              paginationRowsPerPageOptions={[5, 10, 15, 20]}
+              highlightOnHover
+              striped
+              defaultFilterMethod={(filter, row) =>
+                String(row[filter.id])
+                  .toLowerCase()
+                  .includes(filter.value.toLowerCase())
+              }
+              style={{ height: "400px" }}
+              paginationComponentOptions={{
+                rowsPerPageText: "Rows:",
+                rangeSeparatorText: "of",
+                noRowsPerPage: false,
+                selectAllRowsItem: false,
+                selectAllRowsItemText: "All",
+              }}
+            />
           ) : (
-            <div className="text-red-500">No records found</div>
+            <div>No records found</div>
           )}
         </>
       )}

@@ -88,7 +88,7 @@ const AdminHome = () => {
         <div className='bg-green-50 pl-3 m-4 border-white border-2 rounded-md'>
           <h1>{selectedMenuItem}</h1>
         </div>
-        <div className="bg-green-50 pl-3 m-4 border-white border-2 rounded-md">
+        <div className="bg-green-50 pl-3 ml-64 m-4 border-white border-2 rounded-md">
           {renderPageContent()}
         </div>
       </div>
