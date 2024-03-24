@@ -37,7 +37,7 @@ const AdminTourist = () => {
   ];
 
   return (
-    <div className="p-6 bg-white border-b border-gray-200">
+    <div className="p-6 bg-white border rounded-md border-green-100 shadow-md">
       <MyTable
         apiEndpoint="http://localhost:5000/api/users"
         title="Tourists"

@@ -42,26 +42,25 @@ const MyTable = ({ apiEndpoint, title, columns, dataKey, handleEdit, handleDelet
   );
 
   return (
-    <div>
+    <div className=" p-3">
       {isLoading ? (
         <h1>Loading...</h1>
       ) : (
         <>
-          <div className="flex items-center justify-between">
-            <input
-              type="text"
-              placeholder="Search by name"
-              value={searchText}
-              onChange={handleSearch}
-              className="border rounded-md py-2 px-4"
-            />
-            <h2 className="text-green-700 text-xl font-semibold mb-4">{title}</h2>
-            <button className="border rounded-md py-2 px-4 mr-2 text-white bg-green-400">Add User</button>
+           <div className="flex flex-col lg:flex-row items-center justify-between ">
+            <h2 className="text-green-500 text-xl font-semibold mb-4 lg:mb-0">{title}</h2>
+              <input
+                type="text"
+                placeholder="Search by name"
+                value={searchText}
+                onChange={handleSearch}
+                className="input w-2/5"
+              />
+              <button className="border rounded-md py-2 px-4 mr-2 text-white bg-green-400">Add User</button>
           </div>
           {filteredData.length > 0 ? (
             <DataTable
               className="data-table"
-              title={title}
               columns={columns.map(column => ({
                 name: column.name,
                 selector: column.selector,
@@ -93,7 +92,7 @@ const MyTable = ({ apiEndpoint, title, columns, dataKey, handleEdit, handleDelet
               }}
             />
           ) : (
-            <div>No records found</div>
+            <div className="text-red-500">No records found</div>
           )}
         </>
       )}

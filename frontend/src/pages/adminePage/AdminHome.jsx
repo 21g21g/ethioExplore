@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import AdminTopNav from '../../components/header/AdminTopNav';
 import Sidebar from '../../components/sidebar/Sidebar';
 import AdminDashboard from './AdminDashboard';
 import AdminBooking from './AdminBooking';
@@ -74,7 +73,7 @@ const AdminHome = () => {
     }
   };
   return (
-    <div className="flex bg-green-100">
+    <div className="flex bg-green-50 px-2">
       <Sidebar role="admin" onMenuItemClick={handleMenuItemClick} />
       <div className="flex flex-col w-full">
         <TopNav
@@ -82,13 +81,12 @@ const AdminHome = () => {
           onMenuToggle={() => console.log("Menu toggled")} // Example function for menu toggle
           onMenuClick={handleMenuItemClick}
           searchPlaceholder="Search..."
-          userName={name} // Example user name
+          userName={name} 
         />
-        {/* <AdminTopNav /> */}
-        <div className='bg-green-50 pl-3 m-4 border-white border-2 rounded-md'>
-          <h1>{selectedMenuItem}</h1>
+        <div className='bg-white p-3 m-4 border-white border-2 rounded-md shadow-md'>
+          <h1 className='text-green-500 '>{selectedMenuItem}</h1>
         </div>
-        <div className="bg-green-50 pl-3 ml-64 m-4 border-white border-2 rounded-md">
+        <div className=" m-4 ">
           {renderPageContent()}
         </div>
       </div>

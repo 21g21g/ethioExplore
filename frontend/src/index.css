@@ -17,7 +17,7 @@
   
   
 .input{
-        @apply focus:border-blue-500 focus:text-slate-400 outline-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5  dark:text-white 
+        @apply focus:border-green-500 focus:text-indigo-400 outline-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5  dark:text-white 
     }
 
 }

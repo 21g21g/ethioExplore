@@ -6,13 +6,11 @@ const bcrypt = require("bcryptjs")
 // register users
 exports.registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
-
   // Validation
   if (!name || !email || !password) {
     res.status(400);
     throw new Error("Please fill in all fields");
   }
-
   if (password.length < 6) {
     res.status(400);
     throw new Error("Password must be at least 6 characters");
