@@ -3,7 +3,7 @@ import axios from "axios";
 import DataTable from "react-data-table-component";
 import { HiTrash, HiEye } from "react-icons/hi";
 
-const MyTable = ({ apiEndpoint, title, columns, dataKey, handleEdit, handleDelete }) => {
+const MyTable = ({ apiEndpoint, title, columns, dataKey, }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
   const [searchText, setSearchText] = useState("");
@@ -56,7 +56,6 @@ const MyTable = ({ apiEndpoint, title, columns, dataKey, handleEdit, handleDelet
                 onChange={handleSearch}
                 className="input w-2/5"
               />
-              <button className="border rounded-md py-2 px-4 mr-2 text-white bg-green-400">Add User</button>
           </div>
           {filteredData.length > 0 ? (
             <DataTable
@@ -73,7 +72,9 @@ const MyTable = ({ apiEndpoint, title, columns, dataKey, handleEdit, handleDelet
                 }
               }))}
               data={filteredData}
+              selectableRows
               pagination
+              paginationPerPage={5}
               paginationRowsPerPageOptions={[5, 10, 15, 20]}
               highlightOnHover
               striped

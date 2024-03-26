@@ -141,41 +141,68 @@ exports.getUsers = asyncHandler(async (req, res) => {
   }
 });
 
-
-
-//get single user
+// Get single user by ID
 exports.getUser = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.user._id);
-  if (user) {
-    res.status(200).json({
-      data: {
-        user,
-      },
-    });
-  } else {
-    throw new Error("user not found");
+  try {
+    const {id } = req.params;
+
+    if (!id) {
+      res.status(400).json({ error: "User ID is missing in the request" });
+      return;
+    }
+
+    console.log("Requested User ID:", id); // Log userId for debugging
+
+    // Find the user by ID
+    const user = await User.findById(id);
+
+    // If user is found, respond with user data
+    if (user) {
+      res.status(200).json({
+        data: {
+          user,
+        },
+      });
+    } else {
+      // If user is not found, return 404 error
+      res.status(404).json({ error: "User not found" });
+    }
+  } catch (error) {
+    console.error(error); // Log any caught errors for further inspection
+    res.status(500).json({ error: "Server Error" }); // Send a generic error response
   }
 });
 
-
-//update the user
+// Update the user
 exports.updateUser = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.params.id);
+  const { id } = req.params;
+  const { name, email, role } = req.body;
+  // Find the user by ID and update
+  let user = await User.findById(id, req.body,{
+    new: true,
+    runValidators: true,
+  });
 
+  // If user doesn't exist, return 404 error
   if (!user) {
     res.status(404);
     throw new Error("User not found");
   }
 
-  user.name = req.body.name || user.name;
-  user.email = req.body.email || user.email;
-  user.role = req.body.role || user.role;
+  // Update specific fields if provided
+  user.name = name || user.name;
+  user.email = email || user.email;
+  user.role = role || user.role;
 
-  const updatedUser = await user.save();
+  // Save the updated user
+  updaterUser = await user.save();
 
+  // Respond with the updated user
   res.json({
     data: {
-      updatedUser,
+      updaterUser,
     },
   });
 });
+
+

@@ -33,9 +33,10 @@ const Login = () => {
         setFormData({ ...formData, [name]: value });
     };
 
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+    
         if (!email || !password) {
             return toast.error("Please fill all fields");
         }
@@ -45,24 +46,25 @@ const Login = () => {
         if (!validateEmail(email)) {
             return toast.error("Please enter a valid email");
         }
-
+    
         setIsLoading(true);
         try {
             const data = await loginService({ email, password });
-
+    
+            const userData = data.data.user; // Assuming user data includes the name
+            const userRole = userData.role;
+    
             dispatch(setLogin(true));
-
-            // Extract role from the user data returned in the response
-            const userRole = data.data.user.role;
-
+            dispatch(setName(userData.name)); // Dispatch setName action to update name in Redux store and local storage
+    
             if (userRole === 'admin') {
                 navigate("/admin");
             } else if (userRole === 'tourGuide') {
                 navigate("/tourGuide");
             } else if (userRole === 'user') {
                 navigate("/user");
-            } else if (userRole === 'hotel') {
-                navigate("/hotel");
+            } else if (userRole === 'hotelManager') {
+                navigate("/hotelmanager");
             } else {
                 navigate("/"); // Default route for unrecognized roles
             }
@@ -76,6 +78,7 @@ const Login = () => {
             setIsLoading(false);
         }
     };
+    
 
 
 

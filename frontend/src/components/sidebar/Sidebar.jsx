@@ -14,7 +14,7 @@ const Sidebar = (props) => {
   let SidebarData = role === "admin" ? AdminSidebarData : role === "hotel" ? HotelSidebarData :role=="user"?UserSidebarData: TourGuideSidebarData;
 
   return (
-    <div className="bg-white text-green-500 w-64 h-screen  flex-col   lg:block hidden  shadow-md">
+    <div className="bg-white text-green-950 w-64 h-screen  flex-col   lg:block hidden  shadow-md">
       {/* Logo */}
       <div className=" h-20 flex items-center justify-center">
         <SiEthiopianairlines size={25} color="yellow" />
@@ -27,7 +27,7 @@ const Sidebar = (props) => {
         {SidebarData.map((item, index) => (
           <div
             key={index}
-            className={`p-4 cursor-pointer flex items-center ${selected === index ? 'bg-green-500 rounded-md text-white' : ''}`}
+            className={`p-4 cursor-pointer flex items-center ${selected === index ? ' rounded-md text-green-500' : ''}`}
             onClick={() => handleMenuItemClick(item.link, index)}
           >
             <item.icon className="mr-2" />

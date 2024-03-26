@@ -1,6 +1,7 @@
 import React from "react";
 import MyTable from "../../components/table/DataTable";
-import { HiTrash, HiEye } from "react-icons/hi"; // Importing HiTrash and HiEye icons
+import { HiTrash, HiPencilAlt } from "react-icons/hi"; // Importing HiTrash and HiPencilAlt icons
+import axios from "axios";
 
 const AdminTourist = () => {
   const handleEdit = (row) => {
@@ -11,6 +12,16 @@ const AdminTourist = () => {
   const handleDelete = (row) => {
     // Define the logic for handling the delete action
     console.log("Delete action clicked for row:", row);
+    // Example of deletion logic with axios
+    axios.delete(`http://localhost:5000/api/users/${row.id}`)
+      .then(response => {
+        console.log("Deleted successfully:", response.data);
+        // Optionally, you can perform additional actions after deletion
+      })
+      .catch(error => {
+        console.error("Error deleting user:", error);
+        // Optionally, you can handle error cases
+      });
   };
 
   const Usercolumns = [
@@ -23,13 +34,13 @@ const AdminTourist = () => {
       name: "Actions",
       cell: (row) => (
         <div className="flex items-center space-x-4">
-          <HiEye
+          <HiPencilAlt
             onClick={() => handleEdit(row)}
-            className="cursor-pointer text-green-500 text-3xl"
+            className="cursor-pointer text-green-500 text-2xl"
           />
           <HiTrash
             onClick={() => handleDelete(row)}
-            className="cursor-pointer text-red-500 text-3xl"
+            className="cursor-pointer text-red-500 text-2xl"
           />
         </div>
       ),
@@ -45,8 +56,6 @@ const AdminTourist = () => {
         dataKey="users"
       />
     </div>
-
-
   );
 };
 

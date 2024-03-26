@@ -6,9 +6,9 @@ const packageSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    guides: [
+    guides: [{
      String
-    ],
+    }],
 
     price: {
       type: Number,

@@ -4,6 +4,8 @@ const bodyParser = require("body-parser");
 const dotenv = require("dotenv").config();
 const cookieParser = require("cookie-parser");
 const userRoute = require("./routes/userRoute");
+const hotelManagerRoute=require('./routes/hotelManagerRoute')
+const tourGuideRoute=require('./routes/hotelManagerRoute')
 const cors = require('cors');
 const app = express();
 //environmental variables
@@ -23,6 +25,8 @@ app.use(cors(
 ));
 //route middleware
 app.use("/api/users", userRoute);
+app.use("/api/managers", hotelManagerRoute);
+app.use("/api/tourguides", tourGuideRoute);
 
 //connect mongodb and listen to server
 mongoose

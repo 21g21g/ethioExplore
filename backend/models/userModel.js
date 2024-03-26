@@ -9,7 +9,7 @@ userSchema = mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ["admin", "tourGuide", "user", "hotel"],
+      enum: ["admin", "tourGuide", "user", "hotelManager"],
       default: "user",
     },
     email: {
@@ -38,7 +38,20 @@ userSchema = mongoose.Schema(
       type: Number,
       default: +251,
     },
+    hotelName: {
+      type: String,
+      required: function () {
+        return this.role === 'hotelManager';
+      }
+    },
+    destination: {
+      type: String,
+      required: function () {
+        return this.role === 'tourGuide';
+      }
+    }
   },
+
   {
     timestamp: true,
   }

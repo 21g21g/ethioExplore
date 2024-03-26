@@ -8,24 +8,25 @@ const protect = async (req, res, next) => {
     // If no access token found, deny access
     if (!accessToken) {
       res.status(401);
-      throw new Error('Not autherized please login');
+      throw new Error('Not authorized, please login');
     }
-    //verify the token
+    // Verify the token
     const verified = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
-    const user= await User.findById( verified.userId,
-      verified.role ).select("-password")
-      if (!user) {
-        res.status(401)
-        throw new Error("user not found")
-      }
-      req.user=user
+    // Fetch the user based on the userId from the token
+    const user = await User.findById(verified.userId).select("-password");
+    if (!user) {
+      res.status(401);
+      throw new Error("User not found");
+    }
+    // Set user role in the request object
+    req.user = user;
     next();
   } catch (error) {
-    // If verification fails, deny access
-    res.status(401);
+    // Forward errors to error handler middleware
     next(error);
   }
 };
+
 
 // Role-based middleware
 const admin = (req, res, next) => {
@@ -58,9 +59,9 @@ const user = (req, res, next) => {
     throw new Error("Not authorized as a user");
   }
 };
-const hotel = (req, res, next) => {
+const hotelManager = (req, res, next) => {
   console.log('User Role:', req.user.role); // Log user role
-  if (req.user && req.user.role === "hotel") {
+  if (req.user && req.user.role === "hotelManager") {
     next();
   } else {
     res.status(401);
@@ -68,4 +69,4 @@ const hotel = (req, res, next) => {
   }
 };
 
-module.exports = { protect, admin, tourGuide, user, hotel, };
+module.exports = { protect, admin, tourGuide, user, hotelManager, };
