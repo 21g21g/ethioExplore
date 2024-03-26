@@ -1,6 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const User = require("../models/userModel");
-const generateToken = require('../utils/generateToken');
+const generateToken = require("../utils/generateToken");
 // register users
 
 exports.registerUser = asyncHandler(async (req, res) => {
@@ -48,7 +48,7 @@ exports.registerUser = asyncHandler(async (req, res) => {
     res.status(201).json({
       data: {
         user,
-        token // Include token in the response
+        token, // Include token in the response
       },
     });
   } else {
@@ -56,8 +56,6 @@ exports.registerUser = asyncHandler(async (req, res) => {
     throw new Error("Invalid credentials");
   }
 });
-
-
 
 //login uuser
 exports.loginUser = asyncHandler(async (req, res) => {

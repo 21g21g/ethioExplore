@@ -20,19 +20,22 @@ const roomSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    photos: {
+      type: [String],
+    },
     roomNumbers: [
       {
-        number:Number,
-        unavailableDates:{
-           type: [Date],
+        number: Number,
+        unavailableDates: {
+          type: [Date],
         },
-    }
-  ],
+      },
+    ],
   },
   {
     timestamps: true,
   }
 );
 
-const Room=mongoose.model("Room",roomSchema);
-module.exports=Room;
+const Room = mongoose.model("Room", roomSchema);
+module.exports = Room;
