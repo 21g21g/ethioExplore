@@ -12,7 +12,6 @@ import UserDashboard from "./pages/userPage/UserDashboard"
 import ListHotel from "./pages/hotels/listHotel/ListHotel"
 import SingleHotelAvailability from "./pages/hotels/availabiltyhotels/SingleHotelAvailability"
 import HotelAdmin from "./pages/hotels/hotelAdminPage/HotelAdmin"
-import HotelReserved from "./pages/hotels/hotelreserved/HotelReserved"
 import HotelDetail from "./pages/hotels/hoteldetail/HotelDetail"
 import Roomadds from "./pages/hotels/hotelAdminPage/Roomadds"
 
@@ -26,6 +25,7 @@ const App = () => {
           <Route path="packages" element={<Package />} />
           <Route path="bookings" element={<Booking />} />
           <Route path="destinations" element={<Destination />} />
+
         </Route>
         <Route path="/user">
           <Route path="dashboard" element={<UserDashboard />} />
@@ -36,7 +36,6 @@ const App = () => {
         <Route path="/hotels/:id" element={<SingleHotelAvailability />} />
         <Route path="/hoteladmin" element={<HotelAdmin />} />
         <Route path="/roomnumbers" element={<Roomadds/>}/>
-        <Route path="/hotels/room/:id" element={<HotelReserved />} />
         <Route path="/hoteldetail" element={<HotelDetail />} />
         
       </Routes>

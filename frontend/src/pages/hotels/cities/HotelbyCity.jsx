@@ -2,11 +2,23 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import blunile from "../../../assets/blue.avif"
 import { useDispatch, useSelector } from "react-redux";
-import { Card, Carousel } from "flowbite-react";
+import Slider from "react-slick";
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+import { Card } from "flowbite-react";
 import { hotelSliceactions } from "../../../redux/hotelRedux/hoteSlice";
 import { useNavigate } from "react-router-dom";
 
 const HotelbyCity = () => {
+   const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 3
+  };
   const dispatch = useDispatch();
   const navigate=useNavigate()
   const loading = useSelector((state) => state.hotel.loading);
@@ -52,30 +64,22 @@ const HotelbyCity = () => {
     <div className="flex flex-col md:flex-row">
       <h1>Cities</h1>
       <div className="flex flex-row justify-center gap-3 overflow-x-auto">
-        
-        {hotelData.slice(0, 2).map((count, index) => (
-            <div className="w-60 flex-row md:w-full">
-          <Card key={index} imgSrc={blunile} onClick={()=>handleClick(count)} className="cursor-pointer">
-            <h1 className="text-yellow-300">{count[0].city}</h1>
-            <h3>{count.length} hotels</h3>
-            </Card>
-            </div>
-        ))}
-      
-        {hotelData.length > 2 && (
-          <div  className="w-60 md:w-full">
-            <Carousel slide={false} >
-              {hotelData.slice(2).map((count, index) => (
-                <Card key={index} imgSrc={blunile} onClick={()=>handleClick(count)} className="cursor-pointer">
+         {/* <Slider {...settings}> */}
+        {hotelData.map((count, index) => (
+         <div key={index} className="slider-container">
+           
+              <div className="w-60 flex-row md:w-full">
+                <Card imgSrc={blunile} onClick={() => handleClick(count)} className="cursor-pointer">
                   <h1 className="text-yellow-300">{count[0].city}</h1>
                   <h3>{count.length} hotels</h3>
                 </Card>
-              ))}
-            </Carousel>
+              </div>
+           
+           
           </div>
+        ))}
+         {/* </Slider> */}
         
-
-        )}
       </div>
     </div>
   );

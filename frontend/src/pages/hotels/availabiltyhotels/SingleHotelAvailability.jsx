@@ -16,7 +16,6 @@ const SingleHotelAvailability = () => {
 
     const dispatch=useDispatch()
     const singleData = useSelector((state) => state.hotel.singleData)
-    console.log(singleData)
     const startDate = useSelector((state) => state.hotel.startDate)
    
     const endDate = useSelector((state) => state.hotel.endDate)
@@ -24,6 +23,8 @@ const SingleHotelAvailability = () => {
     const room = useSelector((state) => state.hotel.numbers.room)
 
     const roomData = useSelector((state) => state.hotel.roomData)
+ console.log(roomData)
+    
     const [selectedRooms, setSelectedRooms] = useState([])
   
     const getDateDifference = (start, end) => {
@@ -68,11 +69,12 @@ const SingleHotelAvailability = () => {
 
       const getDatesRange = (startDate, endDate) => {
         const start = new Date(startDate)
-        const end = new Date(endDate)
+          const end = new Date(endDate)
+         const ends=new Date(end.getTime())
         const date = new Date(start.getTime())
         let list = []
        
-        while (date <= end) {
+        while (date <= ends) {
             //getDate() is used for inorder to get the current day of the month.
             list.push(new Date(date).getTime())
             date.setDate(date.getDate()+1)
@@ -81,6 +83,7 @@ const SingleHotelAvailability = () => {
         return list
     }
     const alldates = getDatesRange(startDate, endDate)
+   
     const isAvailable = (roomNumber) => {
         //some function is used for if there is a condition true for one input it returns true.
         return !roomNumber.unavailableDates.some((date) => alldates.includes(new Date(date).getTime()));
@@ -134,9 +137,11 @@ const SingleHotelAvailability = () => {
                 </div>
             </div>
                 <div className='flex flex-row gap-4'>
-              <img src={jaka} className='w-48 h-40 object-cover' />  
-              <img src={blue} className='w-48 h-40 object-cover' />
-               <img src={sheratn} className='w-48 h-40 object-cover'/>
+                    {singleData.photos.map((photo) => (
+                         <img src={`http://localhost:5000/${photo}`} className='w-48 h-40 object-cover' />  
+                    ))}
+             
+           
             </div>
             
           <div>
@@ -148,24 +153,23 @@ const SingleHotelAvailability = () => {
 
             </div>
              <div className='flex flex-col space-y-14 items-center  justify-between'>
-                    <Button className='bg-sky-700 text-zinc-100 mt-2 p-4 ml-3 h-6'>reserve or book now</Button>
                     <div className='flex flex-col bg-slate-400'>
                         <p>this room is taken for {getDateDifference(new Date(endDate),new Date(startDate))}-days</p>
                     <p>${room * getDateDifference(new Date(endDate), new Date(startDate)) * singleData.cheapestPrice}({getDateDifference(new Date(endDate), new Date(startDate))}-nights)</p>
-                    {/* <Link to={`/hotels/room/${id}`}> */}
                         <Button onClick={handleModal} className='bg-sky-700 text-zinc-100 mt-2 p-5 ml-3 h-6'>reserve or book now</Button>
 
-                    {/* </Link> */}
                  
 
                 </div>
                
             </div>
             <Modal show={modal} onClose={()=>setModal(false)}>
-                <ModalHeader  />
+                <ModalHeader>
+                     <h1 className='text-3xl'>Select the room you want to reserve:</h1>
+                </ModalHeader>
                 <ModalBody>
                     <div className='flex flex-col'>
-                        <h1 className='text-3xl'>Select the room you want to reserve:</h1>
+                       
                   <div className='flex flex-col'>
                             {roomData.map((room) => (
               room&&(<div key={room._id} className='flex flex-row gap-10'>
