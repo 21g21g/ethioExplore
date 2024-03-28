@@ -9,7 +9,7 @@ const AdminDashboard = () => {
 
   const url = "http://localhost:5000/api/users";
   return (
-    <div className="container mx-auto mt-8">
+    <div className="container mx-auto mt-3">
       {/* Cards for Tourist, Hotels, Bookings, and Tour Guides */}
       <div className="container mx-auto mt-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -59,6 +59,7 @@ const AdminDashboard = () => {
           <div className="w-32 h-32 ">
             <CircularProgressbar
               // Change the epresent the percentage
+              value={75}
               text={`${75}%`}
             />
           </div>

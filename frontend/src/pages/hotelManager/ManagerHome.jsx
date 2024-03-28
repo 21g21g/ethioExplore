@@ -61,9 +61,6 @@ const ManagerHome = () => {
           searchPlaceholder="Search..."
           userName={name }
         />
-        {/* <div className='bg-white p-3 m-4 border-white border-2 rounded-md shadow-md'>
-          <h1 className='text-green-500 '>{selectedMenuItem}</h1>
-        </div> */}
         <div className=" m-4 ">
           {renderPageContent()}
         </div>
