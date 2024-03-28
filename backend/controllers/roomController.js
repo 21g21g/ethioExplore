@@ -81,6 +81,10 @@ const updateAvailability = async (req, res, next) => {
   try {
     const roomId = req.params.id;
     const dates = req.body.dates;
+    const isoDates = dates.map((all) => new Date(all).toISOString());
+
+    console.log(dates);
+    console.log(roomId);
     // Extract dates from request body
 
     // Update the unavailableDates array for the specified room
@@ -89,13 +93,15 @@ const updateAvailability = async (req, res, next) => {
       {
         $push: {
           // Push the new dates to the unavailableDates array
-          "roomNumbers.$.unavailableDates": { $each: dates },
+          "roomNumbers.$.unavailableDates": { $each: isoDates },
         },
       }
     );
 
     // Send a success response
-    res.status(200).json({ message: "Room availability updated successfully" });
+    res
+      .status(200)
+      .json({ message: "Room availability updated successfully", ro });
   } catch (error) {
     // Forward the error to the error handling middleware
     next(error);

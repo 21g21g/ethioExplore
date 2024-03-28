@@ -83,7 +83,7 @@ const SingleHotelAvailability = () => {
         return list
     }
     const alldates = getDatesRange(startDate, endDate)
-   
+
     const isAvailable = (roomNumber) => {
         //some function is used for if there is a condition true for one input it returns true.
         return !roomNumber.unavailableDates.some((date) => alldates.includes(new Date(date).getTime()));
@@ -108,11 +108,12 @@ const SingleHotelAvailability = () => {
                await Promise.all(selectedRooms.map(async(roomid) => {
                 const response =await axios.put(`http://localhost:5000/api/rooms/availability/${roomid}`,  { dates: alldates } )
                 const data = response.data
-                return data
+                   return data
+                   
              
             })
                 
-            )
+                  )
            
             
             
@@ -140,6 +141,8 @@ const SingleHotelAvailability = () => {
                     {singleData.photos.map((photo) => (
                          <img src={`http://localhost:5000/${photo}`} className='w-48 h-40 object-cover' />  
                     ))}
+                   
+                   
              
            
             </div>
