@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-const AddButton = ({ apiEndpoint, dataToAdd, onSuccess }) => {
+const AddButton = ({ apiEndpoint, userData, onSuccess }) => {
+  // console.log(apiEndpoint);
+  // console.log(userData);
   const [isLoading, setIsLoading] = useState(false);
   const handleAdd = () => {
     setIsLoading(true);
-    if (!dataToAdd.name || !dataToAdd.email || !dataToAdd.password || !dataToAdd.hotelName || !dataToAdd.phone) {
+    if (!userData.name || !userData.email || !userData.password ||(userData.role === 'hotelManager' ? !userData.hotelName:!userData.destination)|| !userData.phone) {
       toast.error("Please fill in all required fields.");
       return setIsLoading(false);
       ;
     }
     axios
-      .post(apiEndpoint, dataToAdd)
+      .post(apiEndpoint, userData)
       .then((response) => {
         setIsLoading(false);
         onSuccess();
@@ -26,7 +28,7 @@ const AddButton = ({ apiEndpoint, dataToAdd, onSuccess }) => {
 
   return (
     <button
-      className="bg-green-500 w-full mt-4 text-white px-4 py-2 rounded hover:bg-green-300 focus:outline-none"
+      className="bg-green-500 w-full mt-4 text-white px-4 py-2 rounded hover:bg-green-700 focus:outline-none"
       onClick={handleAdd}
       disabled={isLoading}
     >

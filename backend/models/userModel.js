@@ -39,17 +39,23 @@ userSchema = mongoose.Schema(
       default: +251,
     },
     hotelName: {
+      unique:true,
       type: String,
       required: function () {
         return this.role === 'hotelManager';
       }
+    },
+
+    languages: {
+      type: [String],
+      enum: ["English", "Amharic", "French", "German", "Mandarin", "Other"],
     },
     destination: {
       type: String,
       required: function () {
         return this.role === 'tourGuide';
       }
-    }
+    },
   },
 
   {

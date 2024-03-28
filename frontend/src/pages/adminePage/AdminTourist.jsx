@@ -24,7 +24,7 @@ const AdminTourist = () => {
       });
   };
 
-  const Usercolumns = [
+  const columnData = [
     { name: "ID", selector: "id", sortable: true },
     { name: "Name", selector: "name", sortable: true },
     { name: "Email", selector: "email", sortable: true },
@@ -52,7 +52,7 @@ const AdminTourist = () => {
       <MyTable
         apiEndpoint="http://localhost:5000/api/users"
         title="Tourists"
-        columns={Usercolumns}
+        columns={columnData}
         dataKey="users"
       />
     </div>

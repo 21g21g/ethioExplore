@@ -35,11 +35,6 @@ export const AdminSidebarData = [
     link: "/admin/hotels",
   },
   {
-    icon: RiCarLine,
-    heading: "Cars",
-    link: "/admin/cars",
-  },
-  {
     icon: RiBook2Line,
     heading: "Bookings",
     link: "/admin/bookings",
@@ -51,7 +46,7 @@ export const AdminSidebarData = [
   },
   {
     icon: RiTeamLine,
-    heading: "Guide Companies",
+    heading: "TourGuides",
     link: "/admin/guides",
   },
   {

@@ -3,8 +3,9 @@ import MyTable from "../../components/table/DataTable";
 import ManagerFormModal from "../../components/managerformmodal/ManagerFormModal";
 
 const Managers = () => {
+  const url="http://localhost:5000/api/managers";
   const [showModal, setShowModal] = useState(false);
-  const [managerData, setManagerData] = useState({
+  const [userData, setUserData] = useState({
     name: "",
     email: "",
     password: "",
@@ -13,13 +14,13 @@ const Managers = () => {
     role: "hotelManager",
   });
 
-  const managerColumns = [
+  const columnData = [
     { name: "ID", selector: "id", sortable: true },
     { name: "Name", selector: "name", sortable: true },
     { name: "Email", selector: "email", sortable: true },
     { name: "Hotel Name", selector: "hotelName", sortable: true },
     { name: "Phone", selector: "phone", sortable: true },
-    
+
   ];
 
   const handleManager = () => {
@@ -33,7 +34,7 @@ const Managers = () => {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setManagerData((prevData) => ({
+    setUserData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
@@ -47,9 +48,10 @@ const Managers = () => {
   return (
     <div className="p-4">
       <ManagerFormModal
+        url={url}
         isOpen={showModal}
         onClose={handleCloseModal}
-        managerData={managerData}
+        userData={userData}
         handleInputChange={handleInputChange}
         handleAddSuccess={handleAddSuccess}
       />
@@ -68,7 +70,7 @@ const Managers = () => {
         <MyTable
           apiEndpoint="http://localhost:5000/api/managers"
           title="Hotel Managers"
-          columns={managerColumns}
+          columns={columnData}
           dataKey="hotelManagers"
         />
         {showModal && <div className="fixed inset-0 bg-slate-400 bg-opacity-50 z-40"></div>}

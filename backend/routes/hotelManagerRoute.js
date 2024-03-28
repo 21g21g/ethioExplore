@@ -1,14 +1,10 @@
 const express = require('express');
+const { addHotelManager, getAllHotelManagers, getHotelManagerById, deleteHotelManager, updateHotelManager, addUser } = require('../controllers/admincontrollers/HotelManagerController');
 
-const {
-    addHotelManager,
-    getAllHotelManagers,
-    getHotelManagerById,
-    updateHotelManager,
-    deleteHotelManager } = require('../controllers/admincontrollers/hotelManagerController');
+
 const router = express.Router();
 
-router.post("/", addHotelManager);
+router.post("/", addUser);
 router.get("/", getAllHotelManagers);
 router.get("/:id", getHotelManagerById);
 router.delete("/:id", deleteHotelManager);

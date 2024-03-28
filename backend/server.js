@@ -4,8 +4,8 @@ const bodyParser = require("body-parser");
 const dotenv = require("dotenv").config();
 const cookieParser = require("cookie-parser");
 const userRoute = require("./routes/userRoute");
-const hotelManagerRoute=require('./routes/hotelManagerRoute')
-const tourGuideRoute=require('./routes/hotelManagerRoute')
+const hotelManagerRoute = require('./routes/hotelManagerRoute')
+const tourGuideRoute = require('./routes/tourGuideRoute')
 const cors = require('cors');
 const app = express();
 //environmental variables

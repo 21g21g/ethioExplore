@@ -7,7 +7,12 @@ exports.addTourGuide = async (req, res) => {
     const { name, email, password, photo, phone, destination } = req.body;
     const tourGuide = new User({ name, email, password, photo, phone, role: 'tourGuide', destination });
     await tourGuide.save();
-    res.status(201).json({tourGuide});
+    res.status(201).json(
+      {
+        data: {
+          tourGuide
+        }
+      });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
@@ -17,7 +22,12 @@ exports.addTourGuide = async (req, res) => {
 exports.getAllTourGuides = async (req, res) => {
   try {
     const tourGuides = await User.find({ role: 'tourGuide' });
-    res.status(200).json(tourGuides);
+    res.status(201).json(
+      {
+        data:{
+          tourGuides
+        }
+      });
   } catch (err) {
     res.status(500).json({ message: 'Internal server error' });
   }

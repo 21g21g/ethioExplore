@@ -1,6 +1,11 @@
 const express = require('express');
+const {
+    addTourGuide,
+    getAllTourGuides,
+    getTourGuideById,
+    deleteTourGuide,
+    updateTourGuide } = require('../controllers/admincontrollers/tourGuideController');
 
-const { addTourGuide, getAllTourGuides, getTourGuideById, updateTourGuide, deleteTourGuide } = require('../controllers/admincontrollers/TourGuideController');
 const router = express.Router();
 
 router.post("/", addTourGuide);

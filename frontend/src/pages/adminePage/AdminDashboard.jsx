@@ -1,15 +1,13 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { FaRegUser, FaHotel, FaClipboardList, FaUserTie } from "react-icons/fa";
-import {MdOutlineLocalHotel} from "react-icons/md";
-import { Bar } from "react-chartjs-2";
+import { FaRegUser, FaRegClipboard } from "react-icons/fa";
+import { MdOutlineLocalHotel } from "react-icons/md";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import SmallCard from "../../components/smallcards/smallCards";
+import { RiTeamLine } from "react-icons/ri";
 
 const AdminDashboard = () => {
 
-
+  const url = "http://localhost:5000/api/users";
   return (
     <div className="container mx-auto mt-8">
       {/* Cards for Tourist, Hotels, Bookings, and Tour Guides */}
@@ -17,33 +15,36 @@ const AdminDashboard = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           {/* Tourist Card */}
           <SmallCard
-            icon={<FaRegUser className="text-2xl text-green-400" />}
+            icon={<RiTeamLine className="text-2xl text-green-900" />}
             title="Tourist"
-            value="1000"
             linkTo="/tourist"
+            role="user"
             linkText="See Details"
+            apiEndpoint={url}
           />
           {/* Hotels Card */}
           <SmallCard
-            icon={<MdOutlineLocalHotel className="text-2xl text-green-400" />}
+            icon={<MdOutlineLocalHotel className="text-2xl text-green-900" />}
             title="Hotels"
-            value="50"
+            role="hotelManager"
             linkTo="/hotels"
             linkText="See Details"
+            apiEndpoint={url}
           />
           {/* Bookings Card */}
           <SmallCard
-            icon={<FaClipboardList className="text-2xl text-green-400" />}
+            icon={<FaRegClipboard className="text-2xl text-green-900" />}
             title="Bookings"
-            value="500"
+
             linkTo="/bookings"
             linkText="See Details"
           />
           {/* Tour Guides Card */}
           <SmallCard
-            icon={<FaUserTie className="text-3xl text-green-400" />}
+            icon={<FaRegUser className="text-2xl text-green-900" />}
             title="Tour Guides"
-            value="20"
+            role='tourGuide'
+            apiEndpoint={url}
             linkTo="/tour-guides"
             linkText="See Details"
           />
@@ -57,7 +58,7 @@ const AdminDashboard = () => {
           <h3 className="text-lg font-semibold mb-2">Revenue</h3>
           <div className="w-32 h-32 ">
             <CircularProgressbar
-              value={75} // Change the value to represent the percentage
+              // Change the epresent the percentage
               text={`${75}%`}
             />
           </div>
@@ -80,19 +81,7 @@ const AdminDashboard = () => {
           </div>
         </div>
         {/* Chart Card */}
-        {/* <div className="bg-white p-4 shadow-md rounded-md">
-          <h3 className="text-lg font-semibold mb-4">Monthly Revenue Report</h3>
-          <Bar data={{
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-            datasets: [{
-              label: 'Revenue',
-              data: [50000, 80000, 100000, 90000, 120000, 110000, 150000],
-              backgroundColor: 'rgba(75,192,192,0.2)',
-              borderColor: 'rgba(75,192,192,1)',
-              borderWidth: 1
-            }]
-          }} />
-        </div> */}
+
       </div>
     </div>
   );

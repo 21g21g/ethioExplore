@@ -83,7 +83,7 @@ exports.loginUser = asyncHandler(async (req, res) => {
     throw new Error("Enter correct password");
   }
   // Generate access token and refresh token
-  const accessToken = generateAccessToken(user._id,user.role);
+  const accessToken = generateAccessToken(user._id, user.role);
   const refreshToken = generateRefreshToken(user._id);
 
   // Set tokens as cookies
@@ -107,7 +107,7 @@ exports.loginUser = asyncHandler(async (req, res) => {
       data: {
         user,
       },
-        });
+    });
   } else {
     res.status(400);
     throw new Error("Invalid credentials");
@@ -119,7 +119,7 @@ exports.loginUser = asyncHandler(async (req, res) => {
 exports.logoutUser = asyncHandler(async (req, res) => {
   res.cookie('accessToken', "", {
     httpOnly: true,
-    expires: new Date(0) , // 0 minutes
+    expires: new Date(0), // 0 minutes
     secure: true,
     sameSite: 'none'
   });
@@ -144,7 +144,7 @@ exports.getUsers = asyncHandler(async (req, res) => {
 // Get single user by ID
 exports.getUser = asyncHandler(async (req, res) => {
   try {
-    const {id } = req.params;
+    const { id } = req.params;
 
     if (!id) {
       res.status(400).json({ error: "User ID is missing in the request" });
@@ -178,7 +178,7 @@ exports.updateUser = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const { name, email, role } = req.body;
   // Find the user by ID and update
-  let user = await User.findById(id, req.body,{
+  let user = await User.findById(id, req.body, {
     new: true,
     runValidators: true,
   });

@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import DataTable from "react-data-table-component";
-import { HiTrash, HiEye } from "react-icons/hi";
-
 const MyTable = ({ apiEndpoint, title, columns, dataKey, }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
