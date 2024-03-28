@@ -11,7 +11,6 @@ import axios from "axios";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PrivateRoute from "./utils/privateRoute";
-import UserBookings from "./pages/userPage/UserBookings";
 import AdminHome from "./pages/adminePage/AdminHome";
 import UserHome from "./pages/userPage/UserHome";
 import ManagerHome from "./pages/hotelManager/ManagerHome";

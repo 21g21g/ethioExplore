@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { SiEthiopianairlines } from "react-icons/si";
-import { TourGuideSidebarData, HotelSidebarData, AdminSidebarData, UserSidebarData } from "../../data/Data";
+import { TourGuideSidebarData, ManagerSidebarData, AdminSidebarData, UserSidebarData } from "../../data/Data";
 
 const Sidebar = (props) => {
+  
   const { role, onMenuItemClick } = props;
+  console.log(role);
+
   const [selected, setSelected] = useState(0);
 
   const handleMenuItemClick = (link, index) => {
@@ -11,7 +14,7 @@ const Sidebar = (props) => {
     onMenuItemClick(link);
   };
 
-  let SidebarData = role === "admin" ? AdminSidebarData : role === "hotel" ? HotelSidebarData :role=="user"?UserSidebarData: TourGuideSidebarData;
+  let SidebarData = role === "admin" ? AdminSidebarData : role === "hotelManager" ? ManagerSidebarData :role=="user"?UserSidebarData: TourGuideSidebarData;
 
   return (
     <div className="bg-white text-green-950 w-64 h-screen  flex-col   lg:block hidden  shadow-md">

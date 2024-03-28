@@ -3,16 +3,8 @@ import { TbBrandBooking } from "react-icons/tb";
 
 import { AiOutlineHome, AiOutlineUsergroupAdd } from "react-icons/ai";
 import {
-  FaUserFriends,
-  FaCarAlt,
-  FaHouseUser,
-  FaThList,
-  FaEject,
-} from "react-icons/fa";
-import {
   RiDashboardLine,
   RiHotelBedLine,
-  RiCarLine,
   RiBook2Line,
   RiUserLine,
   RiTeamLine,
@@ -118,29 +110,25 @@ export const UserSidebarData = [
 
 ];
 
-export const HotelSidebarData = [
+export const ManagerSidebarData = [
   {
     icon: RxDashboard,
     heading: "Dashboard",
-    link: "/hotel/dashboard",
+    link: "/hotelmanager/dashboard",
   },
   {
     icon: TbBrandBooking,
     heading: "Bookings",
-    link: "/hotel/bookings",
+    link: "/hotelmanager/bookings",
   },
-
   {
-    icon: TfiPackage,
-    heading: "Packages",
-    link: "/hotel/packages",
+    icon: RiUserLine,
+    heading: "Guests",
+    link: "/hotelmanager/guests",
   },
   {
     icon: AiOutlineHome,
-    heading: "Hotels",
-    link: "/hotel/hotels",
+    heading: "Rooms",
+    link: "/hotelmanager/rooms",
   },
-
-
-
 ];
