@@ -1,4 +1,5 @@
 import React from 'react';
+import Layout from './Layout';
 
 const Home = () => {
   const visitorCount = 1200000; // Example number of visitors per year
@@ -25,6 +26,7 @@ const Home = () => {
           <img src="https://images.unsplash.com/photo-1564101151838-630e722d7b1f?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Ethiopia Image 3" className="rounded-lg shadow-md" />
         </div>
       </div>
+      <Layout/>
       
       {/* Additional Features */}
       <div className="mt-8">

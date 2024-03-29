@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import DataTable from "react-data-table-component";
-const MyTable = ({ apiEndpoint, title, columns, dataKey, }) => {
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+
+const MyTable = ({ apiEndpoint, title, columns, dataKey }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
   const [searchText, setSearchText] = useState("");
@@ -21,7 +22,7 @@ const MyTable = ({ apiEndpoint, title, columns, dataKey, }) => {
           });
           setData(updatedData);
         } else {
-          console.log("Response data is not an array:", response.data.data[dataKey]);
+          console.log("Response data is not an array:", response.data[dataKey]);
         }
         setIsLoading(false);
       })
@@ -35,65 +36,39 @@ const MyTable = ({ apiEndpoint, title, columns, dataKey, }) => {
     setSearchText(event.target.value);
   };
 
-  const filteredData = data.filter(item =>
-    item.name.toLowerCase().includes(searchText.toLowerCase())
-  );
 
   return (
-    <div className=" p-3">
+    <div className="bg-white border rounded-md shadow-md h-auto">
+      <div className="p-6">
+        <h2 className="text-xl font-semibold text-green-500 mb-4">{title}</h2>
+      </div>
       {isLoading ? (
-        <h1>Loading...</h1>
+        <div className="p-6">Loading...</div>
+      ) : data.length > 0 ? (
+        <DataGrid
+          rows={data}
+          columns={columns}
+          pagination
+          checkboxSelection
+          slots={{ toolbar: GridToolbar }}
+          slotProps={{
+
+            toolbar: {
+              showQuickFilter: true
+            }
+          }}
+          initialState={{
+            pagination: {
+              paginationModel: { page: 0, pageSize: 5 },
+            },
+          }}
+          disableColumnFilter
+          disableDensitySelector
+          disableColumnSelector
+          pageSizeOptions={[5, 10, 15]} />
+
       ) : (
-        <>
-           <div className="flex flex-col lg:flex-row items-center justify-between ">
-            <h2 className="text-green-500 text-xl font-semibold mb-4 lg:mb-0">{title}</h2>
-              <input
-                type="text"
-                placeholder="Search by name"
-                value={searchText}
-                onChange={handleSearch}
-                className="input w-2/5"
-              />
-          </div>
-          {filteredData.length > 0 ? (
-            <DataTable
-              className="data-table"
-              columns={columns.map(column => ({
-                name: column.name,
-                selector: column.selector,
-                sortable: true,
-                cell: row => <div>{row[column.selector]}</div>,
-                sortFunction: (a, b) => {
-                  if (a[column.selector] < b[column.selector]) return -1;
-                  if (a[column.selector] > b[column.selector]) return 1;
-                  return 0;
-                }
-              }))}
-              data={filteredData}
-              selectableRows
-              pagination
-              paginationPerPage={5}
-              paginationRowsPerPageOptions={[5, 10, 15, 20]}
-              highlightOnHover
-              striped
-              defaultFilterMethod={(filter, row) =>
-                String(row[filter.id])
-                  .toLowerCase()
-                  .includes(filter.value.toLowerCase())
-              }
-              style={{ height: "400px" }}
-              paginationComponentOptions={{
-                rowsPerPageText: "Rows:",
-                rangeSeparatorText: "of",
-                noRowsPerPage: false,
-                selectAllRowsItem: false,
-                selectAllRowsItemText: "All",
-              }}
-            />
-          ) : (
-            <div className="text-red-500">No records found</div>
-          )}
-        </>
+        <div className="p-6 text-red-500">No records found</div>
       )}
     </div>
   );

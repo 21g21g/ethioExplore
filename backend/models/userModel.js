@@ -7,6 +7,9 @@ userSchema = mongoose.Schema(
       type: String,
       required: [true, "please add the name"],
     },
+    address: {
+      type: String,
+    },
     role: {
       type: String,
       enum: ["admin", "tourGuide", "user", "hotelManager"],
@@ -39,7 +42,7 @@ userSchema = mongoose.Schema(
       default: +251,
     },
     hotelName: {
-      unique:true,
+      unique: true,
       type: String,
       required: function () {
         return this.role === 'hotelManager';

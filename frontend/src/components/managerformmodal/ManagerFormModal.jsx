@@ -9,7 +9,7 @@ const ManagerFormModal = ({ isOpen, onClose, url, userData, handleInputChange, h
             <div className="fixed inset-0 flex items-center justify-center z-50  ">
                 <div className="absolute top-1/2 lg:w-1/2  left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg  shadow-lg  lg:px-32 p-8 w-full ">
                     <p className="pb-4 text-center text-3xl mb-3 font-serif">{userData.role === 'hotelManager' ? 'Please Add Hotel Manager' : 'Please Add The Tour Guide '}</p>
-                    <hr className="bg-blue-500 mb-3 h-2" />
+                    <hr className="bg-green-800 mb-3 h-2" />
                     <button className="absolute top-4  right-4" onClick={onClose}>
                         <IoClose className="text-red-500 text-2xl cursor-pointer hover:text-red-500" />
                     </button>

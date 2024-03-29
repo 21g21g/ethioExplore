@@ -14,6 +14,7 @@ import PrivateRoute from "./utils/privateRoute";
 import AdminHome from "./pages/adminePage/AdminHome";
 import UserHome from "./pages/userPage/UserHome";
 import ManagerHome from "./pages/hotelManager/ManagerHome";
+import UserDetails from "./pages/adminePage/UserDetail";
 axios.defaults.withCredentials = true;
 
 const App = () => {
@@ -32,6 +33,7 @@ const App = () => {
         </Route>
         {/* admin route is private */}
         <Route path="admin" element={<PrivateRoute><AdminHome /></PrivateRoute> } />
+        <Route path="admin/users/:role" element={<PrivateRoute><UserDetails /></PrivateRoute>} />
         <Route path="user" element={<PrivateRoute><UserHome /></PrivateRoute>} />
         <Route path="hotelmanager" element={<PrivateRoute><ManagerHome /></PrivateRoute>} />
         <Route path="auth/login" element={<Login />} />

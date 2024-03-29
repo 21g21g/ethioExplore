@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import MyTable from "../../components/table/DataTable";
 import ManagerFormModal from "../../components/managerformmodal/ManagerFormModal";
+import { HiPencilAlt, HiTrash } from "react-icons/hi";
+import axios from "axios";
 
 const Managers = () => {
-  const url="http://localhost:5000/api/managers";
+  const url = "http://localhost:5000/api/managers";
   const [showModal, setShowModal] = useState(false);
   const [userData, setUserData] = useState({
     name: "",
@@ -13,14 +15,46 @@ const Managers = () => {
     phone: "",
     role: "hotelManager",
   });
+  const handleEdit = (row) => {
+    // Define the logic for handling the edit action
+    console.log("Edit action clicked for row:", row);
+  };
 
-  const columnData = [
-    { name: "ID", selector: "id", sortable: true },
-    { name: "Name", selector: "name", sortable: true },
-    { name: "Email", selector: "email", sortable: true },
-    { name: "Hotel Name", selector: "hotelName", sortable: true },
-    { name: "Phone", selector: "phone", sortable: true },
+  const handleDelete = (row) => {
+    console.log("Delete action clicked for row:", row);
+    axios.delete(`${url}/${row.id}`)
+      .then(response => {
+        console.log("Deleted successfully:", response.data);
+      })
+      .catch(error => {
+        console.error("Error deleting user:", error);
+      });
+  };
 
+  const columns = [
+    { field: "id", headerName: "ID", width: 200, sortable: true },
+    { field: "name", headerName: "Name", sortable: true },
+    { field: "email", headerName: "Email", width: 150,sortable: true },
+    { field: "role", headerName: "Role",width: 150,sortable: true },
+    { field: "phone", headerName: "Phone",width: 150, sortable: true },
+    { field: "hotelName", headerName: "HotelName", sortable: true },
+    {
+      field: "actions",
+      headerName: "Actions",
+      sortable: false,
+      renderCell: (params) => (
+        <div className="flex items-center space-x-4">
+          <HiPencilAlt
+            onClick={() => handleEdit(params.row)}
+            className="cursor-pointer text-green-500 text-2xl"
+          />
+          <HiTrash
+            onClick={() => handleDelete(params.row)}
+            className="cursor-pointer text-red-500 text-2xl"
+          />
+        </div>
+      ),
+    },
   ];
 
   const handleManager = () => {
@@ -66,15 +100,16 @@ const Managers = () => {
           </button>
         </div>
       )}
-      <div className="p-6 bg-white border rounded-md border-green-100 shadow-md relative">
         <MyTable
           apiEndpoint="http://localhost:5000/api/managers"
           title="Hotel Managers"
-          columns={columnData}
+          columns={columns}
           dataKey="hotelManagers"
         />
-        {showModal && <div className="fixed inset-0 bg-slate-400 bg-opacity-50 z-40"></div>}
-      </div>
+       {/* the laout */}
+        {showModal && <div className="fixed inset-0 bg-slate-400 bg-opacity-50 z-40">
+          <h1>try</h1>
+          </div>}
     </div>
   );
 };

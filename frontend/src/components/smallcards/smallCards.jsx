@@ -26,7 +26,7 @@ const SmallCard = ({ icon, linkTo, linkText, title, role, apiEndpoint }) => {
         <div className="text-xl font-bold text-green-900">{count}</div>
       </div>
       <div className="flex items-center justify-between mt-2 px-2">
-        <Link to={linkTo} className="text-green-500 underline">
+        <Link to={`/admin/users/${role}`} className="text-green-500 underline">
           {linkText}
         </Link>
         {icon}

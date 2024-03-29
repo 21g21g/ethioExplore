@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import MyTable from "../../components/table/DataTable";
 import ManagerFormModal from "../../components/managerformmodal/ManagerFormModal";
+import { HiPencilAlt, HiTrash } from "react-icons/hi";
+import axios from "axios";
 
 const AdminGuides = () => {
   const url="http://localhost:5000/api/tourguides";
@@ -13,16 +15,46 @@ const AdminGuides = () => {
     phone: "",
     role: "tourGuide",
   });
-
-  const columnData = [
-    { name: "ID", selector: "id", sortable: true },
-    { name: "Name", selector: "name", sortable: true },
-    { name: "Email", selector: "email", sortable: true },
-    { name: "Destination", selector: "destination", sortable: true },
-    { name: "Phone", selector: "phone", sortable: true },
-    
+  const columns = [
+    { field: "id", headerName: "ID",  sortable: true },
+    { field: "name", headerName: "Name", sortable: true },
+    { field: "email", headerName: "Email", sortable: true },
+    { field: "role", headerName: "Role",sortable: true },
+    { field: "phone", headerName: "Phone", sortable: true },
+    { field: "destination", headerName: "Destination", sortable: true },
+    {
+      field: "actions",
+      headerName: "Actions",
+      sortable: false,
+      renderCell: (params) => (
+        <div className="flex items-center space-x-4">
+          <HiPencilAlt
+            onClick={() => handleEdit(params.row)}
+            className="cursor-pointer text-green-500 text-2xl"
+          />
+          <HiTrash
+            onClick={() => handleDelete(params.row)}
+            className="cursor-pointer text-red-500 text-2xl"
+          />
+        </div>
+      ),
+    },
   ];
+  const handleEdit = (row) => {
+    // Define the logic for handling the edit action
+    console.log("Edit action clicked for row:", row);
+  };
 
+  const handleDelete = (row) => {
+    console.log("Delete action clicked for row:", row);
+    axios.delete(`${url}/${row.id}`)
+      .then(response => {
+        console.log("Deleted successfully:", response.data);
+      })
+      .catch(error => {
+        console.error("Error deleting user:", error);
+      });
+  };
   const handleManager = () => {
     setShowModal(true);
   };
@@ -66,15 +98,13 @@ const AdminGuides = () => {
           </button>
         </div>
       )}
-      <div className="p-6 bg-white border rounded-md border-green-100 shadow-md relative">
         <MyTable
-          apiEndpoint="http://localhost:5000/api/tourguides"
+          apiEndpoint={url}
           title="Tour Guides"
-          columns={columnData}
+          columns={columns}
           dataKey="tourGuides"
         />
         {showModal && <div className="fixed inset-0 bg-slate-400 bg-opacity-50 z-40"></div>}
-      </div>
     </div>
   );
 };

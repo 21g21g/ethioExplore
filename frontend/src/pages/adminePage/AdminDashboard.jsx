@@ -1,17 +1,18 @@
 import { FaRegUser, FaRegClipboard } from "react-icons/fa";
 import { MdOutlineLocalHotel } from "react-icons/md";
-import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import SmallCard from "../../components/smallcards/smallCards";
 import { RiTeamLine } from "react-icons/ri";
+import Mychart from "../../components/charts/Mychart";
+import Progress from "../../components/charts/circularProgress";
 
 const AdminDashboard = () => {
 
   const url = "http://localhost:5000/api/users";
   return (
-    <div className="container mx-auto mt-3">
+    <div className="container mx-auto ">
       {/* Cards for Tourist, Hotels, Bookings, and Tour Guides */}
-      <div className="container mx-auto mt-8">
+      <div className="container mx-auto mt-3">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           {/* Tourist Card */}
           <SmallCard
@@ -52,38 +53,15 @@ const AdminDashboard = () => {
       </div>
 
       {/* Revenue and Chart Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 mt-8 gap-4">
-        {/* Revenue Card */}
-        <div className="bg-white p-4 shadow-md rounded-md flex flex-col justify-center items-center">
-          <h3 className="text-lg font-semibold mb-2">Revenue</h3>
-          <div className="w-32 h-32 ">
-            <CircularProgressbar
-              // Change the epresent the percentage
-              value={75}
-              text={`${75}%`}
-            />
-          </div>
-
-          <div className="text-xl font-bold mb-2">Total Revenue</div>
-          <div className="text-xl font-bold mb-2">$500,000</div>
-          <div className="flex justify-between w-full">
-            <div>
-              <p className="text-sm text-gray-500">Weekly</p>
-              <p className="text-lg font-semibold">+$20,000</p>
-            </div>
-            <div>
-              <p className="text-sm text-gray-500">Monthly</p>
-              <p className="text-lg font-semibold">+$80,000</p>
-            </div>
-            <div>
-              <p className="text-sm text-gray-500">Yearly</p>
-              <p className="text-lg font-semibold">+$500,000</p>
-            </div>
-          </div>
+      <div className="flex flex-col md:flex-row mt-4 gap-4">
+        <div className="md:w-2/5 h-full">
+          <Progress />
         </div>
-        {/* Chart Card */}
-
+        <div className="md:w-full mt-4 md:mt-0 h-full">
+          <Mychart />
+        </div>
       </div>
+
     </div>
   );
 };
