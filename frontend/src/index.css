@@ -2,15 +2,82 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components{
-.top-header{
-    @apply bg-green-600 text-white h-16 flex items-center  pl-10 justify-between rounded-lg m-2
+@layer components {
+  .top-header {
+    @apply bg-green-600 text-white h-16 flex items-center pl-10 justify-between rounded-lg m-2;
+  }
+
+  .nav-link {
+    @apply flex items-center pr-5;
+  }
+
+  .nav-text {
+    @apply flex gap-2 text-gray-200 hover:bg-green-800 hover:text-white px-3 py-2 rounded-md text-sm font-medium;
+  }
 }
-.nav-link{
-    @apply  flex items-center  pr-5
+
+ .card {
+    @apply  mx-2 mb-10 mt-10 h-[380px] rounded overflow-hidden shadow-lg;
+  }
+
+  .card-image {
+    @apply w-full h-44 object-cover rounded-t-lg
+  }
+ 
+  .card-title {
+    @apply font-semibold text-xl text-center;
+  }
+  .card-subtitle{
+    @apply font-semibold text-lg text-gray-500 mb-1
+  }
+
+  .card-text {
+    @apply text-gray-700 text-base overflow-hidden;
+  }
+
+  .filter-by-region-text {
+    @apply text-lg font-semibold ml-32;
+  }
+
+  .region-dropdown {
+    @apply  w-1/5 px-4 py-2 border rounded-md shadow-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent;
+  }
+
+  .search-input {
+    @apply w-1/2 px-4 py-2 border rounded-md shadow-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent;
+  }
+
+  .see-details-btn {
+    @apply bg-green-500 text-white py-1 px-6 rounded-xl hover:bg-green-700 transition-colors mt-4 inline-block;
+  }
+
+  .slick-slide > div{
+    margin: 0 10px;
+  }
+
+  .modal-backdrop {
+    @apply overflow-y-auto fixed top-0 left-0 w-full h-full z-40 flex items-center justify-center bg-black bg-opacity-50;
+  }
+
+  .modal {
+    @apply relative bg-neutral-100 rounded-lg shadow-xl max-w-4xl w-full mx-auto;
+  }
+
+ .modal-close-btn{
+  @apply absolute top-1 right-2 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-1 px-2  rounded-full z-50;
 }
-.nav-text{
-    @apply flex gap-2 text-gray-200 hover:bg-green-800  hover:text-white px-3 py-2 rounded-md text-sm font-medium
-}
-    
-}
+  .modal-image {
+    @apply max-w-md w-full mx-auto h-80 rounded-t-lg mb-4 ;
+  }
+  
+  .overflow-y-hidden {
+    overflow-y: hidden;
+  }
+  .category-dropdown{
+    @apply p-2 mt-2 mb-2 ml-2 border border-gray-300 rounded-md shadow-sm cursor-pointer
+    focus:border-blue-500
+  }
+  .book-button{
+    @apply bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded
+  }
+ 

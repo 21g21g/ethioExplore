@@ -1,11 +1,12 @@
-
+import React from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom"
+
 import Login from "./pages/auth/Login"
 import Register from "./pages/auth/Register"
 import Package from "./pages/packages/Package"
 import Hotel from "./pages/hotels/Hotel"
 import Booking from "./pages/bookings/Booking"
-import Destination from "./pages/destinations/Destination"
+import DestinationDetail from "./pages/destinations/DestinationDetail"
 import Layouts from "./pages/layout/Layouts"
 import Home from "./pages/home/Home"
 
@@ -18,7 +19,7 @@ const App = () => {
           <Route path="hotels" element={<Hotel />} />
           <Route path="packages" element={<Package />} />
           <Route path="bookings" element={<Booking />} />
-          <Route path="destinations" element={<Destination />} />
+          <Route path="destinations" element={<DestinationDetail />} />
         </Route>
         <Route path="auth/login" element={<Login />} />
         <Route path="auth/register" element={<Register />} />
