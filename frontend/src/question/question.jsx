@@ -1,0 +1,1 @@
+//why the componenet not render images at the front.

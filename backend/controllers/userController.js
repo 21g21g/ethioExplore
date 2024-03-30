@@ -52,6 +52,7 @@ exports.registerUser = asyncHandler(async (req, res) => {
     res.status(201).json({
       data: {
         user,
+        token, // Include token in the response
       },
     });
   } else {

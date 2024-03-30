@@ -12,7 +12,7 @@
     }
   
     .nav-text {
-      @apply flex text-white gap-2 hover:bg-yellow-500 hover:text-white px-3 py-2  rounded-md text-sm font-medium; /* Adjusted hover colors to match the header background */
+      @apply flex text-white gap-2 hover:text-yellow-300 px-3 py-2  rounded-md text-sm font-medium; /* Adjusted hover colors to match the header background */
     }
   
   

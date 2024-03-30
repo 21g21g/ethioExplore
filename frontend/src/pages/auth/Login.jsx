@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 import { validateEmail } from '../../utils/validateEmail';
 import { loginService } from '../../services/authservice/authService';
 import { setLogin, setName } from '../../redux/features/auth/authSlice';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
 

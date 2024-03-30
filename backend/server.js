@@ -6,7 +6,9 @@ const cookieParser = require("cookie-parser");
 const userRoute = require("./routes/userRoute");
 const hotelManagerRoute = require('./routes/hotelManagerRoute')
 const tourGuideRoute = require('./routes/tourGuideRoute')
-const cors = require('cors');
+const hotelRoute = require("./routes/hotelRoute");
+const roomRoute = require("./routes/roomRoute");
+const cors = require("cors");
 const app = express();
 //environmental variables
 const url = process.env.MONGO_URI
@@ -23,10 +25,25 @@ app.use(cors(
     credentials: true
   }
 ));
+app.use("/uploads", express.static("uploads"));
+app.use("/photoroom", express.static("photoroom"));
+
 //route middleware
 app.use("/api/users", userRoute);
 app.use("/api/managers", hotelManagerRoute);
 app.use("/api/tourguides", tourGuideRoute);
+app.use("/api/hotels", hotelRoute);
+app.use("/api/rooms", roomRoute);
+app.use((err, req, res, next) => {
+  const status = err.status || 500;
+  const message = err.message || "internal server error";
+
+  res.status(status).json({
+    success: false,
+    status,
+    message,
+  });
+});
 
 //connect mongodb and listen to server
 mongoose
