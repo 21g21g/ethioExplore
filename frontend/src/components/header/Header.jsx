@@ -52,7 +52,7 @@ const Header = () => {
               <Link
                 key={index}
                 to={item.path}
-                className={`nav-text ${selected === index ? '  rounded-md text-yellow-200  font-serif font-semibold' : ''}`}
+                className={`nav-text ${selected === index ? '  rounded-md text-custom-yellow1  font-serif font-semibold' : ''}`}
                 onClick={() => handleMenuItemClick(index)}
               >
                 {item.text}
