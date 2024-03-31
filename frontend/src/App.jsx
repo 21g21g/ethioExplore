@@ -23,20 +23,16 @@ import axios from "axios";
 axios.defaults.withCredentials = true;
 
 const App = () => {
-  // const isLoggedIn = useSelector(selectIsLoggedIn); // Assuming you have a selector named selectIsLoggedIn
-
   return (
     <BrowserRouter>
-    <ToastContainer/>
+      <ToastContainer />
       <Routes>
-
         <Route path="/" element={<Layouts />}>
           <Route index element={<Home />} />
           <Route path="hotels" element={<HotelHompage />} />
           <Route path="packages" element={<Package />} />
           <Route path="bookings" element={<Booking />} />
           <Route path="destinations" element={<Destination />} />
-
         </Route>
         <Route path="admin" element={<PrivateRoute><AdminHome /></PrivateRoute>} />
         <Route path="admin/users/:role" element={<PrivateRoute><UserDetails /></PrivateRoute>} />
@@ -49,7 +45,6 @@ const App = () => {
         <Route path="/hoteladmin" element={<HotelAdmin />} />
         <Route path="/roomnumbers" element={<Roomadds />} />
         <Route path="/hoteldetail" element={<HotelDetail />} />
-
       </Routes>
     </BrowserRouter>
   );

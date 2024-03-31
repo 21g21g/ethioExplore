@@ -4,7 +4,6 @@ const Room = require("../models/hotel/roomModel");
 
 const createHotel = async (req, res, next) => {
   try {
-    //const photos = req.file; if we want to use upload single file
     const photos = req.files;
 
     const newHotel = await Hotel.create({
@@ -70,7 +69,7 @@ const updateHotel = async (req, res, next) => {
       id,
       { $set: req.body },
       { new: true }
-    ); //new:true is used to return the updated document but if we cannot use new:true it returns the previous value.
+    );
     if (!updateHotel) {
       return next(errorHandler(400, "the hotel is not found"));
     }
