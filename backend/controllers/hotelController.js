@@ -4,7 +4,6 @@ const Room = require("../models/hotel/roomModel");
 
 const createHotel = async (req, res, next) => {
   try {
-    //const photos = req.file; if we want to use upload single file
     const photos = req.files;
 
     const newHotel = await Hotel.create({

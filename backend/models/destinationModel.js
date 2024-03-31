@@ -15,6 +15,18 @@ const destinationSchema = new mongoose.Schema(
       required: true,
       enum: ["International", "National", "Religious", "Cultural"],
     },
+ 
+    location: {
+      type: {
+        region:{
+        type: String,
+        required: true,
+        enum: ["Afar","Amhara", "Benshangul-Gumz", "Gambela", "Harar", "Oromia", "SNNPR", "Somalia", "Tigray",],
+        },
+        address:String,
+      },
+      required: true,
+    },
 
     description: {
       type: String,
@@ -22,40 +34,26 @@ const destinationSchema = new mongoose.Schema(
       trim: true,
     },
 
-    features: [{
-      type: String,
-      required: true,
-    }],
-
-    location: {
-      type: String,
-      required: true,
-    },
-
     images: {
-      type: Object,
-      required: true,
-      default: {},
-    },
-
-    ratings: {
-      type: Number,
-      default: 0,
-    },
-
-    reviews: [{
-      user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+      main: {
+        type: String,
+        required: [true, 'Main image is required.'],
       },
-      comment: String,
-      rating: Number,
-    }],
-
-    priceRange: {
-      type: String,
-      enum: ["Budget", "Mid-range", "Luxury"],
-    },
+      gallery: {
+        
+          type: [String],
+          default: [],
+         },
+        },
+   
+     ratings: {
+      type: Number,
+      required: [true, 'Rating is required'],
+      min: [1, 'Rating must be at least 1'],
+      max: [5, 'Rating cannot exceed 5'],
+    }
+        
+  
   },
   {
     timestamps: true,
