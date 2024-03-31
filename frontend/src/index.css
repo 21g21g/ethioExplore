@@ -4,7 +4,7 @@
 
 @layer components {
     .top-header {
-      @apply bg-green-500 border-white  border-2 text-white h-16 flex items-center pl-10 justify-between  shadow-md; /* Added shadow for depth */
+      @apply bg-green-500  text-white h-16 flex items-center pl-10 justify-between  shadow-md; /* Added shadow for depth */
     }
   
     .nav-link {

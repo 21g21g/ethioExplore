@@ -37,7 +37,7 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
+
         if (!email || !password) {
             return toast.error("Please fill all fields");
         }
@@ -47,17 +47,17 @@ const Login = () => {
         if (!validateEmail(email)) {
             return toast.error("Please enter a valid email");
         }
-    
+
         setIsLoading(true);
         try {
             const data = await loginService({ email, password });
-    
+
             const userData = data.data.user; // Assuming user data includes the name
             const userRole = userData.role;
-    
+
             dispatch(setLogin(true));
             dispatch(setName(userData.name)); // Dispatch setName action to update name in Redux store and local storage
-    
+
             if (userRole === 'admin') {
                 navigate("/admin");
             } else if (userRole === 'tourGuide') {
@@ -79,7 +79,7 @@ const Login = () => {
             setIsLoading(false);
         }
     };
-    
+
 
 
 

@@ -4,7 +4,7 @@ function Layout() {
   return (
     <div className="flex flex-col min-h-screen">
       <div className="bg-cover bg-center h-1/2" style={{ backgroundImage: `url("path/to/your/image.jpg")` }}>
-        <div className="text-white text-center py-16 px-4">
+        <div className="text-green-400 text-center py-16 px-4">
           <h1 className="text-4xl font-bold">Breathtaking Landscapes</h1>
         </div>
       </div>

@@ -1,11 +1,12 @@
-
+import React from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom"
+
 import Login from "./pages/auth/Login"
 import Register from "./pages/auth/Register"
 import Package from "./pages/packages/Package"
 import Booking from "./pages/bookings/Booking"
 import HotelHompage from "./pages/home/hotelHompage/HotelHompage"
-import Destination from "./pages/destinations/Destination"
+import DestinationDetail from "./pages/destinations/DestinationDetail"
 import Layouts from "./pages/layout/Layouts"
 import Home from "./pages/home/Home"
 import ListHotel from "./pages/hotels/listHotel/ListHotel"
@@ -32,7 +33,7 @@ const App = () => {
           <Route path="hotels" element={<HotelHompage />} />
           <Route path="packages" element={<Package />} />
           <Route path="bookings" element={<Booking />} />
-          <Route path="destinations" element={<Destination />} />
+          <Route path="destinations" element={<DestinationDetail />} />
         </Route>
         <Route path="admin" element={<PrivateRoute><AdminHome /></PrivateRoute>} />
         <Route path="admin/users/:role" element={<PrivateRoute><UserDetails /></PrivateRoute>} />
