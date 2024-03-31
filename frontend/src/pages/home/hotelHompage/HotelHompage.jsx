@@ -65,39 +65,46 @@ const HotelHompage = () => {
   };
 
   return (
-    <div className="flex flex-col gap-3">
-      <div className="flex flex-row">
-        <form onSubmit={handleSubmit} className="flex flex-row gap-3 w-full ml-5">
-          <TextInput type="text" placeholder="Where do you want to go?" value={city} onChange={handleCitychange} className="w-full" />
+     <div className="flex flex-col gap-3  md:gap-6 ">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-3 md:flex-row md:gap-3 w-full">
+        <TextInput type="text" placeholder="Where do you want to go?" value={city} onChange={handleCitychange} className="w-96 md:w-auto" />
+        <div className="flex flex-col gap-3 md:flex-row md:gap-3">
           <DatePicker
             showIcon
             selected={selectedStartdate}
             onChange={handleSelectedStartdate}
             placeholderText="Select start date"
+            className="w-96 md:w-auto"
           />
           <DatePicker
             showIcon
             selected={selectedEnddate}
             onChange={handleSelectedEnddate}
             placeholderText="Select end date"
+            className="w-96 md:w-auto"
           />
-          <div className="flex flex-row gap-3">
-            <TextInput type="number" value={adult} onChange={handleAdultchange} className="w-full" />
-            <span>Adult</span>
-            <TextInput type="number" value={children} onChange={handleChildrenchange} className="w-full" />
-            <span>Children</span>
-            <TextInput type="number" value={room} onChange={handleRoomchange} className="w-full" />
-            <span>Room</span>
-          </div>
-          <Button type="submit" className="bg-blue-500 text-white">
-            Search
-          </Button>
-        </form>
+        </div>
+        <div className="flex flex-col gap-3 md:flex-row md:gap-3">
+          <TextInput type="number" value={adult} onChange={handleAdultchange} className="w-96 md:w-auto " />
+          <span>Adult</span>
+          <TextInput type="number" value={children} onChange={handleChildrenchange} className="w-96 md:w-auto" />
+          <span>Children</span>
+          <TextInput type="number" value={room} onChange={handleRoomchange} className="w-96 md:w-auto" />
+          <span>Room</span>
+        </div>
+        <Button type="submit" className="bg-blue-500 text-white">
+          Search
+        </Button>
+      </form>
+      <div className="w-full  ">
+        <HotelbyCity />
       </div>
-
-      <HotelbyCity />
-      <HotelbyType />
-      <HotelbyFeatured />
+      <div className="w-full ">
+        <HotelbyType />
+      </div>
+      <div className="w-full ">
+        <HotelbyFeatured />
+      </div>
     </div>
   );
 };

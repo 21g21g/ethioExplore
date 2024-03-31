@@ -4,10 +4,10 @@ const hotelSlice = createSlice({
   name: "hotel",
   initialState: {
     hotelData: JSON.parse(localStorage.getItem("hotel")) || [],
-    detailHotel: JSON.parse(localStorage.getItem("detailhotel")) || [],
+    detailHotel: [],
     hotelType: JSON.parse(localStorage.getItem("hoteltype")) || [],
     featuredHotel: JSON.parse(localStorage.getItem("feature")) || [],
-    singleData: JSON.parse(localStorage.getItem("single")) || null,
+    singleData: [],
     searchCity: JSON.parse(localStorage.getItem("city")) || [],
     searched: JSON.parse(localStorage.getItem("search")) || [],
     roomData: JSON.parse(localStorage.getItem("roomdata")) || [],

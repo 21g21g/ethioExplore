@@ -46,7 +46,7 @@ const HotelbyType = () => {
           return (
             <Card imgSrc={blue}>
               <h1>{hotel.type}</h1>
-              <h3>{hotel.count} number of hotels</h3>
+              <h3>{hotel.count} number of {hotel.type}s</h3>
 
             </Card>
 

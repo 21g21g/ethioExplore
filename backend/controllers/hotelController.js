@@ -49,7 +49,7 @@ const getHotels = async (req, res, next) => {
     }
 
     if (req.query.city) {
-      query.city = req.query.city;
+      query.city = req.query.city.toLowerCase();
     }
 
     if (req.query.featured) {
@@ -71,6 +71,8 @@ const updateHotel = async (req, res, next) => {
       { $set: req.body },
       { new: true }
     ); //new:true is used to return the updated document but if we cannot use new:true it returns the previous value.
+
+    ////// tommorow carousol,redux,
     if (!updateHotel) {
       return next(errorHandler(400, "the hotel is not found"));
     }
@@ -110,18 +112,19 @@ const deleteHotel = async (req, res, next) => {
     return next(errorHandler(400, error.message));
   }
 };
+//group hotels by city then count and finall push all documents on that group.
 const countBycity = async (req, res, next) => {
-  const cities = req.query.cities;
   try {
-    const cityData = [];
-    for (let i = 0; i < cities.length; i++) {
-      const city = cities[i];
-      const hotelCount = await Hotel.find({ city: city });
-
-      cityData.push(hotelCount);
-    }
-    res.json(cityData);
-    console.log(cityData);
+    const cityCounts = await Hotel.aggregate([
+      {
+        $group: {
+          _id: { $toLower: "$city" },
+          count: { $sum: 1 },
+          hotels: { $push: "$$ROOT" },
+        },
+      },
+    ]);
+    res.json(cityCounts);
   } catch (error) {
     next(error);
   }

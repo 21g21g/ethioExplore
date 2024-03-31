@@ -20,7 +20,8 @@ const ListHotel = () => {
   const room = useSelector((state) => state.hotel.numbers.room)
 
   const startDate = useSelector((state) => state.hotel.startDate)
-  const endDate=useSelector((state)=>state.hotel.endDate)
+  const endDate = useSelector((state) => state.hotel.endDate)
+  console.log(searchCity)
   const [fiteredData, setFiteredData] = useState(searchCity)
  const handleClick = async() => {
     const response = await axios.get(`http://localhost:5000/api/hotels/gethotels?city=${city}&min=${min}&max=${max}`)
@@ -28,10 +29,11 @@ const ListHotel = () => {
   
     
   }
-
-   console.log(fiteredData)
-     return (
-    <div className='flex flex-row gap-3'>
+  
+  return (
+       <div className='flex flex-col'>
+   <h1 className='text-xl md:text-2xl text-green-400 md:self-center md:justify-center md:w-full bg-gray-800 '>This are Hotels,Resorts and Apartamas ocuured in {city}</h1>
+ <div className='flex flex-row gap-3'>
       <form className='flex flex-col bg-slate-500 w-72 ml-7 gap-4 mt-4 p-2 h-1/2'>
         <h1>Search</h1>
         <h4>destination</h4>
@@ -62,7 +64,7 @@ const ListHotel = () => {
         </div>
         <Button onClick={handleClick}  className=' text-white p-3' outline>search</Button>
       </form>
-      <div className='flex md:flex-col flex-row p-3'>{fiteredData.map((search) => (
+      <div className='flex flex-col md:flex-col p-3'>{fiteredData.map((search) => (
        <SingleCityHotels  key={search._id} data={search}/>
        
       ))}
@@ -73,6 +75,8 @@ const ListHotel = () => {
            
     </div>
   
+       </div>
+      
   )
 }
 

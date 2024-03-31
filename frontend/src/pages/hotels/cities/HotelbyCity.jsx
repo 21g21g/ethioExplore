@@ -1,29 +1,79 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Slider from 'react-slick';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import { useDispatch, useSelector } from "react-redux";
-import { Card } from "flowbite-react";
+import {  Modal, ModalBody, ModalHeader } from "flowbite-react";
 import { hotelSliceactions } from "../../../redux/hotelRedux/hoteSlice";
 import { useNavigate } from "react-router-dom";
 import blunile from "../../../assets/blue.avif";
+import { FaAngleDoubleRight } from "react-icons/fa";
+import { FaAngleDoubleLeft } from "react-icons/fa";
+
+
 
 const HotelbyCity = () => {
+  const NextArrow = ({ onClick }) => (
+  <button onClick={onClick}   className="next-arrow" style={{right:"10px"}}>
+    <FaAngleDoubleRight/>
+  </button>
+);
+
+const PrevArrow = ({ onClick }) => (
+  <button onClick={onClick} className="prev-arrow" style={{left:'10px'}}>
+    <FaAngleDoubleLeft/>
+  </button>
+);
+   const settings = {
+    dots: true,
+     infinite: true,
+    
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 3,
+    arrows: true,
+    // className: "slider variable-width ",
+    // variableWidth: true,
+    nextArrow: <NextArrow />,
+  prevArrow: <PrevArrow />,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
+  };
   const dispatch = useDispatch();
+  const [modal,setModal]=useState(false)
   const navigate = useNavigate();
   const loading = useSelector((state) => state.hotel.loading);
   const error = useSelector((state) => state.hotel.error);
   const hotelData = useSelector((state) => state.hotel.hotelData);
+  const detailHotel = useSelector((state) => state.hotel.detailHotel)
+  console.log(hotelData)
 
+  
+ 
   useEffect(() => {
     const fetchHotelByCity = async () => {
       dispatch(hotelSliceactions.hotelfetchStart());
       try {
-        const cities = ['bahrdar', 'addis', 'bdr', 'bure', 'Bahrdar'];
-        const iter = cities.map((city) => `cities=${encodeURIComponent(city)}`);
-
-        const response = await axios.get(`http://localhost:5000/api/hotels/countbycity?${iter.join("&")}`);
-        const data = response.data;
-
-        dispatch(hotelSliceactions.hotelfetchSuccess(data));
+       
+        const response = await axios.get("http://localhost:5000/api/hotels/countbycity");
+       
+        // console.log(response.data)
+        dispatch(hotelSliceactions.hotelfetchSuccess(response.data));
       } catch (error) {
         dispatch(hotelSliceactions.hotelfetchFailure(error.message));
       }
@@ -31,32 +81,77 @@ const HotelbyCity = () => {
     fetchHotelByCity();
   }, [dispatch]);
 
-  const handleClick = (count) => {
-    dispatch(hotelSliceactions.setDetailHotel(count));
-    navigate('/hoteldetail');
+  const handleClick = (hotels) => {
+    
+    dispatch(hotelSliceactions.setDetailHotel(hotels));
+    setModal(true)
+    // navigate('/hoteldetail');
   };
 
   return (
+    
     <div className="flex flex-col md:flex-row">
-      <h1>Cities</h1>
-      <div className="flex flex-row justify-center gap-3 overflow-x-auto">
+      <h1 className="text-2xl mb-4 md:mb-0 md:mr-4">Cities</h1>
+      <div className="flex flex-col justify-center gap-3 overflow-x-auto md:flex-row">
         {loading ? (
           <p>Loading...</p>
         ) : error ? (
           <p>Error: {error}</p>
-        ) : (
-          hotelData.map((count, index) => (
-            <div key={index} className="slider-container">
-              <div className="w-60 flex-row md:w-full">
-                <Card imgSrc={blunile} onClick={() => handleClick(count)} className="cursor-pointer">
-                  <h1 className="text-yellow-300">{count[0]?.city}</h1>
-                  <h3>{count.length} hotels</h3>
-                </Card>
+          ) : ( 
+              <div className="carousel-container my-8 w-3/4 m-auto ">
+                <Slider {...settings} >
+                    {hotelData.map((hotels, index) => (
+                  <div key={index} className="cards md:w-full sm:gap-0" >
+                  
+                  <img src={blunile}  className="card-images cursor-pointer" onClick={()=>handleClick(hotels.hotels)}/>
+                    <div className="card-body px-6 py-4">
+                      <div className="card-title">{hotels._id}</div>
+                      <div className='text-gray-500 mb-2 flex items-center'>
+                        <h3>{hotels.count} hotels</h3>
+                       </div>
+                      
+                  </div>
+                   
+    </div>
+  ))}
+                    
+                  <div className="flex justify-center items-center md:mt-10" >
+                    <Modal show={modal} onClose={() => setModal(false)} className="w-full">
+                      <ModalHeader />
+                      <ModalBody>
+            <div className="grid grid-cols-2 md:grid-cols-3">
+          {detailHotel.map((detail,index) => (
+            <div key={index} className="flex flex-col flex-wrap mx-3 my-3">
+              <div>
+               
+                <img className="w-60 h-40 object-cover " src={`http://localhost:5000/${detail.photos[1]}`}/>
+
+              
               </div>
-            </div>
-          ))
-        )}
-      </div>
+              <p className="text-2xl">{detail.name}</p>
+              <h1 className="text-2xl">{detail.type}</h1>
+              <p className="text-2xl">${detail.cheapestPrice}</p>
+              <button className="bg-green-500 text-slate-200">Book now</button>
+              
+                  
+              </div>
+              
+          ))}
+    </div>
+                    </ModalBody>
+
+                  </Modal></div>       
+                  
+   
+               
+              </Slider>
+                  </div>
+
+            
+                
+
+  )}
+  </div>
     </div>
   );
 };

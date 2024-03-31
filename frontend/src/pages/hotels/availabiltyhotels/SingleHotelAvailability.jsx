@@ -13,7 +13,7 @@ import { hotelSliceactions } from '../../../redux/hotelRedux/hoteSlice'
 const SingleHotelAvailability = () => {
     const [modal,setModal]=useState(false)
     const { id } = useParams()
-
+      console.log(id)
     const dispatch=useDispatch()
     const singleData = useSelector((state) => state.hotel.singleData)
     const startDate = useSelector((state) => state.hotel.startDate)
@@ -23,7 +23,7 @@ const SingleHotelAvailability = () => {
     const room = useSelector((state) => state.hotel.numbers.room)
 
     const roomData = useSelector((state) => state.hotel.roomData)
- console.log(roomData)
+//  console.log(roomData)
     
     const [selectedRooms, setSelectedRooms] = useState([])
   
@@ -38,11 +38,11 @@ const SingleHotelAvailability = () => {
 
     useEffect(() => {
         const fetchedSigledata = async () => {
-            const response = await axios.get(`http://localhost:5000/api/hotels/gethotel/${id}`)
+            const response = await axios.get(`http://localhost:5000/api/hotels/room/${id}`)
             const data = response.data
+            console.log(data)
           
             dispatch(hotelSliceactions.setsingleDataSuccess(data))
-            localStorage.setItem("single",JSON.stringify(data))
            
             
             
@@ -128,7 +128,7 @@ const SingleHotelAvailability = () => {
       
         <div className='flex flex-row justify-between'>
                          
-           <div className='flex flex-col m-4'>
+           {/* <div className='flex flex-col m-4'>
           <div className='flex flex-col md:flex-row justify-between'>
               <div className='flex flex-col'>
                     <p>{singleData.title}</p>
@@ -139,7 +139,7 @@ const SingleHotelAvailability = () => {
             </div>
                 <div className='flex flex-row gap-4'>
                     {singleData.photos.map((photo) => (
-                         <img src={`http://localhost:5000/${photo}`} className='w-48 h-40 object-cover' />  
+                         <img src={`http://localhost:5000/${photo}`} className='w-full md:w-48 h-40 object-cover' />  
                     ))}
                    
                    
@@ -202,10 +202,10 @@ const SingleHotelAvailability = () => {
         ))}
     
                         </div>
-                         <Button conClick={handleClick} outline>Reserv Now</Button>
+                         <Button conClick={handleClick}  outline>Reserv Now</Button>
       </div>
                 </ModalBody>
-            </Modal>
+            </Modal> */}
                        
 
             </div>

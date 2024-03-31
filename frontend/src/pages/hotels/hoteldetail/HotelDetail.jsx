@@ -3,12 +3,9 @@ import { useDispatch, useSelector } from 'react-redux'
 
 const HotelDetail = () => {
     const detailHotel = useSelector((state) => state.hotel.detailHotel)
-   
-  
+    console.log(detailHotel)
 
-   
-    
-  return (
+   return (
       <div>
           {detailHotel.map((detail,index) => (
               <div key={index}>

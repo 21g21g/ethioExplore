@@ -19,5 +19,23 @@
 .input{
         @apply focus:border-green-500 focus:text-indigo-400 outline-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5  dark:text-white 
     }
+     .cards {
+    @apply   mb-10 mt-10  rounded overflow-hidden shadow-lg;
+  }
+
+  .card-images {
+    @apply w-full h-44 object-cover rounded-t-lg
+  }
+ 
+  .card-title {
+    @apply font-semibold text-xl text-center;
+  }
+  .next-arrow {
+    @apply absolute top-1/2 transform -translate-y-1/2 z-10 cursor-pointer bg-white bg-opacity-50 border-none rounded-full w-10 h-10 flex justify-center items-center text-xl
+  }
+  .prev-arrow {
+    @apply absolute top-1/2 transform -translate-y-1/2 z-10 cursor-pointer bg-white bg-opacity-50 border-none rounded-full w-10 h-10 flex justify-center items-center text-xl
+
+  }
 
 }

@@ -4,14 +4,14 @@ const bodyParser = require("body-parser");
 const dotenv = require("dotenv").config();
 const cookieParser = require("cookie-parser");
 const userRoute = require("./routes/userRoute");
-const hotelManagerRoute = require('./routes/hotelManagerRoute')
-const tourGuideRoute = require('./routes/tourGuideRoute')
+const hotelManagerRoute = require("./routes/hotelManagerRoute");
+const tourGuideRoute = require("./routes/tourGuideRoute");
 const hotelRoute = require("./routes/hotelRoute");
 const roomRoute = require("./routes/roomRoute");
 const cors = require("cors");
 const app = express();
 //environmental variables
-const url = process.env.MONGO_URI
+const url = process.env.MONGO_URI;
 const PORT = process.env.PORT || 5000;
 //middlewares
 app.use(express.json());
@@ -19,12 +19,12 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 //avoid conflic for the back and frontend
-app.use(cors(
-  {
+app.use(
+  cors({
     origin: ["http://localhost:5173"],
-    credentials: true
-  }
-));
+    credentials: true,
+  })
+);
 app.use("/uploads", express.static("uploads"));
 app.use("/photoroom", express.static("photoroom"));
 
