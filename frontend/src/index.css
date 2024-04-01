@@ -20,9 +20,11 @@
         @apply focus:border-green-500 focus:text-indigo-400 outline-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5  dark:text-white 
     }
      .cards {
-    @apply   mb-10 mt-10  rounded overflow-hidden shadow-lg;
+    @apply   mb-10 mt-10 h-[380px]  rounded overflow-hidden shadow-zinc-300 shadow-lg ;
   }
-
+.card-body{
+  @apply shadow-sm shadow-zinc-300
+}
   .card-images {
     @apply w-full h-44 object-cover rounded-t-lg
   }
@@ -101,5 +103,20 @@
   }
   .book-button{
     @apply bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded
+  }
+  .all-room{
+    @apply flex flex-col md:w-full gap-3 justify-center items-center  ml-7 mt-4
+  }
+  .room-data{
+    @apply flex flex-col md:flex-row sm:gap-5 md:gap-9 bg-gray-100
+  }
+  .room-image{
+    @apply sm:w-28 md:w-48 justify-center items-center  object-cover
+  }
+  .room-detail{
+    @apply flex flex-col
+  }
+  .btn-room{
+    @apply  flex justify-center items-center cursor-pointer
   }
 }

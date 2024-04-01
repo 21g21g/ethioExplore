@@ -3,14 +3,14 @@ import { createSlice } from "@reduxjs/toolkit";
 const hotelSlice = createSlice({
   name: "hotel",
   initialState: {
-    hotelData: JSON.parse(localStorage.getItem("hotel")) || [],
+    hotelData: [],
     detailHotel: [],
-    hotelType: JSON.parse(localStorage.getItem("hoteltype")) || [],
-    featuredHotel: JSON.parse(localStorage.getItem("feature")) || [],
+    hotelType: [],
+    featuredHotel: [],
     singleData: [],
-    searchCity: JSON.parse(localStorage.getItem("city")) || [],
-    searched: JSON.parse(localStorage.getItem("search")) || [],
-    roomData: JSON.parse(localStorage.getItem("roomdata")) || [],
+    searchCity: [],
+    searched: [],
+    roomData: [],
     startDate:
       JSON.parse(localStorage.getItem("startdate")) || new Date().toISOString(), //i use toIsoString method because inorder to change the date into json format because the state stored in redux is must be seralizable.
     endDate:
@@ -34,6 +34,7 @@ const hotelSlice = createSlice({
     },
     hotelfetchSuccess(state, action) {
       state.hotelData = action.payload;
+      console.log(action.payload);
       state.loading = false;
       state.error = null;
     },

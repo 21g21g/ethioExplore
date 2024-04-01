@@ -23,7 +23,9 @@ const SingleHotelAvailability = () => {
     const room = useSelector((state) => state.hotel.numbers.room)
 
     const roomData = useSelector((state) => state.hotel.roomData)
-//  console.log(roomData)
+    console.log(roomData)
+    
+
     
     const [selectedRooms, setSelectedRooms] = useState([])
   
@@ -32,24 +34,24 @@ const SingleHotelAvailability = () => {
      const getday = Math.ceil(getDayDifference / (1000 * 60 * 60 * 24))
     return getday
     }
-    const handleModal = () => {
-      setModal(true)
-  }
+//     const handleModal = () => {
+//       setModal(true)
+//   }
 
-    useEffect(() => {
-        const fetchedSigledata = async () => {
-            const response = await axios.get(`http://localhost:5000/api/hotels/room/${id}`)
-            const data = response.data
-            console.log(data)
+    // useEffect(() => {
+    //     const fetchedSigledata = async () => {
+    //         const response = await axios.get(`http://localhost:5000/api/hotels/room/${id}`)
+    //         const data = response.data
+    //         console.log(data)
           
-            dispatch(hotelSliceactions.setsingleDataSuccess(data))
+    //         dispatch(hotelSliceactions.setsingleDataSuccess(data))
            
             
             
-        }
-        fetchedSigledata()
+    //     }
+    //     fetchedSigledata()
         
-    }, [])
+    // }, [])
     
     
     useEffect(() => {
@@ -57,7 +59,7 @@ const SingleHotelAvailability = () => {
             const response = await axios.get(`http://localhost:5000/api/hotels/room/${id}`)
             const data = response.data
             dispatch(hotelSliceactions.setRoomData(data))
-            localStorage.setItem("roomdata",JSON.stringify(data))
+            // localStorage.setItem("roomdata",JSON.stringify(data))
             
           
 
@@ -125,37 +127,60 @@ const SingleHotelAvailability = () => {
         
     }
     return (
-      
-        <div className='flex flex-row justify-between'>
-                         
-           {/* <div className='flex flex-col m-4'>
-          <div className='flex flex-col md:flex-row justify-between'>
-              <div className='flex flex-col'>
-                    <p>{singleData.title}</p>
-                    <p>{singleData.address}</p>
-                  <p>Excellent location-{singleData.distance} from the center</p>
-                  <p>book ${singleData.cheapestPrice}</p>
-                </div>
-            </div>
-                <div className='flex flex-row gap-4'>
-                    {singleData.photos.map((photo) => (
-                         <img src={`http://localhost:5000/${photo}`} className='w-full md:w-48 h-40 object-cover' />  
-                    ))}
-                   
-                   
-             
-           
-            </div>
+        <div className='flex flex-col'>
             
-          <div>
-              <p>{ singleData.description}</p>  
-          </div>
             
-               
-            
+            <h1 className='text-3xl self-center text-lime-500'>Select the room you want to reserve:</h1>
 
-            </div>
-             <div className='flex flex-col space-y-14 items-center  justify-between'>
+             <div className='flex flex-row justify-between'>
+
+            <div className='all-room'>
+                {roomData.map((room,index) => (
+                    room && (
+                        <div key={index} className='room-data'>
+                    <div className='room-image'>
+                                <img src={blue}/>
+
+                         </div>
+                        <div className='room-detail'>
+                                <h1>{room.title}</h1>
+                                 <p>{room.maxPeople}</p>
+                                <p>{room.description}</p>
+                                 <p>{room.price}</p>
+             
+                            </div>  
+                            
+                                 
+                <div className='flex flex-col gap-3'>
+                       
+                  <div className='flex flex-col'>
+                            
+                  <div className='flex flex-col gap-3'>
+                      {room.roomNumbers.map((roomNumber) => (
+                      <div key={roomNumber._id} className='flex flex-row gap-3 ml-5'>
+                          <Label className='font-bold'>{roomNumber.number}: </Label>
+                          <TextInput type='checkbox'   value={roomNumber._id} onChange={handleCheck} disabled={!isAvailable(roomNumber)}/>
+                      </div>
+                      
+                      ))}
+                      </div>
+                 </div>
+            <button className='book-button'  onClick={handleClick}>Reserv Now</button>
+      </div>
+
+                            
+                   </div>
+                    )
+                    
+               ))} 
+                </div>
+           
+        </div>
+      
+       
+                         
+         
+             {/* <div className='flex flex-col space-y-14 items-center  justify-between'>
                     <div className='flex flex-col bg-slate-400'>
                         <p>this room is taken for {getDateDifference(new Date(endDate),new Date(startDate))}-days</p>
                     <p>${room * getDateDifference(new Date(endDate), new Date(startDate)) * singleData.cheapestPrice}({getDateDifference(new Date(endDate), new Date(startDate))}-nights)</p>
@@ -165,8 +190,8 @@ const SingleHotelAvailability = () => {
 
                 </div>
                
-            </div>
-            <Modal show={modal} onClose={()=>setModal(false)}>
+            </div> */}
+            {/* <Modal show={modal} onClose={()=>setModal(false)}>
                 <ModalHeader>
                      <h1 className='text-3xl'>Select the room you want to reserve:</h1>
                 </ModalHeader>
@@ -205,7 +230,7 @@ const SingleHotelAvailability = () => {
                          <Button conClick={handleClick}  outline>Reserv Now</Button>
       </div>
                 </ModalBody>
-            </Modal> */}
+            </Modal>  */}
                        
 
             </div>

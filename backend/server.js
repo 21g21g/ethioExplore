@@ -9,7 +9,7 @@ const tourGuideRoute = require("./routes/tourGuideRoute");
 const hotelRoute = require("./routes/hotelRoute");
 const roomRoute = require("./routes/roomRoute");
 const cors = require("cors");
-const destinationRoutes = require('./routes/destinationRoute');
+const destinationRoutes = require("./routes/destinationRoute");
 
 const app = express();
 //environmental variables
@@ -36,7 +36,7 @@ app.use("/api/managers", hotelManagerRoute);
 app.use("/api/tourguides", tourGuideRoute);
 app.use("/api/hotels", hotelRoute);
 app.use("/api/rooms", roomRoute);
-app.use('/api/destinations', destinationRoutes);
+app.use("/api/destinations", destinationRoutes);
 app.use((err, req, res, next) => {
   const status = err.status || 500;
   const message = err.message || "internal server error";

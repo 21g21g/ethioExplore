@@ -12,7 +12,6 @@ import Home from "./pages/home/Home"
 import ListHotel from "./pages/hotels/listHotel/ListHotel"
 import SingleHotelAvailability from "./pages/hotels/availabiltyhotels/SingleHotelAvailability"
 import HotelAdmin from "./pages/hotels/hotelAdminPage/HotelAdmin"
-import HotelDetail from "./pages/hotels/hoteldetail/HotelDetail"
 import Roomadds from "./pages/hotels/hotelAdminPage/Roomadds"
 import PrivateRoute from "./utils/privateRoute"
 import AdminHome from "./pages/adminePage/AdminHome";
@@ -45,7 +44,6 @@ const App = () => {
         <Route path="/hotels/:id" element={<SingleHotelAvailability />} />
         <Route path="/hoteladmin" element={<HotelAdmin />} />
         <Route path="/roomnumbers" element={<Roomadds />} />
-        <Route path="/hoteldetail" element={<HotelDetail />} />
       </Routes>
     </BrowserRouter>
   );

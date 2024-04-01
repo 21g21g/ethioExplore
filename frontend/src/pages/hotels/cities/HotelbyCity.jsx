@@ -8,52 +8,10 @@ import {  Modal, ModalBody, ModalHeader } from "flowbite-react";
 import { hotelSliceactions } from "../../../redux/hotelRedux/hoteSlice";
 import { useNavigate } from "react-router-dom";
 import blunile from "../../../assets/blue.avif";
-import { FaAngleDoubleRight } from "react-icons/fa";
-import { FaAngleDoubleLeft } from "react-icons/fa";
 
-
-
+import { sliderSettings } from "../hotelcomponent/CarousolCards";
 const HotelbyCity = () => {
-  const NextArrow = ({ onClick }) => (
-  <button onClick={onClick}   className="next-arrow" style={{right:"10px"}}>
-    <FaAngleDoubleRight/>
-  </button>
-);
 
-const PrevArrow = ({ onClick }) => (
-  <button onClick={onClick} className="prev-arrow" style={{left:'10px'}}>
-    <FaAngleDoubleLeft/>
-  </button>
-);
-   const settings = {
-    dots: true,
-     infinite: true,
-    
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 3,
-    arrows: true,
-    // className: "slider variable-width ",
-    // variableWidth: true,
-    nextArrow: <NextArrow />,
-  prevArrow: <PrevArrow />,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        }
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1
-        }
-      }
-    ]
-  };
   const dispatch = useDispatch();
   const [modal,setModal]=useState(false)
   const navigate = useNavigate();
@@ -71,8 +29,9 @@ const PrevArrow = ({ onClick }) => (
       try {
        
         const response = await axios.get("http://localhost:5000/api/hotels/countbycity");
+
        
-        // console.log(response.data)
+        console.log(response.data)
         dispatch(hotelSliceactions.hotelfetchSuccess(response.data));
       } catch (error) {
         dispatch(hotelSliceactions.hotelfetchFailure(error.message));
@@ -99,12 +58,12 @@ const PrevArrow = ({ onClick }) => (
           <p>Error: {error}</p>
           ) : ( 
               <div className="carousel-container my-8 w-3/4 m-auto ">
-                <Slider {...settings} >
+                <Slider {...sliderSettings} >
                     {hotelData.map((hotels, index) => (
                   <div key={index} className="cards md:w-full sm:gap-0" >
-                  
-                  <img src={blunile}  className="card-images cursor-pointer" onClick={()=>handleClick(hotels.hotels)}/>
-                    <div className="card-body px-6 py-4">
+                  <div className="flex mx-4"><img src={blunile}  className="card-images cursor-pointer" onClick={()=>handleClick(hotels.hotels)}/>
+</div>
+                    <div className="card-body mx-4 px-6 py-4">
                       <div className="card-title">{hotels._id}</div>
                       <div className='text-gray-500 mb-2 flex items-center'>
                         <h3>{hotels.count} hotels</h3>
@@ -138,9 +97,9 @@ const PrevArrow = ({ onClick }) => (
               
           ))}
     </div>
-                    </ModalBody>
+     </ModalBody>
 
-                  </Modal></div>       
+       </Modal></div>       
                   
    
                
