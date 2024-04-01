@@ -60,7 +60,7 @@ const HotelHompage = () => {
       dispatch(hotelSliceactions.setsearchCitySuccess(data));
       navigate('/hotellist');
     } catch (error) {
-      console.log("there is an error", error);
+      res.status(500).json("error occured", error);
     }
   };
 

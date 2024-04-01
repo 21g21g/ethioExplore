@@ -9,7 +9,7 @@ const InitialDestinations = ({ destinations, settings, openModal }) => {
   return (
     <Slider {...settings}>
       {destinations.map(destination => (
-        <div key={destination._id} className="card" style={{ width: 300 }}>
+        <div key={destination._id} className="card " style={{ width: 300 }}>
           <img src={destination.images.main} alt={destination.name} className="card-image" />
           <div className="card-body px-6 py-4">
             <div className="card-title">{destination.location.region}</div>
