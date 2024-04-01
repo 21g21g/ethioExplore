@@ -15,7 +15,7 @@ const Destinations = () => {
   const [selectedRegion, setSelectedRegion] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedDestination, setSelectedDestination] = useState([]);
-   
+
 
   useEffect(() => {
     fetchDestinations();
@@ -35,24 +35,24 @@ const Destinations = () => {
     (selectedRegion === "" || destination.location.region === selectedRegion)
   );
 
-   const destinationCountsByRegion = countByRegion(destinations);
+  const destinationCountsByRegion = countByRegion(destinations);
 
-       
+
   const getInitialDestinations = (destinations) => {
     const groupedByRegion = {};
-  
+
     destinations.forEach((destination) => {
       const region = destination.location.region;
       if (!groupedByRegion[region]) {
-         groupedByRegion[region] = { ...destination, count: destinationCountsByRegion[region] };
+        groupedByRegion[region] = { ...destination, count: destinationCountsByRegion[region] };
       }
-     
+
     });
-  
+
     return Object.values(groupedByRegion);
-   
+
   };
-  
+
   const settings = {
     dots: true,
     infinite: true,
@@ -62,8 +62,8 @@ const Destinations = () => {
     arrows: true,
     className: "slider variable-width ",
     variableWidth: true,
-    nextArrow: <Arrow/>,
-    prevArrow: <Arrow/>,
+    nextArrow: <Arrow />,
+    prevArrow: <Arrow />,
     responsive: [
       {
         breakpoint: 1024,
@@ -99,7 +99,7 @@ const Destinations = () => {
     setIsModalOpen(true);
     document.body.classList.add('overflow-y-hidden');
   };
-  
+
 
   const closeModal = () => {
     setIsModalOpen(false);
@@ -107,30 +107,34 @@ const Destinations = () => {
   };
 
 
- return (
-    <div className="carousel-container my-8 w-3/4 m-auto">
-      
-     {/* <SearchAndFilter
+  return (
+    <div className="carousel-container my-8 w-5/6 m-auto   " >
+      <div className='text-custom-green1 text-4xl font-serif'>
+        <h1>All Destination By region</h1>
+</div>
+      {/* <SearchAndFilter
       searchQuery={searchQuery}
       setSearchQuery={setSearchQuery}
       selectedRegion={selectedRegion}
       setSelectedRegion={setSelectedRegion}
       regions={regions}
      /> */}
-     
-     <InitialDestinations
-       destinations={getInitialDestinations(filteredDestinations)}
-       settings={settings}
-       openModal={openModal}
+
+      <InitialDestinations
+        destinations={getInitialDestinations(filteredDestinations)}
+        settings={settings}
+        openModal={openModal}
       />
-        
-        <DestinationModal
+
+      <DestinationModal
         isOpen={isModalOpen}
         closeModal={closeModal}
         destinations={selectedDestination}
-        />
-     
-  </div>
+      />
+      <div className='bg-green-400 h-96 mt-8'>
+        <h1>all destinations</h1>
+      </div>
+    </div>
   );
 };
 
