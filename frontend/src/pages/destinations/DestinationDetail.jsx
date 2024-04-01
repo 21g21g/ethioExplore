@@ -108,7 +108,7 @@ const Destinations = () => {
 
 
   return (
-    <div className="carousel-container my-8 w-3/4 m-auto  ">
+    <div className="carousel-container my-8 w-5/6 m-auto   " >
       <div className='text-custom-green1 text-4xl font-serif'>
         <h1>All Destination By region</h1>
 </div>

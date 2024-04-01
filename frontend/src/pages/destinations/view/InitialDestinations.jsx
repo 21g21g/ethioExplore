@@ -7,7 +7,7 @@ const InitialDestinations = ({ destinations, settings, openModal }) => {
   if (!destinations.length) return <div className="text-center">No results found</div>;
 
   return (
-    <Slider {...settings}>
+    <Slider {...settings} className=''>
       {destinations.map(destination => (
         <div key={destination._id} className="card " style={{ width: 300 }}>
           <img src={destination.images.main} alt={destination.name} className="card-image" />
