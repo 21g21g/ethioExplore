@@ -3,6 +3,24 @@ import { createSlice } from "@reduxjs/toolkit";
 const hotelSlice = createSlice({
   name: "hotel",
   initialState: {
+    loading: false,
+    error: null,
+    view:false,
+    min: null,
+    max: null,
+    city: JSON.parse(localStorage.getItem("cit")) || " ",
+    options: {
+      adult: 1,
+      children: 0,
+      room: 1,
+    },
+    dates: [
+      {
+        startDate: new Date(),
+        endDate: new Date(),
+        key: "selection",
+      },
+    ],
     hotelData: [],
     detailHotel: [],
     hotelType: [],
@@ -11,20 +29,6 @@ const hotelSlice = createSlice({
     searchCity: [],
     searched: [],
     roomData: [],
-    startDate:
-      JSON.parse(localStorage.getItem("startdate")) || new Date().toISOString(), //i use toIsoString method because inorder to change the date into json format because the state stored in redux is must be seralizable.
-    endDate:
-      JSON.parse(localStorage.getItem("enddate")) || new Date().toISOString(),
-    loading: false,
-    error: null,
-    min: null,
-    max: null,
-    city: JSON.parse(localStorage.getItem("cit")) || " ",
-    numbers: {
-      adult: parseInt(localStorage.getItem("adult")) || null,
-      children: parseInt(localStorage.getItem("child")) || null,
-      room: parseInt(localStorage.getItem("room")) || null,
-    },
   },
 
   reducers: {
@@ -34,7 +38,6 @@ const hotelSlice = createSlice({
     },
     hotelfetchSuccess(state, action) {
       state.hotelData = action.payload;
-      console.log(action.payload);
       state.loading = false;
       state.error = null;
     },
@@ -68,15 +71,24 @@ const hotelSlice = createSlice({
       state.error = null;
       state.loading = false;
     },
-    setRoomData(state, action) {
-      state.roomData = action.payload;
+    setOptions: (state, action) => {
+      state.options = action.payload;
     },
-    setStartDate(state, action) {
-      state.selectedDate = action.payload;
+    setDates: (state, action) => {
+      state.dates = action.payload;
     },
-    setEndDate(state, action) {
-      state.endDate = action.payload;
+    updateOptions(state, action) {
+      const { name, operation } = action.payload;
+      state.options = {
+        ...state.options,
+        [name]:
+          operation === "i" ? state.options[name] + 1 : state.options[name] - 1,
+      };
     },
+    updateDates(state, action) {
+      state.dates = [action.payload.selection];
+    },
+
     setCity(state, action) {
       state.city = action.payload;
     },
@@ -140,6 +152,9 @@ const hotelSlice = createSlice({
     setDetailHotel(state, action) {
       state.detailHotel = action.payload;
     },
+    setView(state, action) {
+      state.view=action.payload
+    }
   },
 });
 

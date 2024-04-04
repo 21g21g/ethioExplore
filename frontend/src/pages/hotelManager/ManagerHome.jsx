@@ -3,11 +3,12 @@ import {  ManagerSidebarData } from '../../data/Data';
 import { selectName } from '../../redux/features/auth/authSlice';
 import { useSelector } from 'react-redux';
 import Dashboard from "./Dashboard"
-import Rooms from "./Dashboard"
+import Rooms from './Rooms';
 import Guests from "./Guests"
 import Bookings from "./Bookings"
 import TopNav from '../../components/header/TopNav';
 import Sidebar from '../../components/sidebar/Sidebar';
+import Hotels from './Hotels';
 const ManagerHome = () => {
 
   const [selectedMenuItem, setSelectedMenuItem] = useState(
@@ -45,6 +46,12 @@ const ManagerHome = () => {
             <Guests />
           </>
         );
+      case "/hotelmanager/hotels":
+        return(
+          <>
+            <Hotels/>
+          </>
+        )
 
       default:
         return null;

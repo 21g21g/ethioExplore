@@ -75,9 +75,7 @@
     @apply bg-green-500 text-white py-1 px-6 rounded-xl hover:bg-green-700 transition-colors mt-4 inline-block;
   }
 
-  .slick-slide > div{
-    margin: 0 10px;
-  }
+ 
 
   .modal-backdrop {
     @apply overflow-y-auto fixed top-0 left-0 w-full h-full z-40 flex items-center justify-center bg-black bg-opacity-50;
@@ -119,4 +117,86 @@
   .btn-room{
     @apply  flex justify-center items-center cursor-pointer
   }
+  .lsItem{
+    @apply flex flex-col gap-4 mb-2
+  }
+  .lsOptions{
+       @apply p-2
+  }
+  .optionText{
+    @apply z-20
+  }
+  .lsOptionItem{
+    @apply flex justify-between mb-2 font-medium
+  }
+  .lsOptionInput{
+    @apply w-12
+  }
+  .options{
+    @apply  absolute top-20 bg-white text-gray-600 rounded-lg shadow-md
+  }
+  .optionItem{
+    @apply w-64 flex justify-between my-8 p-3 z-20
+  }
+  .optionCounter{
+    @apply flex items-center gap-10 text-black text-sm z-20
+  }
+  .listSearch>button{
+   
+    @apply p-2 bg-custom-green2 text-zinc-50 border-none w-full font-bold .cursor-pointer
+  }
+  .headerListItem {
+    @apply flex items-center gap-3
+ 
+}
+
+.headerListItem.active {
+  @apply border-2 p-2 border-spacing-x-20
+}
+
+
+.headerSearchText{
+  @apply text-gray-300 cursor-pointer
+}
+
+.headerBtn {
+  @apply bg-slate-500 text-slate-50 font-bold  cursor-pointer
+}
+
+
+
+
+
+.headerSearchItem {
+  @apply flex items-center gap-10
+}
+
+
+
+
+.date {
+  @apply absolute top-14  z-20
+ 
+}
+.headerSearch{
+  @apply h-30 bg-white border-3 border-yellow-400 flex items-center justify-around py-2 px-0 rounded-lg absolute bottom-0 w-full max-w-1024
+}
+
+.optionCounter {
+  @apply flex items-center gap-4 text-sm text-black;
+}
+
+.optionCounterButton {
+  @apply w-8 h-8 border  border-blue-500 text-blue-500 cursor-pointer bg-white;
+}
+
+.optionCounterButton:disabled {
+  @apply cursor-not-allowed;
+}
+.btn{
+  @apply bg-custom-green2 text-slate-50 m-1 w-20
+}
+.form-add{
+  @apply flex flex-col mt-2
+}
 }

@@ -37,9 +37,9 @@ const HotelbyFeatured = () => {
   }, [])
   // console.log(featuredHotel)
   return (
-    <div className="flex flex-col md:flex-row "> 
+    <div className="flex flex-col m-3 md:flex-col "> 
     <h1>Featured</h1>
-      <div className="carousel-container my-8 w-3/4 m-auto ">
+      <div className="carousel-container my-8 w-full m-auto ">
          <Slider {...sliderSettings} >
         {featuredHotel.map((feature, index) => (
          <div className="cards mx-3  md:w-full " key={index}>  

@@ -38,7 +38,7 @@ const HotelbyType = () => {
 
   }, [])
   return (
-    <div className="flex flex-col md:flex-row ">
+    <div className="flex flex-col m-3 md:flex-col ">
       <h1 className="text-2xl">type</h1>
       <div className="flex flex-row gap-4 justify-center mt-4">
 

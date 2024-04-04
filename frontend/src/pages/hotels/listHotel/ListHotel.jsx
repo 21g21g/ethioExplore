@@ -15,13 +15,11 @@ const ListHotel = () => {
   const max = useSelector((state) => state.hotel.max)
   const searchCity=useSelector((state)=>state.hotel.searchCity)
   const city = useSelector((state) => state.hotel.city)
-    const adult = useSelector((state) => state.hotel.numbers.adult)
-  const children = useSelector((state) => state.hotel.numbers.children) 
-  const room = useSelector((state) => state.hotel.numbers.room)
+  
+  const options=useSelector((state)=>state.hotel.options)
 
-  const startDate = useSelector((state) => state.hotel.startDate)
-  const endDate = useSelector((state) => state.hotel.endDate)
-  console.log(searchCity)
+  const dates=useSelector((state)=>state.hotel.dates)
+ 
   const [fiteredData, setFiteredData] = useState(searchCity)
  const handleClick = async() => {
     const response = await axios.get(`http://localhost:5000/api/hotels/gethotels?city=${city}&min=${min}&max=${max}`)
@@ -29,42 +27,45 @@ const ListHotel = () => {
   
     
   }
-  
   return (
-       <div className='flex flex-col'>
-   <h1 className='text-xl md:text-2xl text-green-400 md:self-center md:justify-center md:w-full bg-gray-800 '>This are Hotels,Resorts and Apartamas ocuured in {city}</h1>
- <div className='flex flex-row gap-3'>
-      <form className='flex flex-col bg-slate-500 w-72 ml-7 gap-4 mt-4 p-2 h-1/2'>
-        <h1>Search</h1>
-        <h4>destination</h4>
-        <TextInput type='text' placeholder={city}/>
-
-        <p>check-in-date</p>
-        <TextInput type='text'  placeholder={`${new Date(startDate).toLocaleDateString()} to ${new Date(endDate).toLocaleDateString()}`}/>
-        <h3>options</h3>
-        <div className='flex flex-row'>
+    <div className='flex sm:flex-col  sm:ml-4 sm:mr-4 pl-4 pr-4'>
+      <div>
+        <h1 className='text-xl md:text-2xl text-green-400 md:self-center md:justify-center md:w-full bg-gray-800 '>This are Hotels,Resorts and Apartamas ocuured in {city}</h1></div>
+  
+    <div className='flex sm:flex-col  md:flex-row gap-3'>
+        <div>
+           <form className='flex sm:flex-row md:flex-col bg-slate-500 md:w-72 ml-7 gap-4 mt-4 p-2 h-1/2'>
+          <h1>Search</h1>
+          <div className='flex sm:flex-col'> <h4>destination</h4>
+        <TextInput type='text' placeholder={city}/></div>
+       
+<div className='flex sm:flex-col'><p>check-in-date</p>
+        <TextInput type='text'  placeholder={`${new Date(dates[0].startDate).toLocaleDateString()} to ${new Date(dates[0].endDate).toLocaleDateString()}`}/></div>
+        
+        <div className='flex sm:flex-col md:flex-row'>
           <p>min price per night</p>
           <TextInput type='number' value={min} onChange={(event)=>{dispatch(hotelSliceactions.setMin(event.target.value))}}/>
         </div>
-          <div className='flex flex-row'>
+          <div className='flex sm:flex-col md:flex-row'>
           <p>max price per night</p>
           <TextInput type='number' value={max} onChange={(event)=>{dispatch(hotelSliceactions.setMax(event.target.value))}}/>
         </div>
-         <div className='flex flex-row'>
+         <div className='flex sm:flex-col md:flex-row'>
           <p>Adult</p>
-           <TextInput type='number' placeholder={adult}/>
+           <TextInput type='number' placeholder={options.adult}/>
         </div>
-         <div className='flex flex-row'>
+         <div className='flex sm:flex-col md:flex-row'>
           <p>Children</p>
-          <TextInput type='number' placeholder={children}/>
+          <TextInput type='number' placeholder={options.children}/>
         </div>
-         <div className='flex flex-row'>
+         <div className='flex sm:flex-col md:flex-row'>
           <p>Room</p>
-          <TextInput type='number' placeholder={room}/>
+          <TextInput type='number' placeholder={options.room}/>
         </div>
-        <Button onClick={handleClick}  className=' text-white p-3' outline>search</Button>
+        <button onClick={handleClick}  className='bg-green-500 sm:h-12 sm:m-5 sm:w-24 text-white p-2 cursor-pointer' >search</button>
       </form>
-      <div className='flex flex-col md:flex-col p-3'>{fiteredData.map((search) => (
+     </div>
+      <div className='flex sm:flex-col   p-3'>{fiteredData.map((search) => (
        <SingleCityHotels  key={search._id} data={search}/>
        
       ))}
