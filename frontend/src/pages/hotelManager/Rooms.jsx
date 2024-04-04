@@ -3,6 +3,7 @@ import axios from 'axios'
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { hotelSliceactions } from '../../redux/hotelRedux/hoteSlice'
+import ButtonReuse from '../hotels/hotelcomponent/ButtonReuse';
 import { useDispatch, useSelector } from 'react-redux'
 const Rooms = () => {
   const view = useSelector((state) => state.hotel.view)
@@ -93,7 +94,7 @@ const Rooms = () => {
 
   return (
     <div className='form-add'>
-      <button className='btn' onClick={handleView}>Add Room</button>
+      <ButtonReuse className="btn" onClick={handleView} text="Add Room"/>
       {view && (
         <div className='flex flex-col w-full items-center'>
           <h1 className='text-3xl'>Enter Your Room's Data's</h1>
@@ -128,8 +129,8 @@ const Rooms = () => {
                     ))}
 
 
-
-                    <button className='btn self-center' type='submit'>submit</button>
+                  <ButtonReuse className="btn self-center" type="submit" text="submit"/>
+                   
 
 
                 </form>

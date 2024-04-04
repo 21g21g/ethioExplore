@@ -2,6 +2,8 @@ import axios from 'axios'
 import { Button, Modal, ModalBody, ModalHeader,TextInput,Label } from 'flowbite-react'
 
 import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { hotelSliceactions } from '../../../redux/hotelRedux/hoteSlice'
 import {  useParams } from 'react-router-dom'
 
 
@@ -9,8 +11,9 @@ import {  useParams } from 'react-router-dom'
 const SingleHotelAvailability = () => {
     const [modal,setModal]=useState(false)
     const { id } = useParams()
-    //   console.log(id)
-    const dispatch=useDispatch()
+      console.log(id)
+    const dispatch = useDispatch()
+    const loading=useSelector((state)=>state.hotel.loading)
     const roomData = useSelector((state) => state.hotel.roomData)
     const dates = useSelector((state) => state.hotel.dates)
     const options=useSelector((state)=>state.hotel.options)
@@ -29,8 +32,10 @@ const SingleHotelAvailability = () => {
 
     useEffect(() => {
         const fetchedSigledata = async () => {
-            const response = await axios.get(`http://localhost:5000/api/hotels/gethotel/${id}`)
-            const data = response.data._id
+            dispatch(hotelSliceactions.setsingleDatastart(true))
+      const response = await axios.get(`http://localhost:5000/api/hotels/gethotel/${id}`)
+            const data = response.data
+            console.log(data)
           
             dispatch(hotelSliceactions.setsingleDataSuccess(data))
            
@@ -39,7 +44,7 @@ const SingleHotelAvailability = () => {
         }
         fetchedSigledata()
         
-    }, [])
+    }, [dispatch,id])
     
     
     useEffect(() => {
@@ -54,7 +59,7 @@ const SingleHotelAvailability = () => {
         }
         fetchRoom();
         
-    }, [])
+    }, [dispatch,id])
 
 
       const getDatesRange = (startDate, endDate) => {
@@ -91,7 +96,7 @@ const SingleHotelAvailability = () => {
 
    
 };
-    const handleClick = async() => {
+              const handleClick = async() => {
               try {
                await Promise.all(selectedRooms.map(async(roomid) => {
                 const response =await axios.put(`http://localhost:5000/api/rooms/availability/${roomid}`,  { dates: alldates } )
@@ -112,9 +117,15 @@ const SingleHotelAvailability = () => {
       
         
     }
-    return (
+
+    if (!singleData || !roomData) {
+        return <div>Loading...</div>
+    }
+    else {
+        return (
       
-        <div className='flex flex-row justify-between'>
+            <div className='flex flex-row justify-between'>
+                {loading&&<p>Loading...</p>}
                        
          <div className='flex flex-col m-4'>
           <div className='flex flex-col md:flex-row justify-between'>
@@ -193,13 +204,16 @@ const SingleHotelAvailability = () => {
         ))}
     
                         </div>
-                         <Button conClick={handleClick}  outline>Reserv Now</Button>
+                         <Button onClick={handleClick}  outline>Reserv Now</Button>
       </div>
                 </ModalBody>
             </Modal>  
 
             </div>
   )
+        
+    }
+    
 }
 
 export default SingleHotelAvailability

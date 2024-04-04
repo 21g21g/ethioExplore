@@ -16,23 +16,11 @@ const DatePickerss = () => {
     const room = useSelector((state) => state.hotel.options.room)
     const adult = useSelector((state) => state.hotel.options.adult)
     const children = useSelector((state) => state.hotel.options.children)
-    // const startDate = useSelector((state) => state.hotel.dates[0].startDate)
-    // const endDate = useSelector((state) => state.hotel.dates[0].endDate)
+    
     const options = useSelector((state) => state.hotel.options)
     const dates=useSelector((state)=>state.hotel.dates)
 
-//      const [options, setOptions] = useState({
-//     adult: 1,
-//     children: 0,
-//     room: 1,
-//      });
-//      const [dates, setDates] = useState([
-//     {
-//       startDate: new Date(),
-//       endDate: new Date(),
-//       key: "selection",
-//     },
-//   ]);
+
   
     const handleCitychange = (event) => {
     const value = event.target.value;
@@ -50,14 +38,7 @@ const DatePickerss = () => {
         // Handle error
       }
     };
-//      const handleOption = (name, operation) => {
-//     setOptions((prev) => {
-//       return {
-//         ...prev,
-//         [name]: operation === "i" ? options[name] + 1 : options[name] - 1,
-//       };
-//     });
-    //   };
+
     const handleOption = (name, operation) => {
     dispatch(hotelSliceactions.updateOptions({ name, operation }));
     };
@@ -67,9 +48,8 @@ const DatePickerss = () => {
     }
   
     return (
-        <div className=''>
-            <div className='flex flex-row justify-between border mt-5 border-gray-200'>
-             <div className='text-gray-300'>
+            <div className='flex  flex-col md:flex-row justify-between border mt-5 border-gray-200'>
+             <div className='mb-4 text-gray-300'>
                 <input
                     type="text"
                     value={city}
@@ -78,7 +58,7 @@ const DatePickerss = () => {
                   onChange={handleCitychange}
                 />
               </div>
-         <div className="headerSearchItem  relative">
+         <div className="headerSearchItem mb-4  relative">
           <span
             onClick={() => setOpenDate(!openDate)}
             className="headerSearchText"
@@ -95,7 +75,7 @@ const DatePickerss = () => {
                   />
                 )}
         </div>
-         <div className="headerSearchItem  relative">
+         <div className="headerSearchItem mb-4  relative">
                 <span
                   onClick={() => setOpenOptions(!openOptions)}
                   className="headerSearchText"
@@ -170,9 +150,8 @@ const DatePickerss = () => {
             </div>
             
         <div className="headerSearchItem p-2">
-          <button className='text-custom-green2' type='submit' onClick={handleSubmit}>Search</button>
+          <button className='bg-custom-green2 text-slate-50' type='submit' onClick={handleSubmit}>Search</button>
         </div>
-      </div>
       </div>
       
       
