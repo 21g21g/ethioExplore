@@ -5,7 +5,7 @@ const hotelSlice = createSlice({
   initialState: {
     loading: false,
     error: null,
-    view:false,
+    view: false,
     min: null,
     max: null,
     city: JSON.parse(localStorage.getItem("cit")) || " ",
@@ -25,7 +25,7 @@ const hotelSlice = createSlice({
     detailHotel: [],
     hotelType: [],
     featuredHotel: [],
-    singleData: [],
+    singleHotelData:[],
     searchCity: [],
     searched: [],
     roomData: [],
@@ -122,11 +122,12 @@ const hotelSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
-    setsingleDataSuccess(state, action) {
-      state.singleData = action.payload;
+    setSingleHotelData(state, action) {
+      state.singleHotelData = action.payload;
       state.loading = false;
-      state.error = action.payload;
-    },
+      state.error = null;
+     
+   },
     setsearchCityStart(state) {
       state.loading = true;
       state.error = null;
@@ -153,8 +154,11 @@ const hotelSlice = createSlice({
       state.detailHotel = action.payload;
     },
     setView(state, action) {
-      state.view=action.payload
-    }
+      state.view = action.payload;
+    },
+    setRoomData(state, action) {
+      state.roomData = action.payload;
+    },
   },
 });
 

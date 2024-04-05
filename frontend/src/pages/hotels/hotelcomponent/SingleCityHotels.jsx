@@ -1,14 +1,40 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import jaka from "../../../assets/jaka.jpg"
 import { Button } from 'flowbite-react'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
+import { hotelSliceactions } from '../../../redux/hotelRedux/hoteSlice'
+import { useDispatch } from 'react-redux'
 const SingleCityHotels = ({ data }) => {
   const photo = `http://localhost:5000/${data.photos[1]}`;
-  
+  const dispatch=useDispatch()
+ 
+   useEffect(() => {
+        const fetchedSigledata = async () => {
+            dispatch(hotelSliceactions.setsingleDatastart(true))
+      const response = await axios.get(`http://localhost:5000/api/hotels/gethotel/${data._id}`)
+          
+            dispatch(hotelSliceactions.setSingleHotelData(response.data))
+           
+            
+            
+        }
+        fetchedSigledata()
+        
+    }, [dispatch,data._id])
+     useEffect(() => {
+        const fetchRoom = async () => {
+            const response = await axios.get(`http://localhost:5000/api/hotels/room/${data._id}`)
+            console.log(response.data)
+            dispatch(hotelSliceactions.setRoomData(response.data))
+            
+          
 
-  // console.log(photo)  
-  // console.log(data)
-    
+            
+        }
+        fetchRoom();
+        
+    }, [dispatch,data._id])
     
   return (
             <div className='mt-4 flex sm:flex-row sm:gap-1 md:flex-row gap-2 border border-gray-400'>

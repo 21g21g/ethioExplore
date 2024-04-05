@@ -7,9 +7,9 @@ import ButtonReuse from '../hotels/hotelcomponent/ButtonReuse';
 import { useDispatch, useSelector } from 'react-redux'
 const Rooms = () => {
   const view = useSelector((state) => state.hotel.view)
-  const dispatch=useDispatch()
-   const singleData = useSelector((state) => state.hotel.singleData)
-    console.log(singleData._id)
+  const dispatch = useDispatch()
+  const singleHotelData=useSelector((state)=>state.hotel.singleHotelData)
+    console.log(singleHotelData._id)
 
     const [photos, setPhotos] = useState([])
     const [formData, setFormData] = useState({
@@ -73,7 +73,7 @@ const Rooms = () => {
 
         try {
 
-            const response = await axios.post(`http://localhost:5000/api/rooms/${singleData._id}/createroom`, formdata)
+            const response = await axios.post(`http://localhost:5000/api/rooms/${singleHotelData._id}/createroom`, formdata)
           const data = response.data
           console.log(data)
            dispatch(hotelSliceactions.setView(false))
