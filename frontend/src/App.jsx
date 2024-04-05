@@ -11,8 +11,7 @@ import Layouts from "./pages/layout/Layouts"
 import Home from "./pages/home/Home"
 import ListHotel from "./pages/hotels/listHotel/ListHotel"
 import SingleHotelAvailability from "./pages/hotels/availabiltyhotels/SingleHotelAvailability"
-import HotelAdmin from "./pages/hotels/hotelAdminPage/HotelAdmin"
-import Roomadds from "./pages/hotels/hotelAdminPage/Roomadds"
+
 import PrivateRoute from "./utils/privateRoute"
 import AdminHome from "./pages/adminePage/AdminHome";
 import UserHome from "./pages/userPage/UserHome";
@@ -42,8 +41,7 @@ const App = () => {
         <Route path="auth/register" element={<Register />} />
         <Route path="/hotellist" element={<ListHotel />} />
         <Route path="/hotels/:id" element={<SingleHotelAvailability />} />
-        <Route path="/hoteladmin" element={<HotelAdmin />} />
-        <Route path="/roomnumbers" element={<Roomadds />} />
+        
       </Routes>
     </BrowserRouter>
   );

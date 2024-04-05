@@ -19,7 +19,6 @@ const HotelbyCity = () => {
   const error = useSelector((state) => state.hotel.error);
   const hotelData = useSelector((state) => state.hotel.hotelData);
   const detailHotel = useSelector((state) => state.hotel.detailHotel)
-  console.log(hotelData)
 
   
  
@@ -31,7 +30,7 @@ const HotelbyCity = () => {
         const response = await axios.get("http://localhost:5000/api/hotels/countbycity");
 
        
-        console.log(response.data)
+        // console.log(response.data)
         dispatch(hotelSliceactions.hotelfetchSuccess(response.data));
       } catch (error) {
         dispatch(hotelSliceactions.hotelfetchFailure(error.message));
@@ -49,15 +48,15 @@ const HotelbyCity = () => {
 
   return (
     
-    <div className="flex flex-col md:flex-row">
-      <h1 className="text-2xl mb-4 md:mb-0 md:mr-4">Cities</h1>
+    <div className="flex flex-col m-3 md:flex-col">
+      <h1 className="text-2xl ">Cities</h1>
       <div className="flex flex-col justify-center gap-3 overflow-x-auto md:flex-row">
         {loading ? (
           <p>Loading...</p>
         ) : error ? (
           <p>Error: {error}</p>
           ) : ( 
-              <div className="carousel-container my-8 w-3/4 m-auto ">
+              <div className="carousel-container my-8 w-full m-auto ">
                 <Slider {...sliderSettings} >
                     {hotelData.map((hotels, index) => (
                   <div key={index} className="cards md:w-full sm:gap-0" >
@@ -75,7 +74,7 @@ const HotelbyCity = () => {
   ))}
                     
                   <div className="flex justify-center items-center md:mt-10" >
-                    <Modal show={modal} onClose={() => setModal(false)} className="w-full">
+                    <Modal show={modal} onClose={() => setModal(false)} className="w-full h-52">
                       <ModalHeader />
                       <ModalBody>
             <div className="grid grid-cols-2 md:grid-cols-3">
@@ -97,7 +96,7 @@ const HotelbyCity = () => {
               
           ))}
     </div>
-     </ModalBody>
+     </ModalBody>     
 
        </Modal></div>       
                   

@@ -131,4 +131,10 @@ export const ManagerSidebarData = [
     heading: "Rooms",
     link: "/hotelmanager/rooms",
   },
+  {
+    icon: RiHotelBedLine,
+    heading: "Hotels",
+    link:"/hotelmanager/hotels",
+
+  },
 ];

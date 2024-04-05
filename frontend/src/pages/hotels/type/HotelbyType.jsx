@@ -38,18 +38,18 @@ const HotelbyType = () => {
 
   }, [])
   return (
-    <div className="flex flex-col md:flex-row ">
+    <div className="flex flex-col m-3 md:flex-col ">
       <h1 className="text-2xl">type</h1>
-      <div className="flex flex-row gap-4 justify-center mt-4">
+      <div className="flex flex-col md:flex-row gap-4 justify-center mt-4">
 
         {hotelType.map((hotel, index) => {
           return (
-            <Card imgSrc={blue}>
+              <Card imgSrc={blue}>
               <h1>{hotel.type}</h1>
               <h3>{hotel.count} number of {hotel.type}s</h3>
 
             </Card>
-
+           
 
 
 

@@ -3,15 +3,15 @@ import jaka from "../../../assets/jaka.jpg"
 import { Button } from 'flowbite-react'
 import { Link } from 'react-router-dom'
 const SingleCityHotels = ({ data }) => {
-  console.log(data)
   const photo = `http://localhost:5000/${data.photos[1]}`;
   
 
-  console.log(photo)  
+  // console.log(photo)  
+  // console.log(data)
     
     
   return (
-            <div className='mt-4 flex flex-col md:flex-row gap-2 border border-gray-400'>
+            <div className='mt-4 flex sm:flex-row sm:gap-1 md:flex-row gap-2 border border-gray-400'>
           <div>
          <img  src={photo} alt="photo" className='w-48 h-40 object-cover' />
 
@@ -27,7 +27,7 @@ const SingleCityHotels = ({ data }) => {
               <p className='font-semibold'>{data.rating} <span>good</span></p>
               <p className='font-semibold'>${data.cheapestPrice}</p>
               <Link to={`/hotels/${data._id}`}>
-                  <Button className='h-12 bg-green-400' >See availability</Button>
+                  <Button className='h-12 sm:h-9 sm:p-2 md:p-0 bg-green-400' >See availability</Button>
                     </Link>
            </div>
         
