@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import DestinationModal from './view/DestinationModal';
-import SearchAndFilter from './utils/SearchAndFilter';
 import InitialDestinations from './view/InitialDestinations';
 import countByRegion from './utils/countByRegion';
+import TopDestinations from './view/TopDestinations';
 
 
 const Destinations = () => {
   const [destinations, setDestinations] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedRegion, setSelectedRegion] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedDestination, setSelectedDestination] = useState([]);
+ 
 
 
   useEffect(() => {
@@ -24,7 +21,7 @@ const Destinations = () => {
   const fetchDestinations = async () => {
     try {
       const response = await axios.get('http://localhost:5000/api/destinations');
-      setDestinations(response.data);
+      setDestinations(response.data.data);
     } catch (error) {
       console.error("Error fetching destinations", error);
     }
@@ -92,48 +89,16 @@ const Destinations = () => {
       />
     );
   }
-
-  const openModal = (destination) => {
-    const destinationsInRegion = destinations.filter(d => d.location.region === destination.location.region);
-    setSelectedDestination(destinationsInRegion);
-    setIsModalOpen(true);
-    document.body.classList.add('overflow-y-hidden');
-  };
-
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-    document.body.classList.remove('overflow-y-hidden');
-  };
-
-
   return (
     <div className="carousel-container my-8 w-5/6 m-auto   " >
       <div className='text-custom-green1 text-4xl font-serif'>
         <h1>All Destination By region</h1>
-      </div>
-      {/* <SearchAndFilter
-      searchQuery={searchQuery}
-      setSearchQuery={setSearchQuery}
-      selectedRegion={selectedRegion}
-      setSelectedRegion={setSelectedRegion}
-      regions={regions}
-     /> */}
-
-      <InitialDestinations
+</div>
+     <InitialDestinations
         destinations={getInitialDestinations(filteredDestinations)}
         settings={settings}
-        openModal={openModal}
-      />
-
-      <DestinationModal
-        isOpen={isModalOpen}
-        closeModal={closeModal}
-        destinations={selectedDestination}
-      />
-      <div className='bg-green-400 h-80 mt-8'>
-        <h1>all destinations</h1>
-      </div>
+       />
+     <TopDestinations/>
     </div>
   );
 };

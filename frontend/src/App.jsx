@@ -6,7 +6,8 @@ import Register from "./pages/auth/Register"
 import Package from "./pages/packages/Package"
 import Booking from "./pages/bookings/Booking"
 import HotelHompage from "./pages/home/hotelHompage/HotelHompage"
-import DestinationDetail from "./pages/destinations/DestinationDetail"
+// import DestinationDetail from "./pages/destinations/Destinations"
+import Destinations from './pages/destinations/Destinations';
 import Layouts from "./pages/layout/Layouts"
 import Home from "./pages/home/Home"
 import ListHotel from "./pages/hotels/listHotel/ListHotel"
@@ -18,6 +19,7 @@ import UserHome from "./pages/userPage/UserHome";
 import ManagerHome from "./pages/hotelManager/ManagerHome";
 import UserDetails from "./pages/adminePage/UserDetail";
 import { ToastContainer } from "react-toastify"
+import RegionDetails from './pages/destinations/view/RegionDetails';
 import axios from "axios";
 axios.defaults.withCredentials = true;
 
@@ -31,7 +33,8 @@ const App = () => {
           <Route path="hotels" element={<HotelHompage />} />
           <Route path="packages" element={<Package />} />
           <Route path="bookings" element={<Booking />} />
-          <Route path="destinations" element={<DestinationDetail />} />
+          <Route path="destinations" element={<Destinations />} />
+          <Route path="destinations/region/:region" element={<RegionDetails />} />
         </Route>
         <Route path="admin" element={<PrivateRoute><AdminHome /></PrivateRoute>} />
         <Route path="admin/users/:role" element={<PrivateRoute><UserDetails /></PrivateRoute>} />
