@@ -28,7 +28,6 @@ const ListHotel = () => {
     
   }
     return (
-    // <div className='flex flex-col sm:p-2 sm:mr-3 md:flex-row md:p-4 justify-between'>
    
 
       <div className='flex flex-col md:flex-row gap-3 md:p-4 sm:p-2 sm:mr-3 justify-between'>
@@ -73,7 +72,6 @@ const ListHotel = () => {
           ))}
         </div>
       </div>
-    // </div>
   );
 
 }

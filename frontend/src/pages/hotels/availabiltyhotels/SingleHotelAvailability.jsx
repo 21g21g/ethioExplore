@@ -13,12 +13,13 @@ const SingleHotelAvailability = () => {
     const { id } = useParams()
       console.log(id)
     const dispatch = useDispatch()
-    const loading=useSelector((state)=>state.hotel.loading)
-    const roomData = useSelector((state) => state.hotel.roomData)
+    const loading = useSelector((state) => state.hotel.loading)
+    const roomData=useSelector((state)=>state.hotel.roomData)
+    console.log(roomData)
     const dates = useSelector((state) => state.hotel.dates)
     const options=useSelector((state)=>state.hotel.options)
-     const singleData = useSelector((state) => state.hotel.singleData)
-
+    const singleHotelData=useSelector((state)=>state.hotel.singleHotelData)
+    console.log(singleHotelData)
     const [selectedRooms, setSelectedRooms] = useState([])
   
     const getDateDifference = (start, end) => {
@@ -30,36 +31,7 @@ const SingleHotelAvailability = () => {
       setModal(true)
   }
 
-    useEffect(() => {
-        const fetchedSigledata = async () => {
-            dispatch(hotelSliceactions.setsingleDatastart(true))
-      const response = await axios.get(`http://localhost:5000/api/hotels/gethotel/${id}`)
-            const data = response.data
-            console.log(data)
-          
-            dispatch(hotelSliceactions.setsingleDataSuccess(data))
-           
-            
-            
-        }
-        fetchedSigledata()
-        
-    }, [dispatch,id])
     
-    
-    useEffect(() => {
-        const fetchRoom = async () => {
-            const response = await axios.get(`http://localhost:5000/api/hotels/room/${id}`)
-            const data = response.data
-            dispatch(hotelSliceactions.setRoomData(data))
-            
-          
-
-            
-        }
-        fetchRoom();
-        
-    }, [dispatch,id])
 
 
       const getDatesRange = (startDate, endDate) => {
@@ -110,7 +82,8 @@ const SingleHotelAvailability = () => {
            
             
             
-        } catch (error) {
+              }
+              catch (error) {
             console.log(error)
         }
       
@@ -118,10 +91,7 @@ const SingleHotelAvailability = () => {
         
     }
 
-    if (!singleData || !roomData) {
-        return <div>Loading...</div>
-    }
-    else {
+    
         return (
       
             <div className='flex flex-row justify-between'>
@@ -130,14 +100,14 @@ const SingleHotelAvailability = () => {
          <div className='flex flex-col m-4'>
           <div className='flex flex-col md:flex-row justify-between'>
               <div className='flex flex-col'>
-                    <p>{singleData.title}</p>
-                    <p>{singleData.address}</p>
-                  <p>Excellent location-{singleData.distance} from the center</p>
-                  <p>book ${singleData.cheapestPrice}</p>
+                    <p>{singleHotelData.title}</p>
+                    <p>{singleHotelData.address}</p>
+                  <p>Excellent location-{singleHotelData.distance} from the center</p>
+                  <p>book ${singleHotelData.cheapestPrice}</p>
                 </div>
             </div>
                 <div className='grid grid-cols-2 md:grid-cols-3 flex-wrap gap-4'>
-                    {singleData.photos.map((photo) => (
+                    {singleHotelData.photos.map((photo) => (
                          <img src={`http://localhost:5000/${photo}`} className='w-full md:w-48 h-40 object-cover' />  
                     ))}
                    
@@ -147,10 +117,10 @@ const SingleHotelAvailability = () => {
             </div>
             
           <div className='flex flex-row mt-2 justify-between'>
-                    <p>{singleData.description}</p>  
+                    <p>{singleHotelData.description}</p>  
                     <div className='flex flex-col p-4 bg-slate-400'>
                         <p>this room is taken for {getDateDifference(new Date(dates[0].endDate),new Date(dates[0].startDate))}-days</p>
-                        <p>${options.room * getDateDifference(new Date(dates[0].endDate), new Date(dates[0].startDate)) * singleData.cheapestPrice}({getDateDifference(new Date(dates[0].endDate), new Date(dates[0].startDate))}-nights)</p>
+                        <p>${options.room * getDateDifference(new Date(dates[0].endDate), new Date(dates[0].startDate)) * singleHotelData.cheapestPrice}({getDateDifference(new Date(dates[0].endDate), new Date(dates[0].startDate))}-nights)</p>
                         <div className='bg-custom-green2 p-2 rounded-lg '>
                             <button onClick={handleModal} className=' text-zinc-100 mt-2  ml-3 h-6 cursor-pointer'>reserve now</button>
 </div>
@@ -214,6 +184,6 @@ const SingleHotelAvailability = () => {
         
     }
     
-}
+
 
 export default SingleHotelAvailability

@@ -44,7 +44,7 @@ const HotelbyType = () => {
 
         {hotelType.map((hotel, index) => {
           return (
-              <Card imgSrc={blue}>
+              <Card key={index} imgSrc={blue}>
               <h1>{hotel.type}</h1>
               <h3>{hotel.count} number of {hotel.type}s</h3>
 

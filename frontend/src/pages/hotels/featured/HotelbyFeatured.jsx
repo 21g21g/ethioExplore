@@ -10,7 +10,6 @@ import "slick-carousel/slick/slick-theme.css";
 import { sliderSettings } from "../hotelcomponent/CarousolCards";
 
 const HotelbyFeatured = () => {
-  // const photo=`http://localhost:5000/${feature.photos[0]}`
   
   const dispatch=useDispatch();
   const loading=useSelector((state)=>state.hotel.loading)
@@ -35,7 +34,6 @@ const HotelbyFeatured = () => {
     
     
   }, [])
-  // console.log(featuredHotel)
   return (
     <div className="flex flex-col m-3 md:flex-col "> 
     <h1>Featured</h1>
