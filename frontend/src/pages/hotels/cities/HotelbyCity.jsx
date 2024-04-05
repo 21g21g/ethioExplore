@@ -14,7 +14,6 @@ const HotelbyCity = () => {
 
   const dispatch = useDispatch();
   const [modal,setModal]=useState(false)
-  const navigate = useNavigate();
   const loading = useSelector((state) => state.hotel.loading);
   const error = useSelector((state) => state.hotel.error);
   const hotelData = useSelector((state) => state.hotel.hotelData);
@@ -30,7 +29,6 @@ const HotelbyCity = () => {
         const response = await axios.get("http://localhost:5000/api/hotels/countbycity");
 
        
-        // console.log(response.data)
         dispatch(hotelSliceactions.hotelfetchSuccess(response.data));
       } catch (error) {
         dispatch(hotelSliceactions.hotelfetchFailure(error.message));
@@ -43,7 +41,6 @@ const HotelbyCity = () => {
     
     dispatch(hotelSliceactions.setDetailHotel(hotels));
     setModal(true)
-    // navigate('/hoteldetail');
   };
 
   return (

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ethiopianDestinations from '../../data/DestinationData'; // Assuming you have a file with destination data
 
-const Destination = () => {
+const DestinationFilter = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
 
@@ -85,4 +85,4 @@ const Destination = () => {
   );
 };
 
-export default Destination;
+export default DestinationFilter;

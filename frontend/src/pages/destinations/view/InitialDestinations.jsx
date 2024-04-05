@@ -2,8 +2,9 @@ import React from 'react';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
+import { Link } from 'react-router-dom';
 
-const InitialDestinations = ({ destinations, settings, openModal }) => {
+const InitialDestinations = ({ destinations, settings}) => {
   if (!destinations.length) return <div className="text-center">No results found</div>;
 
   return (
@@ -21,7 +22,9 @@ const InitialDestinations = ({ destinations, settings, openModal }) => {
              </div>
             <p className="card-text" style={{height: "40px"}}>{destination.description}</p>
             <div className="flex justify-center">
-              <button className="see-details-btn" onClick={() => openModal(destination)}>See Details</button>
+              <Link to={`/destinations/region/${encodeURIComponent(destination.location.region)}`} className="see-details-btn">
+                See Details
+              </Link>
             </div>
           </div>
         </div>
