@@ -16,12 +16,12 @@ const AdminGuides = () => {
     role: "tourGuide",
   });
   const columns = [
-    { field: "id", headerName: "ID",  sortable: true },
-    { field: "name", headerName: "Name", sortable: true },
-    { field: "email", headerName: "Email", sortable: true },
+    { field: "id", headerName: "ID", width: 200, sortable: true },
+    { field: "name", headerName: "Name", width: 150, sortable: true },
+    { field: "email", headerName: "Email", width: 150, sortable: true },
     { field: "role", headerName: "Role",sortable: true },
-    { field: "phone", headerName: "Phone", sortable: true },
-    { field: "destination", headerName: "Destination", sortable: true },
+    { field: "phone", headerName: "Phone", width: 150, sortable: true },
+    { field: "destination", headerName: "Destination", width: 150, sortable: true },
     {
       field: "actions",
       headerName: "Actions",

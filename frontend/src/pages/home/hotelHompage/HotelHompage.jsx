@@ -65,7 +65,7 @@ const HotelHompage = () => {
   };
 
   return (
-     <div className="flex flex-col gap-3 mt-3 md:gap-6 ">
+    <div className="flex flex-col gap-3 mt-3 md:gap-6 ">
       <form onSubmit={handleSubmit} className="flex flex-col gap-3 md:flex-row md:gap-3 w-full">
         <TextInput type="text" placeholder="Where do you want to go?" value={city} onChange={handleCitychange} className="w-96 md:w-auto" />
         <div className="flex flex-col gap-3 md:flex-row md:gap-3">

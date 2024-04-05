@@ -31,13 +31,13 @@ const Sidebar = (props) => {
         {SidebarData.map((item, index) => (
           <div
             key={index}
-            className={`p-4 cursor-pointer flex items-center ${selected === index ? ' bg-slate-50 rounded-md text-yellow-500  font-serif font-semibold' : ''}`}
+            className={`p-4 cursor-pointer flex items-center ${selected === index ? ' bg-slate-50 rounded-md text-custom-green2  font-serif font-semibold' : ''}`}
             onClick={() => handleMenuItemClick(item.link, index)}
           >
             {selected === index ?
               <div className=" cursor-pointer flex items-center gap-2">
                 <item.icon className="mr-2 text-green-500" /><span>{item.heading}
-                </span> <IoIosArrowForward className="mr-2 text-red-500" /> </div> :
+                </span> <IoIosArrowForward className="mr-2 text-red-700" /> </div> :
               <div className="cursor-pointer flex items-center gap-4 font-serif">
                 <item.icon className="mr-2" /><span>{item.heading}</span>
               </div>}

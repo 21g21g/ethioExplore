@@ -40,7 +40,11 @@ const MyTable = ({ apiEndpoint, title, columns, dataKey }) => {
   return (
     <div className="bg-white border rounded-md shadow-md h-auto">
       <div className="p-6">
-        <h2 className="text-xl font-semibold text-green-500 mb-4">{title}</h2>
+        <div className="flex gap-1">
+
+          <h2 className="text-xl font-semibold text-green-500 mb-4">{title}</h2>
+          <h1 className="text-xl font-semibold text-green-900 mb-4">:{data.length}</h1>
+        </div>
       </div>
       {isLoading ? (
         <div className="p-6">Loading...</div>

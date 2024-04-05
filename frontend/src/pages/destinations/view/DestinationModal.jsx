@@ -8,20 +8,20 @@ const DestinationModal = ({ isOpen, closeModal, destinations }) => {
   );
 
   return isOpen ? (
-    <div className="modal-backdrop" onClick={closeModal}>
+    <div className="modal-backdrop " onClick={closeModal}>
       <div className="modal" onClick={e => e.stopPropagation()}>
         <button className="modal-close-btn" onClick={closeModal}>x</button>
         <select
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
-          className="category-dropdown">
+          className="category-dropdown ">
           <option value="">All Categories</option>
           <option value="National">National</option>
           <option value="International">International</option>
           <option value="Cultural">Cultural</option>
           <option value="Religious">Religious</option>
         </select>
-        <div className="overflow-y-auto max-h-[90vh]">
+        <div className="overflow-y-auto  h-screen ">
           {filteredDestinations.length > 0 ? (
             filteredDestinations.map((dest) => (
               <div key={dest._id} className="modal-content p-4">
