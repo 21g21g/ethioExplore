@@ -22,8 +22,8 @@ const TopDestinations = () => {
   }, []); 
 
   return (
-    <div className="bg-green-400 h-auto mt-8 p-4 text-red-700">
-      <h1 className="text-2xl font-bold text-center mb-4 text-custom-yellow1">Top Destinations By Their Ratings</h1>
+    <div className="bg-gray-50 h-auto mt-8 p-4 text-red-700">
+      <h1 className="text-3xl mb-4 text-custom-green1 font-serif">Top Destinations By Their Ratings</h1>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {destinations.map((destination) => (
           <div key={destination._id} className="max-w-sm rounded overflow-hidden shadow-lg">
