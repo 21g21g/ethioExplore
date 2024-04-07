@@ -13,7 +13,7 @@ const DestinationDetail = () => {
         const response = await fetch(`http://localhost:5000/api/destinations/${id}`);
         if (!response.ok) throw new Error('Failed to fetch destination details');
         const data = await response.json();
-        setDestination(data);
+        setDestination(data.data);
         setLoading(false);
       } catch (err) {
         setError(err.message);
