@@ -1,10 +1,13 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import Payment from '../payment/Payment'
 
 const Package = () => {
 
   return (
-    <div>Package</div>
+    <div>Package
+      <Payment/>
+    </div>
   )
 }
 

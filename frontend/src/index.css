@@ -40,7 +40,7 @@
   }
 
  .card {
-    @apply  mx-4 my-10 h-full rounded overflow-hidden shadow-lg;
+    @apply  mx-4 my-10 h-full rounded overflow-hidden shadow-lg ;
   }
 
   .card-image {
