@@ -2,9 +2,9 @@ import React from 'react';
 
 const Home = () => {
   return (
-    <div className='lg:mx-20 md:my-6  lg:my-2 lg:px-10' >
+    <div className=' '  >
 
-      <div className="bg-green-900 lg:px-10 relative h-96 flex justify-center items-center">
+      <div className="bg-green-900 lg:px-10 relative h-[500px] flex justify-center items-center">
         {/* Background Image */}
         <img
           src="https://cdn.gamma.app/xr3f49tj2j7z1i2/generated-images/F7Q_YokH2DOE79Pd.jpg"

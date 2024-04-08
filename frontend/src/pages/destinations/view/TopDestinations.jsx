@@ -22,15 +22,15 @@ const TopDestinations = () => {
   }, []); 
 
   return (
-    <div className="bg-gray-50 h-auto mt-8 p-4 text-red-700">
+    <div className="bg-gray-50 h-auto mt-12 p-4">
       <h1 className="text-3xl mb-4 text-custom-green1 font-serif">Top Destinations By Their Ratings</h1>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         {destinations.map((destination) => (
           <div key={destination._id} className="max-w-sm rounded overflow-hidden shadow-lg">
             <img className="w-full" src={destination.images.main} alt={destination.name} />
             <div className="px-6 py-4">
                     <div className="font-bold text-xl mb-2">{destination.name}</div>
-                    <div className='font-semibold'>Found in: {destination.location.region}</div>
+                    <div className='font-semibold'>Found in: {destination.location.region} region</div>
                     <div className='font-semibold'>Ratings: {destination.ratings}</div>
                
             </div>

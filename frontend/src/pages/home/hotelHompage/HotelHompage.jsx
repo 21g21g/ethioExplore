@@ -7,15 +7,13 @@ import DatePickerss from "../../hotels/hotelcomponent/DatePickerss";
 
 
 const HotelHompage = () => {
- 
+
 
   return (
     <div className="flex flex-col gap-3 ml-8 mr-8 md:gap-6 pl-4 pr-4 ">
       <div className="w-full ">
         <DatePickerss />
       </div>
-       
-      
       <div className="w-full  ">
         <HotelbyCity />
       </div>

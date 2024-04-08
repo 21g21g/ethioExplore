@@ -7,21 +7,17 @@ import { useDispatch, useSelector } from 'react-redux'
 import { hotelSliceactions } from '../../../redux/hotelRedux/hoteSlice'
 import {  useParams } from 'react-router-dom'
 
-//this component takes data about single hotel
 
 const SingleHotelAvailability = () => {
     const [modal,setModal]=useState(false)
     const { id } = useParams()
-    //   console.log(id)
     const dispatch = useDispatch()
     const loading = useSelector((state) => state.hotel.loading)
     const roomData = useSelector((state) => state.hotel.roomData)
     
-    // console.log(roomData)
     const dates = useSelector((state) => state.hotel.dates)
     const options=useSelector((state)=>state.hotel.options)
     const singleHotelData=useSelector((state)=>state.hotel.singleHotelData)
-    // console.log(singleHotelData)
     const [selectedRooms, setSelectedRooms] = useState([])
   
     const getDateDifference = (start, end) => {
@@ -78,7 +74,7 @@ const SingleHotelAvailability = () => {
     const alldates = getDatesRange(dates[0].startDate, dates[0].endDate)
 
     const isAvailable = (roomNumber) => {
-        //some function is used for if there is a condition true for one input it returns true.
+        
         return !roomNumber.unavailableDates.some((date) => alldates.includes(new Date(date).getTime()));
         
        
@@ -128,7 +124,6 @@ const SingleHotelAvailability = () => {
       
         
     }
-    //used to replace html tag symbole when the backend return from the description.
  
         return (
       

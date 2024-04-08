@@ -21,6 +21,8 @@ import ManagerHome from "./pages/hotelManager/ManagerHome";
 import UserDetails from "./pages/adminePage/UserDetail";
 import { ToastContainer } from "react-toastify"
 import RegionDetails from './pages/destinations/view/RegionDetails';
+import AllDestinations from './pages/destinations/view/AllDestinations';
+import DestinationDetail from './pages/destinations/view/DestinationDetail';
 import axios from "axios";
 axios.defaults.withCredentials = true;
 const App = () => {
@@ -35,6 +37,8 @@ const App = () => {
           <Route path="bookings" element={<Booking />} />
           <Route path="destinations" element={<Destinations />} />
           <Route path="destinations/region/:region" element={<RegionDetails />} />
+          <Route path="/" element={<AllDestinations />} />
+          <Route path="/destination/:id" element={<DestinationDetail />} />
         </Route>
         <Route path="admin" element={<PrivateRoute><AdminHome /></PrivateRoute>} />
         <Route path="admin/users/:role" element={<PrivateRoute><UserDetails /></PrivateRoute>} />

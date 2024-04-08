@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import InitialDestinations from './view/InitialDestinations';
 import countByRegion from './utils/countByRegion';
 import TopDestinations from './view/TopDestinations';
+import AllDestinations from './view/AllDestinations';
 
 
 const Destinations = () => {
@@ -98,7 +99,8 @@ const Destinations = () => {
         destinations={getInitialDestinations(filteredDestinations)}
         settings={settings}
        />
-     <TopDestinations/>
+      <TopDestinations />
+      <AllDestinations/>
     </div>
   );
 };

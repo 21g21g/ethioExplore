@@ -53,9 +53,7 @@ const ListHotel = () => {
     fechedData(); // Call the function here
 
 }, [city, dispatch]);
-//  const handleClick = async() => {
-//     const response = await axios.get(`http://localhost:5000/api/hotels/gethotels?city=${city}&min=${min}&max=${max}`)
-//    setFiteredData(response.data)
+
   
     
   //   }
@@ -82,23 +80,11 @@ const ListHotel = () => {
         dispatch(hotelSliceactions.updateDates({selection:item.selection}))
         
   }
-  // const handleSubmit = async (event) => {
-  //     event.preventDefault();
-  //     try {
-  //       const response = await axios.get(`http://localhost:5000/api/hotels/gethotels?city=${city}`);
-  //       const data = response.data;
-  //       dispatch(hotelSliceactions.setsearchCitySuccess(data));
-  //       navigate('/hotellist');
-  //     } catch (error) {
-  //       console.error("Error occurred", error);
-  //       // Handle error
-  //     }
-  //   };
-  
-  
-//  const handleClick = () => {
-//       console.log(e)
-//     }
+   const handleOptionChange = (event, optionName) => {
+    const value = event.target.value;
+    dispatch(hotelSliceactions.setOptions({ ...options, [optionName]: parseInt(value) }));
+  };
+ 
   
   return (
     <>
@@ -149,17 +135,15 @@ const ListHotel = () => {
             </div>
             <div className='flex flex-col'>
               <p>Adult</p>
-              <TextInput type='number' placeholder={options.adult}                   
-/>
+        <TextInput type="number" value={options.adult} placeholder={options.adult} onChange={(e) => handleOptionChange(e, 'adult')} />
             </div>
             <div className='flex flex-col'>
               <p>Children</p>
-              <TextInput type='number' placeholder={options.children}                           onClick={() => handleOption("children", "i")}
- />
+              <TextInput type='number' placeholder={options.children} value={options.children} onChange={(e)=>handleOptionChange(e,'children')}/>
             </div>
             <div className='flex flex-col'>
               <p>Room</p>
-              <TextInput type='number' placeholder={options.room} onClick={() => handleOption("room", "i")}/>
+              <TextInput type='number' value={options.room} placeholder={options.room} onChange={(e)=>handleOptionChange(e,'room')}/>
             </div>
            
           </form>

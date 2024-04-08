@@ -141,15 +141,7 @@ const hotelSlice = createSlice({
       state.loading = false;
       state.error = null;
     },
-    setAdult(state, action) {
-      state.numbers.adult = action.payload;
-    },
-    setChildren(state, action) {
-      state.numbers.children = action.payload;
-    },
-    setRoom(state, action) {
-      state.numbers.room = action.payload;
-    },
+   
     setDetailHotel(state, action) {
       state.detailHotel = action.payload;
     },

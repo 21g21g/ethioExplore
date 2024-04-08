@@ -10,7 +10,7 @@ const InitialDestinations = ({ destinations, settings}) => {
   return (
     <Slider {...settings} className=''>
       {destinations.map(destination => (
-        <div key={destination._id} className="card " style={{ width: 300 }}>
+        <div key={destination._id} className="card p-2" style={{ width: 300 }}>
           <img src={destination.images.main} alt={destination.name} className="card-image" />
           <div className="card-body px-6 py-4">
             <div className="card-title">{destination.location.region}</div>
