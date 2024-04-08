@@ -33,7 +33,7 @@ const HotelbyFeatured = () => {
     featuerdHotel();
     
     
-  }, [])
+  }, [dispatch])
   return (
     <div className="flex flex-col m-3 md:flex-col "> 
     <h1>Featured</h1>

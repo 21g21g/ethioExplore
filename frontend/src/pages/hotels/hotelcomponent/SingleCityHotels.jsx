@@ -49,7 +49,7 @@ const SingleCityHotels = ({ data }) => {
             <p className='font-semibold'>this room is the confort room</p></div>
       
                <div className='flex flex-col gap-1 md:gap-3 md:p-3'>
-              <p className='font-semibold'>{ data.description}</p>
+              <p className='font-semibold'>{ data.description.replace(/<[^>]*>/g, '')}</p>
               <p className='font-semibold'>{data.rating} <span>good</span></p>
               <p className='font-semibold'>${data.cheapestPrice}</p>
               <Link to={`/hotels/${data._id}`}>

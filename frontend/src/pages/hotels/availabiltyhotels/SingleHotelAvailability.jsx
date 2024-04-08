@@ -1,25 +1,27 @@
 import axios from 'axios'
 import { Button, Modal, ModalBody, ModalHeader,TextInput,Label } from 'flowbite-react'
-
+import {  toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { hotelSliceactions } from '../../../redux/hotelRedux/hoteSlice'
 import {  useParams } from 'react-router-dom'
 
-
+//this component takes data about single hotel
 
 const SingleHotelAvailability = () => {
     const [modal,setModal]=useState(false)
     const { id } = useParams()
-      console.log(id)
+    //   console.log(id)
     const dispatch = useDispatch()
     const loading = useSelector((state) => state.hotel.loading)
-    const roomData=useSelector((state)=>state.hotel.roomData)
-    console.log(roomData)
+    const roomData = useSelector((state) => state.hotel.roomData)
+    
+    // console.log(roomData)
     const dates = useSelector((state) => state.hotel.dates)
     const options=useSelector((state)=>state.hotel.options)
     const singleHotelData=useSelector((state)=>state.hotel.singleHotelData)
-    console.log(singleHotelData)
+    // console.log(singleHotelData)
     const [selectedRooms, setSelectedRooms] = useState([])
   
     const getDateDifference = (start, end) => {
@@ -30,7 +32,32 @@ const SingleHotelAvailability = () => {
     const handleModal = () => {
       setModal(true)
   }
+         useEffect(() => {
+           const fetchedSigledata = async () => {
+            dispatch(hotelSliceactions.setsingleDatastart(true))
+            const response = await axios.get(`http://localhost:5000/api/hotels/gethotel/${id}`)
+          
+            dispatch(hotelSliceactions.setSingleHotelData(response.data))
+           
+            
+            
+        }
+        fetchedSigledata()
+        
+         }, [dispatch, id])
+     useEffect(() => {
+        const fetchRoom = async () => {
+            const response = await axios.get(`http://localhost:5000/api/hotels/room/${id}`)
+            // console.log(response.data)
+            dispatch(hotelSliceactions.setRoomData(response.data))
+            
+          
 
+            
+        }
+        fetchRoom();
+        
+    }, [dispatch,id])
     
 
 
@@ -60,16 +87,25 @@ const SingleHotelAvailability = () => {
  
   const handleCheck = (event) => {
     const checked = event.target.checked;
-    const value = event.target.value;
-
-    setSelectedRooms(prevSelectedRooms => {
+      const value = event.target.value;
+     
+    
+          setSelectedRooms(prevSelectedRooms => {
         return checked ? [...prevSelectedRooms, value] : prevSelectedRooms.filter(select => select !== value);
-    });
+    });   
+    
+      
+
+   
 
    
 };
-              const handleClick = async() => {
-              try {
+    const handleClick = async () => {
+        if (selectedRooms.length >options.room) {
+            toast.error(`you cannot select more than ${options.room} number of room you select because are ${options.room}` )
+        }
+        else {
+            try {
                await Promise.all(selectedRooms.map(async(roomid) => {
                 const response =await axios.put(`http://localhost:5000/api/rooms/availability/${roomid}`,  { dates: alldates } )
                 const data = response.data
@@ -86,12 +122,14 @@ const SingleHotelAvailability = () => {
               catch (error) {
             console.log(error)
         }
+        }
+              
       
       
         
     }
-
-    
+    //used to replace html tag symbole when the backend return from the description.
+ 
         return (
       
             <div className='flex flex-row justify-between'>
@@ -106,7 +144,7 @@ const SingleHotelAvailability = () => {
                   <p>book ${singleHotelData.cheapestPrice}</p>
                 </div>
             </div>
-                <div className='grid grid-cols-2 md:grid-cols-3 flex-wrap gap-4'>
+                <div className='grid grid-cols-2 md:grid-cols-4 md:self-center flex-wrap gap-4'>
                     {singleHotelData.photos.map((photo) => (
                          <img src={`http://localhost:5000/${photo}`} className='w-full md:w-48 h-40 object-cover' />  
                     ))}
@@ -116,8 +154,9 @@ const SingleHotelAvailability = () => {
            
             </div>
             
-          <div className='flex flex-row mt-2 justify-between'>
-                    <p>{singleHotelData.description}</p>  
+                    <div className='flex flex-row mt-2 justify-between'>
+                        
+                    <p>{singleHotelData.description.replace(/<[^>]*>/g, '')}</p>  
                     <div className='flex flex-col p-4 bg-slate-400'>
                         <p>this room is taken for {getDateDifference(new Date(dates[0].endDate),new Date(dates[0].startDate))}-days</p>
                         <p>${options.room * getDateDifference(new Date(dates[0].endDate), new Date(dates[0].startDate)) * singleHotelData.cheapestPrice}({getDateDifference(new Date(dates[0].endDate), new Date(dates[0].startDate))}-nights)</p>
@@ -151,7 +190,7 @@ const SingleHotelAvailability = () => {
 
                   <div className='flex flex-col'> <h1>{room.title}</h1>  
                   <p>{room.maxPeople}</p>
-                  <p>{room.description}</p>
+                  <p>{room.description.replace(/<[^>]*>/g, '')}  </p>
                   <p>{room.price}</p></div>
                  
                   <div className='flex flex-col gap-3'>
@@ -174,7 +213,7 @@ const SingleHotelAvailability = () => {
         ))}
     
                         </div>
-                         <Button onClick={handleClick}  outline>Reserv Now</Button>
+                         <button className='bg-custom-green2 w-40 self-center rounded-sm' onClick={handleClick}  outline>Reserv Now</button>
       </div>
                 </ModalBody>
             </Modal>  

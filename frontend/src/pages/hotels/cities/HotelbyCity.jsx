@@ -4,7 +4,6 @@ import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useDispatch, useSelector } from "react-redux";
-import {  Modal, ModalBody, ModalHeader } from "flowbite-react";
 import { hotelSliceactions } from "../../../redux/hotelRedux/hoteSlice";
 import { useNavigate } from "react-router-dom";
 import blunile from "../../../assets/blue.avif";
@@ -13,12 +12,10 @@ import { sliderSettings } from "../hotelcomponent/CarousolCards";
 const HotelbyCity = () => {
 
   const dispatch = useDispatch();
-  const [modal,setModal]=useState(false)
   const loading = useSelector((state) => state.hotel.loading);
   const error = useSelector((state) => state.hotel.error);
   const hotelData = useSelector((state) => state.hotel.hotelData);
-  const detailHotel = useSelector((state) => state.hotel.detailHotel)
-
+const navigate=useNavigate()
   
  
   useEffect(() => {
@@ -39,8 +36,11 @@ const HotelbyCity = () => {
 
   const handleClick = (hotels) => {
     
+    const city = hotels.map((hoo) => hoo.city)
+    
     dispatch(hotelSliceactions.setDetailHotel(hotels));
-    setModal(true)
+    navigate(`/hotels/city/${city[0]}`)
+
   };
 
   return (
@@ -70,33 +70,7 @@ const HotelbyCity = () => {
     </div>
   ))}
                     
-                  <div className="flex justify-center items-center md:mt-10" >
-                    <Modal show={modal} onClose={() => setModal(false)} className="w-full h-52">
-                      <ModalHeader />
-                      <ModalBody>
-            <div className="grid grid-cols-2 md:grid-cols-3">
-          {detailHotel.map((detail,index) => (
-            <div key={index} className="flex flex-col flex-wrap mx-3 my-3">
-              <div>
-               
-                <img className="w-60 h-40 object-cover " src={`http://localhost:5000/${detail.photos[1]}`}/>
-
-              
-              </div>
-              <p className="text-2xl">{detail.name}</p>
-              <h1 className="text-2xl">{detail.type}</h1>
-              <p className="text-2xl">${detail.cheapestPrice}</p>
-              <button className="bg-green-500 text-slate-200">Book now</button>
-              
-                  
-              </div>
-              
-          ))}
-    </div>
-     </ModalBody>     
-
-       </Modal></div>       
-                  
+                 
    
                
               </Slider>

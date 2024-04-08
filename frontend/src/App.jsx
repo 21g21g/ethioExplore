@@ -7,6 +7,7 @@ import Package from "./pages/packages/Package"
 import Booking from "./pages/bookings/Booking"
 import HotelHompage from "./pages/home/hotelHompage/HotelHompage"
 // import DestinationDetail from "./pages/destinations/Destinations"
+import CityDetail from './pages/hotels/citydetail/CityDetail';
 import Destinations from './pages/destinations/Destinations';
 import Layouts from "./pages/layout/Layouts"
 import Home from "./pages/home/Home"
@@ -22,7 +23,6 @@ import { ToastContainer } from "react-toastify"
 import RegionDetails from './pages/destinations/view/RegionDetails';
 import axios from "axios";
 axios.defaults.withCredentials = true;
-
 const App = () => {
   return (
     <BrowserRouter>
@@ -44,6 +44,7 @@ const App = () => {
         <Route path="auth/register" element={<Register />} />
         <Route path="/hotellist" element={<ListHotel />} />
         <Route path="/hotels/:id" element={<SingleHotelAvailability />} />
+        <Route path='/hotels/city/:city' element={<CityDetail/>}/>
         
       </Routes>
     </BrowserRouter>

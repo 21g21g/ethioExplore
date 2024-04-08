@@ -23,8 +23,8 @@ export const sliderSettings = {
     slidesToShow: 3,
     slidesToScroll: 1,
     arrows: true,
-    // className: "slider variable-width ",
-    // variableWidth: true,
+    className: "slider variable-width ",
+    variableWidth: false,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
     responsive: [
