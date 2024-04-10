@@ -36,6 +36,7 @@ const Register = () => {
     setFormData({ ...formData, [name]: value });
   };
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!name || !email || !password) {
@@ -59,7 +60,6 @@ const Register = () => {
     setIsLoading(true)
     try {
       const data = await registerService(userData)
-      console.log(data);
       dispatch(setLogin(true));
       if (data && data.name) {
         dispatch(setName(data.name));

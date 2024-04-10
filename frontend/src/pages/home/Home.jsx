@@ -1,4 +1,5 @@
 import React from 'react';
+import Mapbox from './Mapbox';
 
 const Home = () => {
   return (
@@ -32,7 +33,7 @@ const Home = () => {
       <div className='mt-10'>
         <div>
 
-        <h1 className='lg:text-3xl text-custom-green2 font-serif px-6'>Most popular places in ethiopia</h1>
+          <h1 className='lg:text-3xl text-custom-green2 font-serif px-6'>Most popular places in ethiopia</h1>
         </div>
         <div className='flex lg:my-4 '>
           <div className='flex-col px-3   '>
@@ -97,6 +98,10 @@ const Home = () => {
           </div>
 
         </div>
+
+      </div>
+      <div className='h-[600px] w-[600px]'>
+        <Mapbox />
       </div>
     </div>
   );

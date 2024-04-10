@@ -13,7 +13,7 @@ const protect = async (req, res, next) => {
     // Verify the token
     const verified = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
     // Fetch the user based on the userId from the token
-    const user = await User.findById(verified.userId).select("-password");
+    const user = await User.findById(verified.userId,).select("-password");
     if (!user) {
       res.status(401);
       throw new Error("User not found");
