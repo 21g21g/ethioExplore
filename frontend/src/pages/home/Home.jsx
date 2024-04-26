@@ -101,7 +101,6 @@ const Home = () => {
 
       </div>
       <div className='h-[600px] w-[600px]'>
-        <Mapbox />
       </div>
     </div>
   );

@@ -88,8 +88,8 @@ const Login = () => {
 
 
     return (
-        <div className='min-h-screen bg-gree pt-10 px-10 items-center bg-green-100 '>
-            <div className='flex flex-col md:flex-row h-full w-full bg-green-50  border-white border-2 rounded-2xl shadow-lg shadow-green-500'>
+        <div className='min-h-screen bg-gree pt-10 px-10 items-center bg-green-50 '>
+            <div className='flex flex-col md:flex-row h-full w-full bg-green-50  border-white border-2 rounded-2xl shadow-md shadow-green-200'>
                 <div className='w-full md:w-1/2 bg-center bg-cover bg-no-repeat py-5 px-3 rounded-l-2xl' style={{ backgroundImage: `url(${backgroundImage})` }}>
                     <h1 className='text-center text-3xl text-white'>Welcome to Ethio Explore System</h1>
                 </div>
