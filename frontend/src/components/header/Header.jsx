@@ -24,10 +24,10 @@ const Header = () => {
 
   return (
     <>
-      <header className='top-header fixed top-0 left-0 right-0 z-20 shadow-md bg-green-700  text-white h-16 flex items-center pl-10 justify-between'>
+      <header className='top-header fixed top-0 left-0 right-0 z-20 shadow-md bg-inherit  text-green-700 h-16 flex items-center pl-10 justify-between'>
         <div className='flex gap-2 items-center '>
           <SiEthiopianairlines size={30} color='yellow' />
-          <h1 className='text-yellow-200 text-lg font-bold'>Banay-25</h1>
+          <h1 className='text-yellow-200 text-lg font-bold'>EthioExplore</h1>
         </div>
 
         <div className='flex items-center pr-5 md:hidden'>

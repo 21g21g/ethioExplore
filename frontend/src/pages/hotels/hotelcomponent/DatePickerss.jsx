@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
@@ -8,36 +8,44 @@ import axios from 'axios';
 import { hotelSliceactions } from '../../../redux/hotelRedux/hoteSlice';
 import { useNavigate } from 'react-router-dom';
 const DatePickerss = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate()
-  const city = useSelector((state) => state.hotel.city);
-  const [openDate, setOpenDate] = useState(false);
-  const [openOptions, setOpenOptions] = useState(false);
-  const room = useSelector((state) => state.hotel.options.room)
-  const adult = useSelector((state) => state.hotel.options.adult)
-  const children = useSelector((state) => state.hotel.options.children)
-
-  const options = useSelector((state) => state.hotel.options)
-  const dates = useSelector((state) => state.hotel.dates)
+    const dispatch = useDispatch();
+    
+    const navigate=useNavigate()
+    const city = useSelector((state) => state.hotel.city);
+     const [openDate, setOpenDate] = useState(false);
+    const [openOptions, setOpenOptions] = useState(false);
+   
+    
+    const options = useSelector((state) => state.hotel.options)
+    const dates=useSelector((state)=>state.hotel.dates)
 
 
 
   const handleCitychange = (event) => {
     const value = event.target.value;
     dispatch(hotelSliceactions.setCity(value));
-  };
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      const response = await axios.get(`http://localhost:5000/api/hotels/gethotels?city=${city}`);
-      const data = response.data;
-      dispatch(hotelSliceactions.setsearchCitySuccess(data));
-      navigate('/hotellist');
-    } catch (error) {
-      console.error("Error occurred", error);
-      // Handle error
-    }
-  };
+    };
+    useEffect(() => {
+    const fechedData = async () => {
+        try {
+            const response = await axios.get(`http://localhost:5000/api/hotels/gethotels?city=${city}`);
+            const data = response.data;
+            dispatch(hotelSliceactions.setsearchCitySuccess(data));
+        } catch (error) {
+            console.error("Error occurred", error);
+        }
+    };
+
+    fechedData(); // Call the function here
+
+}, [city, dispatch]);
+      
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+      
+        navigate('/hotellist');
+      } 
+    
 
   const handleOption = (name, operation) => {
     dispatch(hotelSliceactions.updateOptions({ name, operation }));

@@ -54,6 +54,8 @@ const Login = () => {
 
             const userData = data.data.user; // Assuming user data includes the name
             const userRole = userData.role;
+            console.log(userRole)
+            console.log(userData)
 
             dispatch(setLogin(true));
             dispatch(setName(userData.name)); // Dispatch setName action to update name in Redux store and local storage

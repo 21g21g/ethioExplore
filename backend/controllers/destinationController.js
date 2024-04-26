@@ -21,6 +21,7 @@ exports.findAll = async (req, res) => {
             // Return all destinations without any sorting or limiting
             destinations = await Destination.find();
         }
+        //json({data:{destinations}})
         res.status(200).json({data: destinations});
     } catch (error) {
         res.status(500).json({message: error.message});

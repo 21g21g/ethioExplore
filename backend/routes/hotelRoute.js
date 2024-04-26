@@ -10,20 +10,21 @@ const {
   countBytype,
   getHotelroom,
 } = require("../controllers/hotelController");
-const path = require("path");
 
 const router = express.Router();
 
+
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "uploads/");
+    cb(null, 'uploads/');
   },
   filename: (req, file, cb) => {
-    cb(null, Date.now() + " " + file.originalname);
+    cb(null, Date.now() + ' ' + file.originalname);
   },
 });
 const uploads = multer({ storage: storage });
-//we can use uploads.single if we can set only a single file
+
 
 router.post("/createhotel", uploads.array("photos"), createHotel);
 router.get("/gethotel/:id", getHotel);

@@ -3,6 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import sheratn from "../../../assets/sheratn.jpg";
 import axios from "axios";
 import { hotelSliceactions } from "../../../redux/hotelRedux/hoteSlice";
+import addis from "../../../assets/addis.jpg"
+import bure from "../../../assets/bure.jpg"
+import bahrdar from "../../../assets/bahrdar.webp"
+
+import bdr from "../../../assets/bdr.jpg"
 import { FaStar } from "react-icons/fa";
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
@@ -33,7 +38,14 @@ const HotelbyFeatured = () => {
     featuerdHotel();
     
     
-  }, [])
+  }, [dispatch])
+  const featuredHotels = {
+    "bure": bure,
+    "addis": addis,
+    "Bahrdar":bahrdar,
+    "bdr":bdr
+    
+  }
   return (
     <div className="flex flex-col m-3 md:flex-col "> 
     <h1>Featured</h1>
@@ -41,7 +53,8 @@ const HotelbyFeatured = () => {
          <Slider {...sliderSettings} >
         {featuredHotel.map((feature, index) => (
          <div className="cards mx-3  md:w-full " key={index}>  
-            <div className="flex mx-4"><img className="card-images cursor-pointer" src={sheratn} />
+            <div className="flex mx-4">
+              <img className="card-images cursor-pointer" src={featuredHotels[feature.city]} />
               </div>
             <div className="card-body  mx-4 px-6 py-4">
 

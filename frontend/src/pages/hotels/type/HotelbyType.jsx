@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 
 import blue from "../../../assets/blue.avif";
-
+import hotelrep from "../../../assets/hotelrep.avif"
+import apartama from "../../../assets/apartama.webp"
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { hotelSliceactions } from "../../../redux/hotelRedux/hoteSlice";
@@ -36,7 +37,13 @@ const HotelbyType = () => {
     hotelfetchbyType();
 
 
-  }, [])
+  }, [dispatch])
+  const typeofimae = {
+    "hotel": hotelrep,
+    "apartama": apartama,
+    "resort":blue,
+    
+  }
   return (
     <div className="flex flex-col m-3 md:flex-col ">
       <h1 className="text-2xl">type</h1>
@@ -44,7 +51,7 @@ const HotelbyType = () => {
 
         {hotelType.map((hotel, index) => {
           return (
-              <Card key={index} imgSrc={blue}>
+              <Card key={index} imgSrc={typeofimae[hotel.type]} className="w-full" >
               <h1>{hotel.type}</h1>
               <h3>{hotel.count} number of {hotel.type}s</h3>
 

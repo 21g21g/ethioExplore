@@ -4,23 +4,25 @@ import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useDispatch, useSelector } from "react-redux";
-import { Modal, ModalBody, ModalHeader } from "flowbite-react";
 import { hotelSliceactions } from "../../../redux/hotelRedux/hoteSlice";
 import { useNavigate } from "react-router-dom";
-import blunile from "../../../assets/blue.avif";
+import blunile from "../../../assets/blue.avif"
+import bahrdar from "../../../assets/bahrdar.webp"
+import addis from "../../../assets/addis.jpg"
+import bure from "../../../assets/bure.jpg"
+import bdr from "../../../assets/bdr.jpg"
 
 import { sliderSettings } from "../hotelcomponent/CarousolCards";
 const HotelbyCity = () => {
 
   const dispatch = useDispatch();
-  const [modal, setModal] = useState(false)
   const loading = useSelector((state) => state.hotel.loading);
   const error = useSelector((state) => state.hotel.error);
   const hotelData = useSelector((state) => state.hotel.hotelData);
-  const detailHotel = useSelector((state) => state.hotel.detailHotel)
-
-
-
+  console.log(hotelData)
+const navigate=useNavigate()
+  
+ 
   useEffect(() => {
     const fetchHotelByCity = async () => {
       dispatch(hotelSliceactions.hotelfetchStart());
@@ -38,10 +40,19 @@ const HotelbyCity = () => {
   }, [dispatch]);
 
   const handleClick = (hotels) => {
-
+    
+    const city = hotels.map((hoo) => hoo.city)
+    
     dispatch(hotelSliceactions.setDetailHotel(hotels));
-    setModal(true)
+    navigate(`/hotels/city/${city[0]}`)
+
   };
+  const cityImage={
+    "bahrdar": bahrdar,
+    "addis": addis,
+    "bure": bure,
+    "bdr":bdr
+  }
 
   return (
 
@@ -57,7 +68,7 @@ const HotelbyCity = () => {
             <Slider {...sliderSettings}  >
               {hotelData.map((hotels, index) => (
                 <div key={index} className="cards md:w-full sm:gap-0   " >
-                  <div className="flex mr-4"><img src={blunile} className="card-images cursor-pointer" onClick={() => handleClick(hotels.hotels)} />
+                  <div className="flex mr-4"><img src={cityImage[hotels._id]} className="card-images cursor-pointer" onClick={() => handleClick(hotels.hotels)} />
                   </div>
                   <div className="card-body mx-4 px-6 py-4">
                     <div className="card-title" >{hotels._id}</div>
@@ -66,41 +77,15 @@ const HotelbyCity = () => {
                     </div>
 
                   </div>
-
-                </div>
-              ))}
-
-              <div className="flex justify-center items-center md:mt-10" >
-                <Modal show={modal} onClose={() => setModal(false)} className="w-full h-52">
-                  <ModalHeader />
-                  <ModalBody>
-                    <div className="grid grid-cols-2 md:grid-cols-3 ">
-                      {detailHotel.map((detail, index) => (
-                        <div key={index} className="flex flex-col flex-wrap mx-3 my-3 bg-red-200">
-                          <div>
-
-                            <img className="w-60 h-40 object-cover " src={`http://localhost:5000/${detail.photos[1]}`} />
-
-
-                          </div>
-                          <p className="text-2xl">{detail.name}</p>
-                          <h1 className="text-2xl">{detail.type}</h1>
-                          <p className="text-2xl">${detail.cheapestPrice}</p>
-                          <button className="bg-green-500 text-slate-200">Book now</button>
-
-
-                        </div>
-
-                      ))}
-                    </div>
-                  </ModalBody>
-
-                </Modal></div>
-
-
-
-            </Slider>
-          </div>
+                   
+    </div>
+  ))}
+                    
+                 
+   
+               
+              </Slider>
+                  </div>
 
 
 
