@@ -22,6 +22,7 @@ import UserDetails from "./pages/adminePage/UserDetail";
 import { ToastContainer } from "react-toastify"
 import RegionDetails from './pages/destinations/view/RegionDetails';
 import AllDestinations from './pages/destinations/view/AllDestinations';
+import TopDestinations from './pages/destinations/view/TopDestinations';
 import DestinationDetail from './pages/destinations/view/DestinationDetail';
 import axios from "axios";
 axios.defaults.withCredentials = true;
@@ -37,8 +38,6 @@ const App = () => {
           <Route path="bookings" element={<Booking />} />
           <Route path="destinations" element={<Destinations />} />
           <Route path="destinations/region/:region" element={<RegionDetails />} />
-          <Route path="/" element={<AllDestinations />} />
-          <Route path="/destination/:id" element={<DestinationDetail />} />
         </Route>
         <Route path="admin" element={<PrivateRoute><AdminHome /></PrivateRoute>} />
         <Route path="admin/users/:role" element={<PrivateRoute><UserDetails /></PrivateRoute>} />
@@ -46,6 +45,9 @@ const App = () => {
         <Route path="hotelmanager" element={<PrivateRoute><ManagerHome /></PrivateRoute>} />
         <Route path="auth/login" element={<Login />} />
         <Route path="auth/register" element={<Register />} />
+        <Route path="/" element={<AllDestinations />} />
+        <Route path="/" element={<TopDestinations />} />
+        <Route path="/destination/:id" element={<DestinationDetail />} />
         <Route path="/hotellist" element={<ListHotel />} />
         <Route path="/hotels/:id" element={<SingleHotelAvailability />} />
         <Route path='/hotels/city/:city' element={<CityDetail/>}/>

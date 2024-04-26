@@ -57,6 +57,10 @@
   .card-text {
     @apply text-gray-700 text-base overflow-hidden;
   }
+  .destination-image{
+    width: 40%;
+    object-fit: cover;
+  }
    .search-input {
     @apply ml-2 w-80 border rounded-md shadow-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent;
   }
