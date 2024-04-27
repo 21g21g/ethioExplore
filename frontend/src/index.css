@@ -5,7 +5,7 @@
 
 @layer components {
     .top-header {
-      @apply bg-green-500  text-white h-16 flex items-center pl-10 justify-between  shadow-md; /* Added shadow for depth */
+      @apply  h-16 flex items-center pl-10 justify-between  ; /* Added shadow for depth */
     }
   
     .nav-link {
@@ -13,10 +13,10 @@
     }
   
     .nav-text {
-      @apply flex text-white gap-2 hover:text-yellow-300 px-3 py-2  rounded-md text-sm font-medium; /* Adjusted hover colors to match the header background */
+      @apply flex text-white gap-2 font-serif  hover:text-yellow-200 px-3 py-2  rounded-md  ; /* Adjusted hover colors to match the header background */
     }
  .input{
-   @apply focus:border-green-500 focus:text-indigo-400 outline-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5  dark:text-white 
+   @apply focus:border-green-500 focus:text-slate-500 outline-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5  dark:text-white 
     }
      .cards {
     @apply   mb-10 mt-10 h-[380px]  rounded overflow-hidden shadow-zinc-300 shadow-lg ;

@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom'
 const Layouts = () => {
   return (
     <>
-    <div className='bg-green-50 rounded-lg'>
+    <div className='bg-white rounded-lg'>
     <Header/>
     <main>
       <Outlet/>

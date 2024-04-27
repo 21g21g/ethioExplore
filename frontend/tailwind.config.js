@@ -10,8 +10,10 @@ export default {
     extend: {
       colors: {
         custom: {
-          'green2': '#24b587',
+          'green2': '#00a987',
+          'green4': '#0e424c',
           'green3': '#1b6941',
+          'green5': '#03395f',
           'green1': '#338269',
           'yellow1': '#fbff08',
           'yellow2': '#c4c108',

@@ -21,8 +21,12 @@ const TopDestinations = () => {
   }, []);
  
   return (
-    <div className="bg-gray-50 h-auto mt-12 p-4">
-      <h1 className="text-3xl mb-4 text-custom-green1 font-serif">Top Destinations By Their Ratings</h1>
+    <div className="bg-gray-100 h-auto my-12 p-4 rounded-md ">
+      <div className='items-center justify-center text-center flex-col lg:px-32 lg:my-10'>
+        <h1 className="text-6xl mb-4 text-custom-green1 font-serif">Top Destinations</h1>
+        <p className='text-slate-300'> discover a range of vacation places in Ethiopia which have very intere
+        sting attraction places most of the worlds admire and stay along over there</p>
+      </div>
       <div className="flex flex-wrap justify-center">
         {destinations.map((destination, index) => (
        <div
