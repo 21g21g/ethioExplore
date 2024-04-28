@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 export const registerService = async (userData) => {
     try {
         const response = await axios.post('http://localhost:5000/api/users/register',
-            userData, { withCredentials: true });
+            userData);
         if (response.statusText === "ok") {
             toast.success("User Registered Successfully")
         }

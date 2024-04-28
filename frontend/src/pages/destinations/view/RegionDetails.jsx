@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+// import Map from './Map';
 import { Link, useParams } from 'react-router-dom';
 import { MdCategory, MdLocationCity, MdOutlineLocationOn } from 'react-icons/md';
-
 const RegionDetails = () => {
   const [destinations, setDestinations] = useState([]);
   const { region } = useParams();
@@ -54,6 +54,8 @@ const RegionDetails = () => {
         </div>
         <div className="overflow-y-auto max-w-5xl mx-auto">
           {filteredDestinations.length > 0 ? (
+            
+            
             filteredDestinations.map((dest) => (
               <div key={dest._id} className="py-4 px-10 border rounded-lg bg-white my-4">
                 <h2 className="text-2xl font-bold mb-2">{dest.name} - {dest.category}</h2>
@@ -94,9 +96,11 @@ const RegionDetails = () => {
           )}
         </div>
       </div>
-      <div className='md:w-2/6 h-[600px] bg-white rounded-md flex items-center justify-center md:mt-32'>
-        <h1 className="text-green-500 text-center text-2xl">Map</h1>
-      </div>
+      
+    {/* <div className='md:w-2/6 h-[600px] bg-white rounded-md flex items-center justify-center md:mt-32'>
+        <Map destinations={destinations} initialCenter={{ lat: '12° 0', lng: '39° 0' }} zoomLevel={10} />
+      </div> */}
+      
     </div>
   );
 

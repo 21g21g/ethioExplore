@@ -69,4 +69,4 @@ const hotelManager = (req, res, next) => {
   }
 };
 
-module.exports = { protect, admin, tourGuide, user, hotelManager, };
+module.exports = { protect, admin, tourGuide, user, hotelManager};

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ReactQuill from 'react-quill';
 import axios from 'axios';
 import 'react-quill/dist/quill.snow.css';
@@ -6,8 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ButtonReuse from '../hotels/hotelcomponent/ButtonReuse';
 import { hotelSliceactions } from '../../redux/hotelRedux/hoteSlice';
 const Hotels = () => {
-    //hotels/gethotel:id
-    // const [view, setView] = useState(false)
+   
     const view = useSelector((state) => state.hotel.view)
     const dispatch=useDispatch()
      const [photos, setPhotos] = useState([])
@@ -54,7 +53,7 @@ const Hotels = () => {
       
       const response = await axios.post(
         "http://localhost:5000/api/hotels/createhotel",
-        formdata,{ withCredentials: true }
+        formdata,
       );
 
       const data = response.data;

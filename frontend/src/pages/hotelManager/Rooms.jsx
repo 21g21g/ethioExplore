@@ -8,9 +8,8 @@ import { useDispatch, useSelector } from 'react-redux'
 const Rooms = () => {
   const view = useSelector((state) => state.hotel.view)
   const dispatch = useDispatch()
-  const singleHotelData=useSelector((state)=>state.hotel.singleHotelData)
-    console.log(singleHotelData._id)
-
+  const id = JSON.parse(localStorage.getItem("hoid"))
+  // console.log(id)
     const [photos, setPhotos] = useState([])
     const [formData, setFormData] = useState({
         title: "",
@@ -69,11 +68,11 @@ const Rooms = () => {
         formdata.append("roomNumbers", JSON.stringify(formattedRoomNumbers));
 
 
-        console.log([...formdata.entries()])
+        // console.log([...formdata.entries()])
 
         try {
 
-            const response = await axios.post(`http://localhost:5000/api/rooms/${singleHotelData._id}/createroom`, formdata)
+            const response = await axios.post(`http://localhost:5000/api/rooms/${id}/createroom`, formdata)
           const data = response.data
           console.log(data)
            dispatch(hotelSliceactions.setView(false))

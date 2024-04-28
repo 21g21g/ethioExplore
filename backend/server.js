@@ -8,6 +8,7 @@ const hotelManagerRoute = require("./routes/hotelManagerRoute");
 const tourGuideRoute = require("./routes/tourGuideRoute");
 const hotelRoute = require("./routes/hotelRoute");
 const roomRoute = require("./routes/roomRoute");
+
 const cors = require("cors");
 const destinationRoutes = require("./routes/destinationRoute");
 
