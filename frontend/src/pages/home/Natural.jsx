@@ -30,13 +30,15 @@ const Natural = () => {
   return (
     <div className="w-full rounded-md mt-8 flex flex-col items-center">
       <h1 className="text-6xl font-bold py-4">Popular Natural Wonders in Ethiopia</h1>
-      <p className=' px-32 py-10 text-green-500 bg-gray-50 my-3 rounded-lg'>
-        Ethiopia boasts a diverse array of natural wonders that captivate the imagination and stir the soul. From the rugged peaks of the Simien Mountains, a UNESCO World Heritage Site teeming with unique wildlife and breathtaking vistas, to the otherworldly landscapes of the Danakil Depression, one of the hottest and lowest places on Earth adorned with colorful sulfur springs and active volcanoes, Ethiopia's natural wonders offer a glimpse into the Earth's most awe-inspiring creations. The majestic Blue Nile Falls, known as "Tis Issat" in Amharic, cascade dramatically over basalt cliffs, creating a mesmerizing spectacle that symbolizes the country's abundant natural beauty. With its rich biodiversity, dramatic landscapes, and geological marvels, Ethiopia's natural wonders are a testament to the country's remarkable diversity and allure</p>
+      <p className='px-4 lg:px-32 py-6 lg:py-10 text-lg lg:text-xl text-green-500 bg-gray-50 my-3 rounded-lg'>
+        Ethiopia boasts a diverse array of natural wonders that captivate the imagination and stir the soul. From the rugged peaks of the Simien Mountains, a UNESCO World Heritage Site teeming with unique wildlife and breathtaking vistas, to the otherworldly landscapes of the Danakil Depression, one of the hottest and lowest places on Earth adorned with colorful sulfur springs and active volcanoes, Ethiopia's natural wonders offer a glimpse into the Earth's most awe-inspiring creations. The majestic Blue Nile Falls, known as "Tis Issat" in Amharic, cascade dramatically over basalt cliffs, creating a mesmerizing spectacle that symbolizes the country's abundant natural beauty. With its rich biodiversity, dramatic landscapes, and geological marvels, Ethiopia's natural wonders are a testament to the country's remarkable diversity and allure
+      </p>
+
       <div className="flex flex-col gap-4 w-full" >
         {/* Additional cards with text overlay */}
-        <div className="flex w-full justify-between space-x-4 h-[300px]">
+        <div className="flex flex-col sm:flex-row w-full justify-between space-y-4 sm:space-y-0 sm:space-x-4 h-[300px]">
           <div className="flex-grow relative bg-white rounded-lg shadow-md overflow-hidden">
-            <img src="https://www.ameco.et/english/wp-content/uploads/2023/06/20230629_120057.jpg" alt="First Natural Wonder" className="w-full h-fit " />
+            <img src="https://www.ameco.et/english/wp-content/uploads/2023/06/20230629_120057.jpg" alt="First Natural Wonder" className="w-full h-fit" />
             <div className="absolute inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 text-white">
               <h2 className="text-2xl font-bold">Ye Minilik Meskot</h2>
             </div>
@@ -48,7 +50,7 @@ const Natural = () => {
             </div>
           </div>
           <div className="flex-grow relative bg-white rounded-lg shadow-md overflow-hidden">
-            <img src="https://www.ytravelblog.com/wp-content/uploads/2023/02/travel-advice-for-ethiopia.jpg" alt="Second Natural Wonder" className="w-full h-fit object-fill" />
+            <img src="https://www.ytravelblog.com/wp-content/uploads/2023/02/travel-advice-for-ethiopia.jpg" alt="Third Natural Wonder" className="w-full h-fit object-fill" />
             <div className="absolute inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 text-white">
               <h2 className="text-2xl font-bold">Semien Mauntain</h2>
             </div>
@@ -57,18 +59,15 @@ const Natural = () => {
 
         {/* Rendering natural wonders from the data */}
         {naturalWonders.map((wonder, index) => (
-          <div key={index} className=" flex space-x-2 rounded-lg shadow-md overflow-hidden">
-            <img src={wonder.image} alt={wonder.name} className="w-1/3 h-[300px] object-cover" />
-            <div className="p-4 justify-between flex-col flex  space-x-2 ">
-              <div>
-                <p>{wonder.description}</p>
-              </div>
+          <div key={index} className="flex flex-col sm:flex-row space-x-2 rounded-lg shadow-md overflow-hidden">
+            <img src={wonder.image} alt={wonder.name} className="w-full sm:w-1/3 h-[300px] object-cover" />
+            <div className="p-4 flex flex-col  space-y-2 sm:space-y-0 sm:ml-4">
               <h2 className="text-xl font-bold mb-2">{wonder.name}</h2>
-              
-          
+              <p>{wonder.description}</p>
             </div>
           </div>
         ))}
+
       </div>
     </div>
   );

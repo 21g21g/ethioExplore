@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
+import { FaAngleDown, FaAngleUp } from 'react-icons/fa'; // Importing icons
 
 const AllDestinations = () => {
   const [destinations, setDestinations] = useState([]);
@@ -27,7 +28,7 @@ const AllDestinations = () => {
   };
 
   const handleCardClick = (id) => {
-    navigate(`/destination/${id}`); 
+    navigate(`/destination/${id}`);
   };
 
   return (
@@ -37,6 +38,7 @@ const AllDestinations = () => {
         <p className='text-slate-300'> discover a range of vacation places in Ethiopia which have very intere
           sting attraction places most of the worlds admire and stay along over there</p>
       </div>
+      
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         {destinations.slice(0, visibleDestinations).map((destination) => (
           <div
@@ -53,13 +55,22 @@ const AllDestinations = () => {
           </div>
         ))}
       </div>
-      <button
-        onClick={toggleDestinationsView}
-        className="mt-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition duration-200"
-      >
-        {visibleDestinations > initialVisibleDestinations ? 'Show Less' : 'Show More'}
-      </button>
-    </div>
+
+        <h1
+          onClick={toggleDestinationsView}
+          className="mt-4 px-4 py-2 text-gray-500 text-end rounded transition duration-200 text-2xl cursor-pointer underline"
+        >
+          {visibleDestinations > initialVisibleDestinations ? (
+            <>
+              Show Less <FaAngleUp size={30} color='red' className='items-end' /> {/* Arrow pointing up when showing less */}
+            </>
+          ) : (
+            <>
+              See All <FaAngleDown size={30} color='green'/> {/* Arrow pointing down when showing all */}
+            </>
+          )}
+        </h1>
+      </div>
   );
 };
 
