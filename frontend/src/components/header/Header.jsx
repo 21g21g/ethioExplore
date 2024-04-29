@@ -24,9 +24,9 @@ const Header = () => {
 
   return (
     <>
-      <header className='top-header  bg-custom-green2 z-50 fixed top-0 right-0 left-0 h-16 flex items-center pl-10 justify-between'>
+      <header className='top-header  bg-custom-green1 z-50 fixed top-0 right-0 left-0 h-16 flex items-center pl-10 justify-between'>
         <div className='flex gap-2 items-center '>
-          <SiEthiopianairlines size={30} color='yellow' />
+          <SiEthiopianairlines size={30} color='white' />
           <h1 className='text-white text-lg font-bold'>EthioExplore</h1>
         </div>
 
@@ -52,7 +52,7 @@ const Header = () => {
               <Link
                 key={index}
                 to={item.path}
-                className={`nav-text ${selected === index ? '  rounded-md text-yellow-200  font-serif ' : ''}`}
+                className={`nav-text ${selected === index ? '  rounded-md text-custom-yellow1  font-serif ' : ''}`}
                 onClick={() => handleMenuItemClick(index)}
               >
                 {item.text}

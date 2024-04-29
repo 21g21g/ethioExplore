@@ -8,7 +8,6 @@ const Home = () => {
 
   return (
     <div className=' '  >
-
       <div className="lg:py-10 lg:px-10 relative h-[500px] flex ">
         <div className="flex justify-center items-center">
           {/* Text Content */}
@@ -35,7 +34,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="">
+      <div className=" ">
         <div className='items-center justify-center text-center flex-col lg:px-32 lg:my-10'>
           <h1 className="text-6xl mb-4 text-custom-green1 font-serif">Most Visited Places</h1>
           <p className='text-slate-300'> discover a range of vacation places in Ethiopia which have very intere
@@ -46,26 +45,26 @@ const Home = () => {
             <ul className="flex gap-4 ">
               {/* the active link Background white */}
               <li
-                className={`text-custom-green5 font-serif cursor-pointer px-4 py-2 rounded-full ${selectedTab === 'Culture' ? 'bg-white' : ''} transition duration-1000`}
+                className={`text-custom-green5 font-serif cursor-pointer px-4 py-2 rounded-full ${selectedTab === 'Culture' ? 'bg-white' : ''} transition duration-500`}
                 onClick={() => setSelectedTab('Culture')}
               >
                 Culture
               </li>
               <li
-                className={`text-custom-green5 font-serif cursor-pointer px-4 py-2 rounded-full ${selectedTab === 'Natural' ? 'bg-white' : ''} transition duration-1000`}
+                className={`text-custom-green5 font-serif cursor-pointer px-4 py-2 rounded-full ${selectedTab === 'Natural' ? 'bg-white' : ''} transition duration-500`}
                 onClick={() => setSelectedTab('Natural')}
               >
                 Natural
               </li>
               <li
-                className={`text-custom-green5 font-serif cursor-pointer px-4 py-2 rounded-full ${selectedTab === 'Religious' ? 'bg-white ' : ''} transition duration-1000`}
+                className={`text-custom-green5 font-serif cursor-pointer px-4 py-2 rounded-full ${selectedTab === 'Religious' ? 'bg-white ' : ''} transition duration-500`}
                 onClick={() => setSelectedTab('Religious')}
               >
                 Religious
               </li>
             </ul>
           </div>
-          <div className="mt-4">
+          <div className="mt-4 w-full px-10 rounded-md">
             {/* Conditionally render the outlet content based on the selected tab */}
             {selectedTab === 'Culture' && (
               <Culture />
@@ -81,76 +80,6 @@ const Home = () => {
 
       </div>
 
-      <div className='mt-10 px-12'>
-        <div>
-
-          <h1 className='lg:text-3xl text-custom-green2 font-serif px-6'>Most popular places in ethiopia</h1>
-        </div>
-        <div className='flex lg:my-4 '>
-          <div className='flex-col px-3   '>
-            <img
-              src="https://cdn.gamma.app/xr3f49tj2j7z1i2/generated-images/fnypHNfEc7kDpqBw.jpg"
-              alt="Background"
-            />
-            Lalibela
-          </div>
-          <div className='flex-col px-3  '>
-            <img
-              src="https://cdn.gamma.app/xr3f49tj2j7z1i2/generated-images/QCNzlB75JNcvvtOW.jpg"
-              alt="Background"
-            />
-            Gondar
-          </div>
-
-        </div>
-        <div className='px-6'>
-
-          <h1 className=' lg:text-3xl text-custom-green2 font-serif'>Explore our beautiful country</h1>
-        </div>
-        <div className='items-center justify-center w-full  gap-4 flex my-4 bg-green-50'>
-          <div className='flex-col px-3 py-4 shadow-md  '>
-            <img
-              src="https://cdn.gamma.app/xr3f49tj2j7z1i2/generated-images/avwhLh9CqKHxtg1v.jpg"
-              alt="Background"
-
-            />
-            <h1 className='lg:text-3xl text-custom-green2 py-4'>
-
-              Diverse Landscapes
-            </h1>
-
-            From the Simien Mountains to the Danakil Depression, Ethiopia boasts a wide range of landscapes, each with its own unique beauty and natural wonders.
-          </div>
-          <div className='flex-col px-3 py-4 shadow-md cursor-pointer  '>
-            <img
-              src="https://cdn.gamma.app/xr3f49tj2j7z1i2/generated-images/MoCJEd6CRA76-hYy.jpg"
-              alt="Background"
-
-            />
-
-            <h1 className='lg:text-3xl text-custom-green2 py-4'>
-
-              Rich Heritage
-            </h1>
-            Explore the awe-inspiring historical sites and discover the ancient traditions that have been preserved for centuries.
-          </div>
-          <div className='flex-col px-3 py-4 shadow-md  '>
-            <img
-              src="https://cdn.gamma.app/xr3f49tj2j7z1i2/generated-images/QCNzlB75JNcvvtOW.jpg"
-              alt="Background"
-
-            />
-
-            <h1 className='lg:text-3xl text-custom-green2 py-4'>
-
-              Natural Wonders
-            </h1>
-            Witness the spectacular waterfalls and natural wonders that make Ethiopia a truly mesmerizing destination.
-          </div>
-
-        </div>
-
-      </div>
     </div>
   );
 };
