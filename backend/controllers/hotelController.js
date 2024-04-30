@@ -36,16 +36,20 @@ const getHotels = async (req, res, next) => {
   try {
     let query = {};
 
-    if (req.query.min) {
-      query.cheapestPrice = { $gt: req.query.min };
-    }
-
-    if (req.query.max) {
-      query.cheapestPrice = {
-        ...query.cheapestPrice,
-        $lt: req.query.max,
-      };
-    }
+    
+      if (req.query.min && req.query.max) {
+        // Filter hotels within the price range
+        query.cheapestPrice = {
+          $gte: parseInt(req.query.min), // Greater than or equal to min price
+          $lte: parseInt(req.query.max), // Less than or equal to max price
+        };
+      } else if (req.query.min) {
+        // Filter hotels with minimum price greater than or equal to min
+        query.cheapestPrice = { $gte: parseInt(req.query.min) };
+      } else if (req.query.max) {
+        // Filter hotels with maximum price less than or equal to max
+        query.cheapestPrice = { $lte: parseInt(req.query.max) };
+      }
 
     if (req.query.city) {
       query.city = req.query.city.toLowerCase();

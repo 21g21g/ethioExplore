@@ -11,6 +11,7 @@ import { format } from "date-fns";
 import { useLocation } from 'react-router-dom'
 import { hotelSliceactions } from '../../../redux/hotelRedux/hoteSlice'
 import axios from 'axios'
+import { toast } from 'react-toastify'
 
 const ListHotel = () => {
  
@@ -33,16 +34,16 @@ const ListHotel = () => {
   };
   const handleMinChange = (event) => {
     const value = parseInt(event.target.value);
-    if (!isNaN(value) && value >= 1) {
+    
       dispatch(hotelSliceactions.setMin(value));
-    }
+    
   };
 
   const handleMaxChange = (event) => {
     const value = parseInt(event.target.value);
-    if (!isNaN(value) && value >= 1) {
+  
       dispatch(hotelSliceactions.setMax(value));
-    }
+    
   };
 
     useEffect(() => {
@@ -63,32 +64,55 @@ const ListHotel = () => {
             dispatch(hotelSliceactions.setsearchCityFailure(error.message))
         }
     };
+      if (city !== "") {
+        fechedData();
+      }
+    
+     // Call the function here
 
-    fechedData(); // Call the function here
-
-}, [city, dispatch]);
+    }, [city, dispatch]);
+  
 
   
     
   //   }
   useEffect(() => {
-    const fetchh = async () => {
-      dispatch(hotelSliceactions.setsearchCityStart())
-      try {
+     const fetchData = async () => {
+    dispatch(hotelSliceactions.setsearchCityStart());
+    try {
+      let url = `http://localhost:5000/api/hotels/gethotels?city=${city}`;
 
-        const response = await axios.get(`http://localhost:5000/api/hotels/gethotels?city=${city}&min=${min}&max=${max}`)
-        if (response.status === 200) {
-          dispatch(hotelSliceactions.setsearchCitySuccess(response.data))
-}
-      } catch (error) {
-        dispatch(hotelSliceactions.setsearchCityFailure(error.message))
+      // Append min and/or max price parameters if available
+      if (min) {
+        url += `&min=${min}`;
       }
-      
+      if (max) {
+        url += `&max=${max}`;
+      }
+
+      const response = await axios.get(url);
+
+      if (response.data === '') {
+        dispatch(hotelSliceactions.setsearchCityFailure("There are no hotels for this city."));
+      } else {
+        dispatch(hotelSliceactions.setsearchCitySuccess(response.data));
+      }
+    } catch (error) {
+      dispatch(hotelSliceactions.setsearchCityFailure(error.message));
+      toast.error("Failed to fetch hotels. Please try again.");
     }
+  };
+
     
+    if (city !== "") {
+      fetchData();
+    }
+    else {
+      toast.error("first select the city")
+}
     
-    fetchh();
-  }, [city, min, max,dispatch])
+   
+  }, [ city,min, max,dispatch])
   
    const handleDateChange = (item) => {
         dispatch(hotelSliceactions.updateDates({selection:item.selection}))
@@ -96,9 +120,9 @@ const ListHotel = () => {
   }
     const handleOptionChange = (event, optionName) => {
     const value = parseInt(event.target.value);
-    if (!isNaN(value) && value >= 1) {
+    
       dispatch(hotelSliceactions.setOptions({ ...options, [optionName]: value }));
-    }
+    
   };
  
   
@@ -143,23 +167,23 @@ const ListHotel = () => {
             </div>
             <div className='flex flex-col'>
               <p>Min price per night</p>
-              <TextInput type='number' value={min} onChange={handleMinChange} disabled={min<0}/>
+              <TextInput type='number' value={min} onChange={handleMinChange} min={1}/>
             </div>
             <div className='flex flex-col'>
               <p>Max price per night</p>
-              <TextInput type='number' value={max}    onChange={handleMaxChange} disabled={max<0}/>
+              <TextInput type='number' value={max}    onChange={handleMaxChange} min={1}/>
             </div>
             <div className='flex flex-col'>
               <p>Adult</p>
-        <TextInput type="number" value={options.adult} placeholder={options.adult} onChange={(e) => handleOptionChange(e, 'adult')} disabled={options.adult<0} />
+        <TextInput type="number" value={options.adult} placeholder={options.adult} onChange={(e) => handleOptionChange(e, 'adult')} min={0} />
             </div>
             <div className='flex flex-col'>
               <p>Children</p>
-              <TextInput type='number' placeholder={options.children} value={options.children} onChange={(e)=>handleOptionChange(e,'children')} disabled={options.children<0}/>
+              <TextInput type='number' placeholder={options.children} value={options.children} onChange={(e)=>handleOptionChange(e,'children')} min={0}/>
             </div>
             <div className='flex flex-col'>
               <p>Room</p>
-              <TextInput type='number' value={options.room} placeholder={options.room} onChange={(e)=>handleOptionChange(e,'room')} disabled={options.room<1}/>
+              <TextInput type='number' value={options.room} placeholder={options.room} onChange={(e)=>handleOptionChange(e,'room')} min={1}/>
             </div>
            
           </form>
