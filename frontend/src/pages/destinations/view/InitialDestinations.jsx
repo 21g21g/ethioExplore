@@ -23,7 +23,7 @@ const InitialDestinations = ({ destinations, settings}) => {
             <p className="card-text" style={{height: "40px"}}>{destination.description}</p>
             <div className="flex justify-center">
               <Link to={`/destinations/region/${encodeURIComponent(destination.location.region)}`} className="see-details-btn">
-                See Details
+                View
               </Link>
             </div>
           </div>

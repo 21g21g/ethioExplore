@@ -11,11 +11,11 @@ export default {
       colors: {
         custom: {
           'green2': '#00a987',
-          'green4': '#0e424c',
+          'green4': '#024744',
           'green3': '#1b6941',
-          'green5': '#03395f',
+          'green5': '#40aba4',
           'green1': '#338269',
-          'yellow1': '#fbff08',
+          'yellow1': '#fde6c4',
           'yellow2': '#c4c108',
         },
       },

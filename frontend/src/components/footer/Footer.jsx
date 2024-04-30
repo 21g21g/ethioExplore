@@ -28,8 +28,8 @@ const Footer = () => {
           </ul>
         </div>
         <hr className="my-6 border-gray-200 sm:mx-auto lg:my-8" />
-        <span className="block text-sm text-gray-200 sm:text-center">© 2023
-          <Link to="http://localhost:5173/" className="hover:underline">EthioTourism</Link>. All Rights Reserved.</span>
+        <span className="block text-sm text-gray-200 sm:text-center">© 2024 
+          <Link to="http://localhost:5173/" className="hover:underline"> EthioTourism</Link>. All Rights Reserved.</span>
       </div>
     </footer>
   );
