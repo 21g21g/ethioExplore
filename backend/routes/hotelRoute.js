@@ -12,6 +12,7 @@ const {
 } = require("../controllers/hotelController");
 
 const router = express.Router();
+const {protect}=require("../middlewares/authMiddleware")
 
 
 

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
 import { hotelSliceactions } from '../../../redux/hotelRedux/hoteSlice'
 import axios from 'axios'
+import DatePickerss from '../hotelcomponent/DatePickerss'
 const CityDetail = () => {
     const dispatch = useDispatch()
     const detailHotel = useSelector((state) => state.hotel.detailHotel)
@@ -42,7 +43,8 @@ const CityDetail = () => {
 
   return (
     <div>
-          <Header />
+      <Header />
+      <DatePickerss/>
           <div className='mt-3 mb-4 text-custom-green1 text-2xl font-serif text-center' >
              <h1 >Hotels Found In {city} City</h1>
      
@@ -56,13 +58,23 @@ const CityDetail = () => {
 
               
                   </div >
-                  <div className='flex flex-col  '>
-                      <p className="text-xl">{detail.name}</p>
-              <h1 className="text-xl">{detail.type}</h1>
-                  <p className="text-xl">${detail.cheapestPrice}</p>
-                  <Link to={`/hotels/${detail._id}`}>
-         <button className="bg-green-500 text-slate-200 hover:bg-green-600 hover:text-white py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">availability </button>
-           </Link></div>
+             <div className="flex flex-row justify-between h-32 items-center border p-4 rounded-lg shadow-md bg-white ml-1">
+  <div>
+    <p className="text-lg font-semibold">{detail.name}</p>
+    <p className="text-sm text-gray-600">{detail.type}</p>
+  </div>
+  <div className="flex items-center flex-col">
+    <p className="text-lg font-semibold">${detail.cheapestPrice}</p>
+    <Link to={`/hotels/${detail._id}`} className="inline-block">
+  <button
+    className="ml-4 bg-green-500 text-white rounded-lg shadow-md hover:bg-green-600 transition duration-300 ease-in-out h-16"
+   
+  >
+    Check Availability
+  </button>
+</Link>
+  </div>
+</div>
              
                   
               

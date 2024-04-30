@@ -4,6 +4,7 @@ import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { format } from "date-fns";
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import axios from 'axios';
 import { hotelSliceactions } from '../../../redux/hotelRedux/hoteSlice';
 import { useNavigate } from 'react-router-dom';
@@ -42,8 +43,14 @@ const DatePickerss = () => {
       
     const handleSubmit = async (event) => {
       event.preventDefault();
-      
+      if (!city.trim()) {
+        toast.error("Please Enter the city")
+      }
+      else {
         navigate('/hotellist');
+      }
+      
+        
       } 
     
 

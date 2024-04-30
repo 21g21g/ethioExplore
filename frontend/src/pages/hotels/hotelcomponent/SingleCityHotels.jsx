@@ -37,9 +37,9 @@ const SingleCityHotels = ({ data }) => {
     }, [dispatch,data._id])
     
   return (
-            <div className='mt-4 flex sm:flex-row sm:gap-1 md:flex-row gap-2 border border-gray-400'>
+            <div className='mt-4 flex sm:flex-row  sm:gap-1 md:flex-row gap-2 border border-gray-400'>
           <div>
-         <img  src={photo} alt="photo" className='w-48 h-40 object-cover' />
+         <img  src={photo} alt="photo" className='w-48 h-56 object-cover' />
 
 
             </div>
@@ -48,8 +48,9 @@ const SingleCityHotels = ({ data }) => {
             <p className='font-semibold'>{data.distance} from center</p>
             <p className='font-semibold'>this room is the confort room</p></div>
       
-               <div className='flex flex-col gap-1 md:gap-3 md:p-3'>
-              <p className='font-semibold'>{ data.description.replace(/<[^>]*>/g, '')}</p>
+      <div className='flex flex-col gap-1 md:gap-3 md:p-3 '>
+        {/* <div className='flex-wrap w-96'><p className='font-semibold'>{ data.description.replace(/<[^>]*>/g, '')}</p></div> */}
+              
               <p className='font-semibold'>{data.rating} <span>good</span></p>
               <p className='font-semibold'>${data.cheapestPrice}</p>
               <Link to={`/hotels/${data._id}`}>

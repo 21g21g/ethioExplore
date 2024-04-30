@@ -6,6 +6,7 @@ import { hotelSliceactions } from "../../../redux/hotelRedux/hoteSlice";
 import addis from "../../../assets/addis.jpg"
 import bure from "../../../assets/bure.jpg"
 import bahrdar from "../../../assets/bahrdar.webp"
+import adama from "../../../assets/adama.jpg"
 
 import bdr from "../../../assets/bdr.jpg"
 import { FaStar } from "react-icons/fa";
@@ -43,14 +44,17 @@ const HotelbyFeatured = () => {
     "bure": bure,
     "addis": addis,
     "Bahrdar":bahrdar,
-    "bdr":bdr
+    "bdr": bdr,
+    "adama": adama,
+
     
   }
   return (
     <div className="flex flex-col m-3 md:flex-col "> 
     <h1>Featured</h1>
       <div className="carousel-container my-8 w-full m-auto ">
-         <Slider {...sliderSettings} >
+        <Slider {...sliderSettings} >
+          
         {featuredHotel.map((feature, index) => (
          <div className="cards mx-3  md:w-full " key={index}>  
             <div className="flex mx-4">

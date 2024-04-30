@@ -124,6 +124,7 @@ const hotelSlice = createSlice({
     },
     setSingleHotelData(state, action) {
       state.singleHotelData = action.payload;
+      localStorage.setItem("hoid",JSON.stringify(action.payload._id))
       state.loading = false;
       state.error = null;
      

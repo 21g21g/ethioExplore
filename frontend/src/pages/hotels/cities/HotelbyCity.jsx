@@ -11,6 +11,14 @@ import bahrdar from "../../../assets/bahrdar.webp"
 import addis from "../../../assets/addis.jpg"
 import bure from "../../../assets/bure.jpg"
 import bdr from "../../../assets/bdr.jpg"
+import hawasa from "../../../assets/hawasa.jpg"
+import adama from "../../../assets/adama.jpg"
+import injbara from "../../../assets/injbara.jpg"
+import markos from "../../../assets/markos.jpg"
+import debrebirhan from "../../../assets/debrebirhan.jpg"
+import jimma from "../../../assets/jimma.jpg"
+import arbaminch from "../../../assets/arbaminch.jpg"
+import mekele from "../../../assets/mekele.jpg"
 
 import { sliderSettings } from "../hotelcomponent/CarousolCards";
 const HotelbyCity = () => {
@@ -51,7 +59,17 @@ const navigate=useNavigate()
     "bahrdar": bahrdar,
     "addis": addis,
     "bure": bure,
-    "bdr":bdr
+    "bdr": bdr,
+    "adama": adama,
+    "hawasa": hawasa,
+    "mekele": mekele,
+    "injbara": injbara,
+    "markos": markos,
+    "debrebirhan": debrebirhan,
+    "jimma": jimma,
+    "arbaminch":arbaminch,
+    
+    
   }
 
   return (
@@ -65,7 +83,8 @@ const navigate=useNavigate()
           <p>Error: {error}</p>
         ) : (
           <div className=" my-8 w-full  ">
-            <Slider {...sliderSettings}  >
+                <Slider {...sliderSettings}  >
+                  
               {hotelData.map((hotels, index) => (
                 <div key={index} className="cards md:w-full sm:gap-0   " >
                   <div className="flex mr-4"><img src={cityImage[hotels._id]} className="card-images cursor-pointer" onClick={() => handleClick(hotels.hotels)} />

@@ -9,6 +9,7 @@ const tourGuideRoute = require("./routes/tourGuideRoute");
 const hotelRoute = require("./routes/hotelRoute");
 const roomRoute = require("./routes/roomRoute");
 const paymentRoute = require("./routes/paymentRoute");
+
 const cors = require("cors");
 const destinationRoutes = require("./routes/destinationRoute");
 const app = express();

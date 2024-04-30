@@ -1,12 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ReactQuill from 'react-quill';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import ButtonReuse from '../hotels/hotelcomponent/ButtonReuse';
 import { hotelSliceactions } from '../../redux/hotelRedux/hoteSlice';
 const Hotels = () => {
-    //hotels/gethotel:id
-    // const [view, setView] = useState(false)
+   
     const view = useSelector((state) => state.hotel.view)
     const dispatch=useDispatch()
      const [photos, setPhotos] = useState([])
@@ -53,7 +52,7 @@ const Hotels = () => {
 
       const response = await axios.post(
         "http://localhost:5000/api/hotels/createhotel",
-        formdata,{ withCredentials: true }
+        formdata,
       );
 
       const data = response.data;
@@ -79,7 +78,7 @@ const Hotels = () => {
                             <input
                   className="w-full mt-1"
                   type='text' name='name'
-                  placeholder='enter your name'
+                  placeholder='enter hotel name'
                   value={formData.name} onChange={(e)=>setFormData({...formData,name:e.target.value})} />
               <input className="w-full  mt-1"  type='text' name='title' placeholder='enter the title' value={formData.title} onChange={(e)=>setFormData({...formData,title:e.target.value})} />
               <input className="w-full  mt-1"  type='text' name='type' placeholder='enter the type' value={formData.type} onChange={(e)=>setFormData({...formData,type:e.target.value})} />    
