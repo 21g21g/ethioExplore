@@ -183,61 +183,63 @@ const SingleHotelAvailability = () => {
             </div>
 
             
-                    
-            <Modal show={modal} onClose={() => setModal(false)}>
-      <ModalHeader>
-        <h1 className='text-3xl'>Select the room you want to reserve:</h1>
-      </ModalHeader>
-      <ModalBody>
-        <div className='flex flex-col'>
+           
+Copy code
+<Modal show={modal} onClose={() => setModal(false)}>
+  <ModalHeader>
+    <h1 className='text-3xl'>Select the room you want to reserve:</h1>
+  </ModalHeader>
+  <ModalBody>
+    <div className='flex flex-col'>
 
-          {roomData.map((room) => (
-            room && (
-              <div key={room._id} className='flex flex-col lg:flex-row items-start gap-6 p-4 border border-gray-200 rounded-md'>
-                
-                {/* Room Image and Description */}
-                <div className='lg:w-1/2'>
-                  <img className='w-full mb-4 rounded-md' src={`http://localhost:5000/${room.photos[0]}`} alt='Room Photo' />
-                  <p className='text-lg'>{room.description.replace(/<[^>]*>/g, '')}</p>
-                </div>
+      {roomData.map((room) => (
+        room && (
+          <div key={room._id} className='flex flex-col lg:flex-row items-start gap-6 p-4 border border-gray-200 rounded-md'>
+            
+            {/* Room Image and Description */}
+            <div className='lg:w-1/2'>
+              <img className='w-full mb-4 rounded-md' src={`http://localhost:5000/${room.photos[0]}`} alt='Room Photo' />
+              <p className='text-lg'>{room.description.replace(/<[^>]*>/g, '')}</p>
+            </div>
 
-                {/* Room Details and Selection */}
-                <div className='lg:w-1/2'>
-                  <h1 className='text-xl font-semibold'>{room.title}</h1>
-                  <p className='text-lg font-semibold text-green-500'>Max Capacity: {room.maxPeople}</p>
+            {/* Room Details and Selection */}
+            <div className='lg:w-1/2'>
+              <h1 className='text-xl font-semibold'>{room.title}</h1>
+              <p className='text-lg font-semibold text-green-500'>Max Capacity: {room.maxPeople}</p>
 
-                  {/* Room Number Selection */}
-                  <div className='mt-4'>
-                    {room.roomNumbers.map((roomNumber) => (
-                      <div key={roomNumber._id} className='flex items-center mb-2'>
-                        <Label className='font-bold'>{roomNumber.number}:</Label>
-                        <TextInput
-                          type='checkbox'
-                          value={roomNumber._id}
-                          onChange={handleCheck}
-                          disabled={!isAvailable(roomNumber)}
-                          className='ml-2'
-                        />
-                      </div>
-                    ))}
+              {/* Room Number Selection */}
+              <div className='mt-4'>
+                {room.roomNumbers.map((roomNumber) => (
+                  <div key={roomNumber._id} className='flex items-center mb-2'>
+                    <Label className='font-bold'>{roomNumber.number}:</Label>
+                    <TextInput
+                      type='checkbox'
+                      value={roomNumber._id}
+                      onChange={handleCheck}
+                      disabled={!isAvailable(roomNumber)}
+                      className='ml-2'
+                    />
                   </div>
-
-                  {/* Reserve Button */}
-                  <button
-                    className='bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-md mt-4'
-                    onClick={handleClick}
-                  >
-                    Reserve Now
-                  </button>
-                </div>
-
+                ))}
               </div>
-            )
-          ))}
 
-        </div>
-      </ModalBody>
-    </Modal>
+            </div>
+
+            {/* Reserve Button (Moved to the bottom of the room section) */}
+            
+
+          </div>
+        )
+      ))}
+       <button
+              className='bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-md mt-4 self-end'
+              onClick={() => handleClick(room._id)} // Assuming handleClick needs room ID
+            >
+              Reserve Now
+            </button>
+    </div>
+  </ModalBody>
+</Modal>
                 
                 <Footer/>
 

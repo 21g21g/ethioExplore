@@ -67,7 +67,7 @@ const CityDetail = () => {
     <p className="text-lg font-semibold">${detail.cheapestPrice}</p>
     <Link to={`/hotels/${detail._id}`} className="inline-block">
   <button
-    className="ml-4 bg-green-500 text-white rounded-lg shadow-md hover:bg-green-600 transition duration-300 ease-in-out h-16"
+    className="ml-4 bg-green-500 text-white rounded-lg shadow-md hover:bg-green-600 transition duration-300 ease-in-out h-16 p-1"
    
   >
     Check Availability
