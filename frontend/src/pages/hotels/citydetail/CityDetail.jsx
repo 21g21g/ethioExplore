@@ -56,13 +56,23 @@ const CityDetail = () => {
 
               
                   </div >
-                  <div className='flex flex-col  '>
-                      <p className="text-xl">{detail.name}</p>
-              <h1 className="text-xl">{detail.type}</h1>
-                  <p className="text-xl">${detail.cheapestPrice}</p>
-                  <Link to={`/hotels/${detail._id}`}>
-         <button className="bg-green-500 text-slate-200 hover:bg-green-600 hover:text-white py-2 px-4 rounded-lg shadow-md transition duration-300 ease-in-out">availability </button>
-           </Link></div>
+             <div className="flex flex-row justify-between h-32 items-center border p-4 rounded-lg shadow-md bg-white ml-1">
+  <div>
+    <p className="text-lg font-semibold">{detail.name}</p>
+    <p className="text-sm text-gray-600">{detail.type}</p>
+  </div>
+  <div className="flex items-center flex-col">
+    <p className="text-lg font-semibold">${detail.cheapestPrice}</p>
+    <Link to={`/hotels/${detail._id}`} className="inline-block">
+  <button
+    className="ml-4 bg-green-500 text-white rounded-lg shadow-md hover:bg-green-600 transition duration-300 ease-in-out h-16"
+   
+  >
+    Check Availability
+  </button>
+</Link>
+  </div>
+</div>
              
                   
               

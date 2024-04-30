@@ -31,8 +31,12 @@ const AllDestinations = () => {
   };
 
   return (
-    <div className="bg-gray-50 h-auto mt-12 p-4">
-      <h1 className="text-3xl mb-4 text-custom-green1 font-serif">All Available Destinations</h1>
+    <div className=" h-auto mt-12 p-4">
+      <div className='items-center justify-center text-center flex-col lg:mx-20 lg:my-10'>
+        <h1 className="text-6xl mb-4 text-custom-green1 font-serif">Explore Amazing Place</h1>
+        <p className='text-slate-300'> discover a range of vacation places in Ethiopia which have very intere
+          sting attraction places most of the worlds admire and stay along over there</p>
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         {destinations.slice(0, visibleDestinations).map((destination) => (
           <div

@@ -85,7 +85,7 @@ const Destinations = () => {
     return (
       <div
         className={className}
-        style={{ ...style, display: "block", background: "grey", borderRadius: "50%" }}
+        style={{ ...style,  display: "block", background: "grey", fontSize:"40px", borderRadius: "50%" }}
         onClick={onClick}
       />
     );

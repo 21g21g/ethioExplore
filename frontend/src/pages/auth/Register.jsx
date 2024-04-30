@@ -36,6 +36,7 @@ const Register = () => {
     setFormData({ ...formData, [name]: value });
   };
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!name || !email || !password) {
@@ -59,7 +60,6 @@ const Register = () => {
     setIsLoading(true)
     try {
       const data = await registerService(userData)
-      console.log(data);
       dispatch(setLogin(true));
       if (data && data.name) {
         dispatch(setName(data.name));
@@ -76,9 +76,9 @@ const Register = () => {
   };
 
   return (
-    <div className='min-h-screen bg-green-100 py-6 px-6'>
+    <div className='min-h-screen bg-green-50 py-6 px-6'>
       <div className='min-w-screen mx-auto'>
-        <div className='flex flex-col md:flex-row h-full w-full  border-white border-2   bg-green-50  rounded-2xl shadow-lg shadow-green-500'>
+        <div className='flex flex-col md:flex-row h-full w-full  border-white border-2   bg-green-50  rounded-2xl shadow-md shadow-green-200'>
           <div className='md:w-1/2 bg-center bg-cover rounded-l-2xl bg-no-repeat px-3 pt-5  ' style={{ backgroundImage: `url(${backgroundImage})` }}>
             <h1 className='text-center text-3xl text-white'>Welcome to Ethio Explore System</h1>
           </div>

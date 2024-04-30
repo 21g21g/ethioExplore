@@ -31,6 +31,20 @@ const ListHotel = () => {
     const value = event.target.value;
     dispatch(hotelSliceactions.setCity(value));
   };
+  const handleMinChange = (event) => {
+    const value = parseInt(event.target.value);
+    if (!isNaN(value) && value >= 1) {
+      dispatch(hotelSliceactions.setMin(value));
+    }
+  };
+
+  const handleMaxChange = (event) => {
+    const value = parseInt(event.target.value);
+    if (!isNaN(value) && value >= 1) {
+      dispatch(hotelSliceactions.setMax(value));
+    }
+  };
+
     useEffect(() => {
       const fechedData = async () => {
       dispatch(hotelSliceactions.setsearchCityStart())
@@ -80,18 +94,20 @@ const ListHotel = () => {
         dispatch(hotelSliceactions.updateDates({selection:item.selection}))
         
   }
-   const handleOptionChange = (event, optionName) => {
-    const value = event.target.value;
-    dispatch(hotelSliceactions.setOptions({ ...options, [optionName]: parseInt(value) }));
+    const handleOptionChange = (event, optionName) => {
+    const value = parseInt(event.target.value);
+    if (!isNaN(value) && value >= 1) {
+      dispatch(hotelSliceactions.setOptions({ ...options, [optionName]: value }));
+    }
   };
  
   
   return (
     <>
     <Header/>
-      <div className='flex flex-col md:flex-row gap-3 md:p-4 sm:p-2 sm:mr-3 justify-between'>
+      <div className='flex flex-col md:flex-row gap-3 md:p-4 sm:p-2 sm:mr-3 '>
         
-        <div className='p-4  md:w-2/4 '>
+        <div className='p-4  md:w-96 '>
           <form className='bg-green-500 mt-4 p-2 '>
             <h1>Search</h1>
             <div className='flex flex-col'>
@@ -100,10 +116,10 @@ const ListHotel = () => {
                 onChange={handleCitychange}
  />
             </div>
-            <div className='flex flex-col'>
+            {/* <div className='flex flex-col'>
               <p>Check-in-date</p>
               <TextInput type='text' placeholder={`${new Date(dates[0].startDate).toLocaleDateString()} to ${new Date(dates[0].endDate).toLocaleDateString()}`} />
-            </div>
+            </div> */}
              <div className='flex flex-col'>
               <p>Check-out-date</p>
               <div className="headerSearchItem mb-4  relative">
@@ -127,23 +143,23 @@ const ListHotel = () => {
             </div>
             <div className='flex flex-col'>
               <p>Min price per night</p>
-              <TextInput type='number' value={min} onChange={(event) => { dispatch(hotelSliceactions.setMin(event.target.value)) }} />
+              <TextInput type='number' value={min} onChange={handleMinChange} disabled={min<0}/>
             </div>
             <div className='flex flex-col'>
               <p>Max price per night</p>
-              <TextInput type='number' value={max} onChange={(event) => { dispatch(hotelSliceactions.setMax(event.target.value)) }} />
+              <TextInput type='number' value={max}    onChange={handleMaxChange} disabled={max<0}/>
             </div>
             <div className='flex flex-col'>
               <p>Adult</p>
-        <TextInput type="number" value={options.adult} placeholder={options.adult} onChange={(e) => handleOptionChange(e, 'adult')} />
+        <TextInput type="number" value={options.adult} placeholder={options.adult} onChange={(e) => handleOptionChange(e, 'adult')} disabled={options.adult<0} />
             </div>
             <div className='flex flex-col'>
               <p>Children</p>
-              <TextInput type='number' placeholder={options.children} value={options.children} onChange={(e)=>handleOptionChange(e,'children')}/>
+              <TextInput type='number' placeholder={options.children} value={options.children} onChange={(e)=>handleOptionChange(e,'children')} disabled={options.children<0}/>
             </div>
             <div className='flex flex-col'>
               <p>Room</p>
-              <TextInput type='number' value={options.room} placeholder={options.room} onChange={(e)=>handleOptionChange(e,'room')}/>
+              <TextInput type='number' value={options.room} placeholder={options.room} onChange={(e)=>handleOptionChange(e,'room')} disabled={options.room<1}/>
             </div>
            
           </form>

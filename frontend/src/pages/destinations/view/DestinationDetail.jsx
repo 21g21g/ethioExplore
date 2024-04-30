@@ -32,7 +32,7 @@ const DestinationDetail = () => {
       {destination && (
         <div>
           <h1 className="text-3xl mb-2">{destination.name}</h1>
-          <img src={destination.images.main} alt={destination.name} className="mb-4" />
+          <img src={destination.images.main} alt={destination.name} className="mb-4 destination-image" />
           <div className="mb-2"><strong>Location:</strong> {destination.location.region}</div>
           <div className="mb-2"><strong>Category:</strong> {destination.category}</div>
           <div className="mb-2"><strong>Rating:</strong> {destination.ratings}</div>

@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 const AddButton = ({ apiEndpoint, userData, onSuccess }) => {
-  // console.log(apiEndpoint);
-  // console.log(userData);
+
   const [isLoading, setIsLoading] = useState(false);
   const handleAdd = () => {
     setIsLoading(true);

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import ReactQuill from 'react-quill';
 import axios from 'axios';
-import 'react-quill/dist/quill.snow.css';
 import { useDispatch, useSelector } from 'react-redux';
 import ButtonReuse from '../hotels/hotelcomponent/ButtonReuse';
 import { hotelSliceactions } from '../../redux/hotelRedux/hoteSlice';
@@ -26,47 +25,47 @@ const Hotels = () => {
 
 
   const handleImageData = (event) => {
-     const files = Array.from(event.target.files);
-  setPhotos(files);
+    const files = Array.from(event.target.files);
+    setPhotos(files);
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
- 
+
     const formdata = new FormData();
 
-     
-    
-      for (const photo of photos) {
-          formdata.append("photos",photo)
-      }
-      
+
+
+    for (const photo of photos) {
+      formdata.append("photos", photo)
+    }
+
     //for...in used for iterate on the object.
-      
-      for (const key in formData) {
-         formdata.append(key,formData[key])
-        
-        
+
+    for (const key in formData) {
+      formdata.append(key, formData[key])
+
+
     }
 
     try {
-      
+
       const response = await axios.post(
         "http://localhost:5000/api/hotels/createhotel",
         formdata,
       );
 
       const data = response.data;
-        console.log(data);
-        dispatch(hotelSliceactions.setView(false))
+      console.log(data);
+      dispatch(hotelSliceactions.setView(false))
     } catch (error) {
       console.error("Error:", error);
     }
-    };
-    const handleView = () => {
-        dispatch(hotelSliceactions.setView(true))
-    }
-   
+  };
+  const handleView = () => {
+    dispatch(hotelSliceactions.setView(true))
+  }
+
   return (
       <div className='form-add'>
           <ButtonReuse className="btn" onClick={handleView} text="Add Hotel"/>
@@ -79,7 +78,7 @@ const Hotels = () => {
                             <input
                   className="w-full mt-1"
                   type='text' name='name'
-                  placeholder='enter your name'
+                  placeholder='enter hotel name'
                   value={formData.name} onChange={(e)=>setFormData({...formData,name:e.target.value})} />
               <input className="w-full  mt-1"  type='text' name='title' placeholder='enter the title' value={formData.title} onChange={(e)=>setFormData({...formData,title:e.target.value})} />
               <input className="w-full  mt-1"  type='text' name='type' placeholder='enter the type' value={formData.type} onChange={(e)=>setFormData({...formData,type:e.target.value})} />    
