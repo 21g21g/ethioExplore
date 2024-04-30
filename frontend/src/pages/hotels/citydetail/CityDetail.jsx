@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
 import { hotelSliceactions } from '../../../redux/hotelRedux/hoteSlice'
 import axios from 'axios'
+import DatePickerss from '../hotelcomponent/DatePickerss'
 const CityDetail = () => {
     const dispatch = useDispatch()
     const detailHotel = useSelector((state) => state.hotel.detailHotel)
@@ -42,7 +43,8 @@ const CityDetail = () => {
 
   return (
     <div>
-          <Header />
+      <Header />
+      <DatePickerss/>
           <div className='mt-3 mb-4 text-custom-green1 text-2xl font-serif text-center' >
              <h1 >Hotels Found In {city} City</h1>
      
