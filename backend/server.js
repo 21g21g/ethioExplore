@@ -8,14 +8,15 @@ const hotelManagerRoute = require("./routes/hotelManagerRoute");
 const tourGuideRoute = require("./routes/tourGuideRoute");
 const hotelRoute = require("./routes/hotelRoute");
 const roomRoute = require("./routes/roomRoute");
+const paymentRoute = require("./routes/paymentRoute");
 const cors = require("cors");
 const destinationRoutes = require("./routes/destinationRoute");
-
 const app = express();
 //environmental variables
 const url = process.env.MONGO_URI;
 const PORT = process.env.PORT || 5000;
-
+const CHAPA_URL = process.env.CHAPA_URL || "https://api.chapa.co/v1/transaction/initialize"
+const CHAPA_AUTH = 'CHASECK_TEST-5XdTKYhUcOcKsVdjYeZVBzLSiSZT4yf7' 
 //middlewares
 app.use(express.json());
 app.use(cookieParser());
@@ -28,6 +29,12 @@ app.use(
     credentials: true,
   })
 );
+// req header with chapa secret key
+const config = {
+  headers: {
+    Authorization: `Bearer ${CHAPA_AUTH}`
+  }
+}
 app.use("/uploads", express.static("uploads"));
 app.use("/photoroom", express.static("photoroom"));
 //route middleware
@@ -37,6 +44,7 @@ app.use("/api/tourguides", tourGuideRoute);
 app.use("/api/hotels", hotelRoute);
 app.use("/api/rooms", roomRoute);
 app.use("/api/destinations", destinationRoutes);
+app.use("/api/payment",paymentRoute)
 app.use((err, req, res, next) => {
   const status = err.status || 500;
   const message = err.message || "internal server error";
