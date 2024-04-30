@@ -1,75 +1,141 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
 
-const Payment = () => {
-    const [paymentDetails, setPaymentDetails] = useState({
-        cardNumber: '',
-        expiryDate: '',
-        cvv: '',
-        amount: 0,
-        fullName: '',
-        email: '',
-        phoneNumber: ''
+function Payment() {
+    const [paymentData, setPaymentData] = useState({
+        amount: "",
+        currency: "",
+        email: "",
+        firstName: "",
+        lastName: "",
+        txRef: "",
     });
 
+    const [paymentDetails, setPaymentDetails] = useState(null);
+    const [error, setError] = useState(null);
+
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setPaymentDetails({ ...paymentDetails, [name]: value });
+        setPaymentData({ ...paymentData, [e.target.name]: e.target.value });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            // Perform payment processing with Chapa API
-            const response = await axios.post('http://chapa-api-url.com/process-payment', paymentDetails);
-            console.log(response.data);
-            // Handle success or error response from Chapa
+            const response = await axios.post("http://localhost:5000/api/payment/initiate-payment", paymentData);
+            setPaymentDetails(response.data.payment);
         } catch (error) {
-            console.error('Error processing payment:', error);
-            // Handle error
+            setError("Error initiating payment");
         }
     };
 
+    const handleReset = () => {
+        setPaymentData({
+            amount: "",
+            currency: "",
+            email: "",
+            firstName: "",
+            lastName: "",
+            txRef: "",
+        });
+        setPaymentDetails(null);
+        setError(null);
+    };
+
     return (
-        <div className="min-h-screen bg-gray-100 flex justify-center items-center">
-            <div className="max-w-md w-full p-8 bg-white rounded-md shadow-md">
-                <h2 className="text-2xl mb-6 text-center">Payment Details</h2>
-                <form onSubmit={handleSubmit}>
-                    <div className="mb-4">
-                        <label htmlFor="cardNumber" className="block text-gray-700">Card Number</label>
-                        <input type="text" id="cardNumber" name="cardNumber" value={paymentDetails.cardNumber} onChange={handleChange} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required />
+        <div className="max-w-md mx-auto p-6 bg-gray-100 shadow-md rounded-md">
+            <h1 className="text-2xl font-bold mb-4">Make Payment</h1>
+            <form onSubmit={handleSubmit}>
+                <div className="space-y-4">
+                    <div>
+                        <label className="block mb-1">Amount:</label>
+                        <input
+                            type="number"
+                            name="amount"
+                            value={paymentData.amount}
+                            onChange={handleChange}
+                            className="w-full border-gray-300 rounded-md px-3 py-2"
+                            required
+                        />
                     </div>
-                    <div className="mb-4">
-                        <label htmlFor="expiryDate" className="block text-gray-700">Expiry Date</label>
-                        <input type="text" id="expiryDate" name="expiryDate" value={paymentDetails.expiryDate} onChange={handleChange} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required />
+                    <div>
+                        <label className="block mb-1">Currency:</label>
+                        <input
+                            type="text"
+                            name="currency"
+                            value={paymentData.currency}
+                            onChange={handleChange}
+                            className="w-full border-gray-300 rounded-md px-3 py-2"
+                            required
+                        />
                     </div>
-                    <div className="mb-4">
-                        <label htmlFor="cvv" className="block text-gray-700">CVV</label>
-                        <input type="text" id="cvv" name="cvv" value={paymentDetails.cvv} onChange={handleChange} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required />
+                    <div>
+                        <label className="block mb-1">Email:</label>
+                        <input
+                            type="email"
+                            name="email"
+                            value={paymentData.email}
+                            onChange={handleChange}
+                            className="w-full border-gray-300 rounded-md px-3 py-2"
+                            required
+                        />
                     </div>
-                    <div className="mb-4">
-                        <label htmlFor="amount" className="block text-gray-700">Amount</label>
-                        <input type="number" id="amount" name="amount" value={paymentDetails.amount} onChange={handleChange} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required />
+                    <div>
+                        <label className="block mb-1">First Name:</label>
+                        <input
+                            type="text"
+                            name="firstName"
+                            value={paymentData.firstName}
+                            onChange={handleChange}
+                            className="w-full border-gray-300 rounded-md px-3 py-2"
+                            required
+                        />
                     </div>
-                    <div className="mb-4">
-                        <label htmlFor="fullName" className="block text-gray-700">Full Name</label>
-                        <input type="text" id="fullName" name="fullName" value={paymentDetails.fullName} onChange={handleChange} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required />
+                    <div>
+                        <label className="block mb-1">Last Name:</label>
+                        <input
+                            type="text"
+                            name="lastName"
+                            value={paymentData.lastName}
+                            onChange={handleChange}
+                            className="w-full border-gray-300 rounded-md px-3 py-2"
+                            required
+                        />
                     </div>
-                    <div className="mb-4">
-                        <label htmlFor="email" className="block text-gray-700">Email</label>
-                        <input type="email" id="email" name="email" value={paymentDetails.email} onChange={handleChange} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required />
+                    <div>
+                        <label className="block mb-1">Transaction Reference:</label>
+                        <input
+                            type="text"
+                            name="txRef"
+                            value={paymentData.txRef}
+                            onChange={handleChange}
+                            className="w-full border-gray-300 rounded-md px-3 py-2"
+                            required
+                        />
                     </div>
-                    <div className="mb-4">
-                        <label htmlFor="phoneNumber" className="block text-gray-700">Phone Number</label>
-                        <input type="tel" id="phoneNumber" name="phoneNumber" value={paymentDetails.phoneNumber} onChange={handleChange} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required />
-                    </div>
-                    <div className="flex justify-center">
-                        <button type="submit" className="bg-indigo-500 text-white py-2 px-4 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600">Submit Payment</button>
-                    </div>
-                </form>
-            </div>
+                </div>
+                <div className="mt-4 space-x-4">
+                    <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+                        Pay Now
+                    </button>
+                    <button type="button" onClick={handleReset} className="bg-gray-300 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-400">
+                        Reset
+                    </button>
+                </div>
+            </form>
+            {error && <p className="text-red-600 mt-4">{error}</p>}
+            {paymentDetails && (
+                <div className="mt-6">
+                    <h2 className="text-xl font-bold">Payment Details</h2>
+                    <p>Amount: {paymentDetails.amount}</p>
+                    <p>Currency: {paymentDetails.currency}</p>
+                    <p>Email: {paymentDetails.email}</p>
+                    <p>First Name: {paymentDetails.firstName}</p>
+                    <p>Last Name: {paymentDetails.lastName}</p>
+                    <p>Transaction Reference: {paymentDetails.txRef}</p>
+                </div>
+            )}
         </div>
     );
-};
+}
 
 export default Payment;

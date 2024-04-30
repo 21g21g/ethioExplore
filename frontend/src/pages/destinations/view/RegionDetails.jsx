@@ -30,8 +30,8 @@ const RegionDetails = () => {
   return (
     <div className='flex flex-col md:flex-row px-4 md:px-20 gap-3 '>
       <div className='md:w-4/6'>
-        <div className='mt-2 mb-4 text-custom-green1 text-2xl font-serif text-center'>
-          <h1>Destinations Found In {region} Region</h1>
+        <div className='py-6 mb-4 text-custom-green1 text-4xl  font-serif text-center'>
+          <h1>Destinations Found In {region}</h1>
         </div>
         <div className="search-and-filter">
           <input
@@ -96,10 +96,6 @@ const RegionDetails = () => {
           )}
         </div>
       </div>
-      
-    {/* <div className='md:w-2/6 h-[600px] bg-white rounded-md flex items-center justify-center md:mt-32'>
-        <Map destinations={destinations} initialCenter={{ lat: '12° 0', lng: '39° 0' }} zoomLevel={10} />
-      </div> */}
       
     </div>
   );

@@ -33,14 +33,15 @@ const destinationSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-
+    price: {
+     type:Number
+   },
     images: {
       main: {
         type: String,
         required: [true, 'Main image is required.'],
       },
       gallery: {
-        
           type: [String],
           default: [],
          },

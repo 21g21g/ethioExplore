@@ -65,7 +65,6 @@ const Home = () => {
               </li>
             </ul>
           </div>
-
           <div className="mt-4 w-full px-10 rounded-md">
             {/* Conditionally render the outlet content based on the selected tab */}
             {selectedTab === 'Culture' && (
