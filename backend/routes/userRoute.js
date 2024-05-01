@@ -8,12 +8,12 @@ const {
   getUser,
 } = require("../controllers/userController");
 
-const router=express.Router();
+const router = express.Router();
 router.post("/register", registerUser);
 router.post("/login", loginUser);
 router.get("/logout", logoutUser);
 router.get("/", getUsers);
-router.get("/:id",getUser);
+router.get("/:id", getUser);
 router.put("/:id", updateUser);
 
 module.exports = router;
