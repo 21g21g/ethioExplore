@@ -16,7 +16,7 @@ const Destinations = () => {
   const [searchedDestinations, setSearchedDestinations] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const navigate = useNavigate();
- 
+
 
   // State to manage the animated text
   const [animatedText, setAnimatedText] = useState('');
@@ -51,7 +51,7 @@ const Destinations = () => {
     setSearchedDestinations(results);
   }, [searchQueryTerm, destinations]);
 
-   const destinationCountsByRegion = countByRegion(destinations);
+  const destinationCountsByRegion = countByRegion(destinations);
 
   const getInitialDestinations = (destinations) => {
     const groupedByRegion = {};
@@ -64,7 +64,7 @@ const Destinations = () => {
     return Object.values(groupedByRegion);
   };
 
-    const settings = {
+  const settings = {
     dots: true,
     infinite: true,
     speed: 500,
@@ -129,37 +129,37 @@ const Destinations = () => {
         />
 
         {showSuggestions && searchQueryTerm && (
-      <div className="absolute z-20 w-1/2 bg-white shadow-xl overflow-hidden rounded-lg mt-16">
-        {searchedDestinations.length > 0 ? (
-        <>
-           <div className="text-md font-semibold p-2 bg-gray-50 pb-4">
-             You might be interested in: 
-           </div>
-         <div className="max-h-96 overflow-y-auto overflow-x-hidden">
-          {searchedDestinations.map(destination => (
-            <div
-              key={destination._id}
-              className="p-2 hover:bg-gray-100 cursor-pointer border-b border-gray-300"
-              onClick={() => {
-                setSearchQueryTerm(destination.name);
-                setShowSuggestions(false);
-                navigate(`/destination/${destination._id}`);
-              }}
-            >
-              <div className='font-bold text-lg'>{destination.name}</div>
-              <div className='font-semibold ml-2'>Rating: <span className='text-yellow-400'>{destination.ratings}</span></div>
-              <div className='font-semibold ml-2'>Address: <span className='text-green-800'>{destination.location.address}</span></div>
-            </div>
-          ))}
-      </div>
-      </>
-    ) : (
-      <div className="p-4 text-center text-lg text-red-500">
-        No match with available destinations!
-      </div>
-    )}
-  </div>
-)}
+          <div className="absolute z-20 w-1/2 bg-white shadow-xl overflow-hidden rounded-lg mt-16">
+            {searchedDestinations.length > 0 ? (
+              <>
+                <div className="text-md font-semibold p-2 bg-gray-50 pb-4">
+                  You might be interested in:
+                </div>
+                <div className="max-h-96 overflow-y-auto overflow-x-hidden">
+                  {searchedDestinations.map(destination => (
+                    <div
+                      key={destination._id}
+                      className="p-2 hover:bg-gray-100 cursor-pointer border-b border-gray-300"
+                      onClick={() => {
+                        setSearchQueryTerm(destination.name);
+                        setShowSuggestions(false);
+                        navigate(`/destination/${destination._id}`);
+                      }}
+                    >
+                      <div className='font-bold text-lg'>{destination.name}</div>
+                      <div className='font-semibold ml-2'>Rating: <span className='text-yellow-400'>{destination.ratings}</span></div>
+                      <div className='font-semibold ml-2'>Address: <span className='text-green-800'>{destination.location.address}</span></div>
+                    </div>
+                  ))}
+                </div>
+              </>
+            ) : (
+              <div className="p-4 text-center text-lg text-red-500">
+                No match with available destinations!
+              </div>
+            )}
+          </div>
+        )}
 
 
 
