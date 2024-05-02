@@ -44,7 +44,7 @@ const SingleCityHotels = ({ data }) => {
       <div className="flex flex-col justify-between">
         <div>
           <h1 className="text-2xl text-blue-500 font-semibold">{data.name}</h1>
-          <p className="text-gray-600 font-semibold">{data.distance} from center</p>
+          <p className="text-gray-600 font-semibold">{data.distance} </p>
           <p className="text-gray-600 font-semibold">Comfortable rooms</p>
         </div>
         <div className="flex flex-col gap-2 md:gap-4">
