@@ -7,7 +7,12 @@ import addis from "../../../assets/addis.jpg"
 import bure from "../../../assets/bure.jpg"
 import bahrdar from "../../../assets/bahrdar.webp"
 import adama from "../../../assets/adama.jpg"
+import markos from "../../../assets/markos.jpg"
+import hawasa from "../../../assets/hawasa.jpg"
 
+import debrebirhan from "../../../assets/debrebirhan.jpg"
+import jimma from "../../../assets/jimma.jpg"
+import arbaminch from "../../../assets/arbaminch.jpg"
 import bdr from "../../../assets/bdr.jpg"
 import { FaStar } from "react-icons/fa";
 import Slider from 'react-slick';
@@ -43,9 +48,14 @@ const HotelbyFeatured = () => {
   const featuredHotels = {
     "bure": bure,
     "addis": addis,
-    "Bahrdar":bahrdar,
+    "bahrdar":bahrdar,
     "bdr": bdr,
     "adama": adama,
+    "markos": markos,
+    "hawasa": hawasa,
+    "debrebirhan": debrebirhan,
+    "jimma": jimma,
+    "arbaminch":arbaminch,
 
     
   }

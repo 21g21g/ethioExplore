@@ -167,7 +167,7 @@ const SingleHotelAvailability = () => {
                             
                             <div>
                                 
-                            <button onClick={handleModal} className=' text-zinc-100 mt-2  ml-3 h-6 cursor-pointer bg-custom-green2 rounded-md w-full'>reserve now</button>
+                            <button onClick={handleModal} className=' text-zinc-100 mt-2  ml-3 h-6 cursor-pointer bg-custom-green2 rounded-md w-full'>book now</button>
                                 </div>
                       
                  
@@ -184,7 +184,7 @@ const SingleHotelAvailability = () => {
 
             
            
-Copy code
+
 <Modal show={modal} onClose={() => setModal(false)}>
   <ModalHeader>
     <h1 className='text-3xl'>Select the room you want to reserve:</h1>
@@ -194,7 +194,8 @@ Copy code
 
       {roomData.map((room) => (
         room && (
-          <div key={room._id} className='flex flex-col lg:flex-row items-start gap-6 p-4 border border-gray-200 rounded-md'>
+          <div>
+            <div key={room._id} className='flex flex-col lg:flex-row items-start gap-6 p-4 border border-gray-200 rounded-md'>
             
             {/* Room Image and Description */}
             <div className='lg:w-1/2'>
@@ -226,18 +227,23 @@ Copy code
             </div>
 
             {/* Reserve Button (Moved to the bottom of the room section) */}
+             
             
-
+        
           </div>
+          </div>
+          
         )
       ))}
-       <button
+       
+                </div>
+                <button
               className='bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-md mt-4 self-end'
-              onClick={() => handleClick(room._id)} // Assuming handleClick needs room ID
+              onClick={ handleClick} // Assuming handleClick needs room ID
             >
               Reserve Now
             </button>
-    </div>
+               
   </ModalBody>
 </Modal>
                 
